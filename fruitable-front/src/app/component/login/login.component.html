@@ -1,0 +1,41 @@
+<div class="bg-img">
+  <div class="my-flex account section top-space bottom-space">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="login-form border p-5 ">
+            <div class="text-center heading">
+              <h2 class="mb-2">Login</h2>
+              <p class="lead">Don't have an account? <a class="hover" routerLink="/signup-buyer">Create a free account</a></p>
+            </div>
+  
+
+            <form [formGroup]="userLogin" (submit)="login()">
+  
+          
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>username</mat-label>
+                <input type="text" matInput placeholder="Entre username" formControlName="userName">
+                <mat-error *ngIf="fields['userName'].errors?.['required']">username is required</mat-error>
+              </mat-form-field>
+  
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>password</mat-label>
+                <input type="password" matInput placeholder="Entre username" formControlName="password">
+                <mat-error *ngIf="fields['password'].errors?.['required']">password is required</mat-error>
+              </mat-form-field>
+  
+              <div class="text-center">
+                <button type="submit" class="btn-myprimary" [disabled]="userLogin.invalid">Login</button>
+              </div>
+              
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

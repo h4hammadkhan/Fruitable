@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Categories</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <mat-selection-list [multiple]="false" >
+        <mat-list-option>
+          <p routerLink="/home">All Products</p>
+        </mat-list-option>
+        <mat-list-option *ngFor="let cate of categories">
+            <p [routerLink]="'/category/'+cate">{{cate}}</p>
+        </mat-list-option>
+      </mat-selection-list>
+
+    </mat-card-content>
+
+</mat-card>

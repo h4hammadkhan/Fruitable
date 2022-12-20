@@ -1,0 +1,187 @@
+<!-- carousel -->
+<div class="absolute index">
+  <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-
+        current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="6000">
+        <img src="../../../assets/front.jpg" class="d-block w-100" alt="...">
+        <div class="middle-center">
+          <div class="carousel-caption d-none d-md-block ">
+            <h1 class="myprimary">WELCOME TO OUR HEALTHY STORE!</h1>
+            <p class="mt-3 mb-4">We are beyond happy to welcome you in our warm and friendly online market <br> of organic fruits, vegetables</p>
+            <a (click)="moveToShop()" class="btn-myprimary">SHOP NOW</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="6000">
+        <img src="../../../assets/front1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 class="myprimary">WELCOME TO OUR HEALTHY STORE!</h1>
+          <p class="mt-3 mb-4">We are beyond happy to welcome you in our warm and friendly online market <br> of organic fruits, vegetables</p>
+          <a (click)="moveToShop()" class="btn-myprimary">SHOP NOW</a>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="6000">
+        <img src="../../../assets/front2.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 class="myprimary">WELCOME TO OUR HEALTHY STORE!</h1>
+          <p class="mt-3 mb-4">We are beyond happy to welcome you in our warm and friendly online market <br> of organic fruits, vegetables</p>
+          <a (click)="moveToShop()" class="btn-myprimary">SHOP NOW</a>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+<!-- Product listing  -->
+<div class="container-fluid mt-5" #shop id="shop">
+  <div class="row">
+
+    <div class="col-md-12">
+      <section class="section products-main">
+        <div class="container">
+
+
+          <div class="mt-3 mb-5">
+            <app-category-tag></app-category-tag>
+          </div>
+
+          <div class="row">
+            <!-- <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let item of product">
+              <div class="search-results" infinite-scroll (scrolled)="onScrollDown($event)">
+                <mat-card class="pointer" [routerLink]="'/product-single/' + item.id">
+                  <div class="product">
+                    <div class="product-wrap">
+
+                      <img class="img-fluid w-100 mb-3 img-first" [src]="item.image" alt="product-img" />
+                    </div>
+
+                    <div class="product-info mt-2">
+                      <h2 class="product-title h5 mb-0 overflow">
+                        {{ item.title }}
+                      </h2>
+                      <p class="price mt-2">
+                        {{ item.price | currency }}
+                      </p>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div> -->
+            <ul>
+              <li *ngFor="let food of product">
+                  <a routerLink="/food/{{food.id}}">
+                      <img src="{{food.image}}" alt="food img">
+                      <div class="content">
+                          <div class="name">
+                              {{food.title}}
+                          </div>
+                          <div class="star">
+                              <!-- <ngb-rating [(rate)]="food.star" [max]="5" [readonly]="true">
+                                  <ng-template let-fill="fill">
+                                    <span class="defaultHeart" [class.filled]="fill === 100">
+                                      <span class="paintedHeart" [style.width.%]="fill">★</span>★
+                                    </span>
+                                  </ng-template>
+                              </ngb-rating> -->
+                          </div>
+                          
+                          <div class="product-item-footer">
+                              <div class="origins">
+                                  <!-- <span *ngFor="let origin of food.origins">
+                                      {{origin}}
+                                    </span> -->
+                                    pakistan
+                              </div>
+          
+                              <div class="cook-time">
+                                  <span>🕒</span>
+                                  <!-- {{food.cookTime}} -->
+                                  55
+                              </div>
+                          </div>
+                          
+                          <div class="price">
+                              {{food.price | currency}}
+                          </div>
+                      </div>
+                  </a>
+              </li>
+          </ul>
+          
+          </div>
+        </div>
+      </section>
+
+      <section class="features mt-5">
+        <mat-divider></mat-divider>
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-lg-3 col-sm-6 col-md-6">
+              <div class="feature-block">
+                <div class="content">
+                  <div class="flex">
+                    <mat-icon class="mat-18 mr-2">local_shipping</mat-icon>
+                    <h5 class="m-0">Free Shipping</h5>
+                  </div>
+                  <p>On all order over $39.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-md-6">
+              <div class="feature-block">
+                <i class="tf-wallet"></i>
+                <div class="content">
+                  <div class="flex">
+                    <mat-icon class="mat-18 mr-2">attach_money</mat-icon>
+                    <h5 class="m-0">30 Days Return</h5>
+                  </div>
+                  <p>Money back Guarantee</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-md-6">
+              <div class="feature-block">
+                <i class="tf-key"></i>
+                <div class="content">
+                  <div class="flex">
+                    <mat-icon class="mat-18 mr-2">gpp_good</mat-icon>
+                    <h5 class="m-0">Secure Checkout</h5>
+                  </div>
+                  <p>100% Protected by paypal</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-md-6">
+              <div class="feature-block">
+                <i class="tf-clock"></i>
+                <div class="content">
+                  <div class="flex">
+                    <mat-icon class="mat-18 mr-2">support_agent</mat-icon>
+                    <h5 class="m-0">24/7 Support</h5>
+                  </div>
+                  <p>All time customer support</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

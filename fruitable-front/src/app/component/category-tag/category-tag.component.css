@@ -1,0 +1,23 @@
+.tag-container{
+  display: flex;
+  justify-content: center;
+}
+
+.tag{
+  background: rgb(37, 37, 37);
+  color: aliceblue;
+  padding: 8px 15px;
+  margin: 4px;
+  border-radius: 25px;
+  transition: all .1s ease-in;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.tag:hover{
+  background: rgb(110, 110, 110);
+}
+
+

@@ -1,0 +1,12 @@
+.size{
+  height: 22rem;
+}
+
+.flex{
+  text-align: center;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

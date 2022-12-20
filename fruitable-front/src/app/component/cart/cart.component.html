@@ -1,0 +1,113 @@
+<div class="container" *ngIf="cartItem?.length && cartItem!=null; else elseBlock">
+
+  <div class="table-responsive">
+
+    <table class="table tabel-borderd">
+
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of cartItem">
+          <td>
+            <div class="container-fluid">
+
+              <div class="row">
+
+                <div class="col-md-3 flex">
+                  <img [src]="item.image" alt="" class="imgSize img-fluid">
+                </div>
+
+                <div class="col-md-9 title">
+                  <p>{{item.title}}</p>
+                </div>
+              </div>
+
+            </div>
+          </td>
+
+          <td>
+            <div class="flex">
+              <div class="row">
+                <div class="col-md-4 text-center">
+                  <button mat-icon-button color="primary" (click)="incrementQuantity(item)" [disabled]="item.quantity>=item.count">
+                    <mat-icon class="mat-18">add_circle</mat-icon>
+                  </button>
+                </div>
+                <div class="col-md-4 text-center">
+                  {{item.quantity}}
+                </div>
+                <div class="col-md-4 text-center">
+                  <button mat-icon-button color="primary" (click)="decrementQuantity(item.id)">
+                    <mat-icon class="mat-18">remove_circle</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </td>
+
+          <td>
+            <div class="flex">
+              {{item.price | currency}}
+            </div>
+          </td>
+
+          <td>
+            <div class="flex">
+              {{item.price*item.quantity | currency}}
+            </div>
+          </td>
+
+          <td>
+            <div class="flex">
+              <button mat-button color="warn" (click)="removeFormCart(item.id)">remove</button>
+            </div>
+          </td>
+
+        </tr>
+
+        <tr>
+          <td>
+            <button mat-icon-button color="primary" routerLink="/home">
+              <mat-icon class="mat-18">arrow_back</mat-icon>
+              back to shop
+            </button>
+          </td>
+          <td>
+            <p>Total Quantity: <strong>{{totalQuantity}}</strong></p>
+          </td>
+          <td>
+            <p>SubTotal: <strong>{{totalPrice | currency}}</strong></p>
+          </td>
+
+          <td>
+
+          </td>
+
+          <td>
+            <button mat-flat-button color="primary" routerLink="/checkout">
+              checkout
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+
+
+    </table>
+  </div>
+
+</div>
+
+
+<ng-template #elseBlock>
+  <app-cart-empty ></app-cart-empty>
+</ng-template>

@@ -1,0 +1,37 @@
+<p class="sticky">
+  <mat-toolbar class="transparent">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span class="ml-4 myprimary">Fruitable</span>
+    <span class="example-spacer"></span>
+    
+    <button mat-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/login"
+     *ngIf="!islogin">
+     Login
+    </button>
+    
+    <button mat-button routerLink="/dashboard/addProduct" *ngIf="islogin">
+      dashboard
+    </button>
+    
+    <button mat-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()"  *ngIf="islogin">
+      logout
+    </button>
+    
+    <button mat-button class="example-icon" aria-label="Example icon-button with share icon"  *ngIf="!islogin" [matMenuTriggerFor]="menu">
+      Signup
+    </button>
+    <mat-menu #menu="matMenu" class="bg-mat-manu" color="primary" xPosition="before">
+      <button mat-menu-item routerLink="/signup-buyer">BUYER</button>
+      <button mat-menu-item routerLink="/signup-seller">SELLER</button>
+    </mat-menu>
+    
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/cart">
+      <mat-icon [matBadge]="totalQuantity" matBadgeColor="warn" matBadgeOverlap="true"  class="demo-section">shopping_cart</mat-icon>
+    </button>
+  
+  </mat-toolbar>
+</p>
+
+

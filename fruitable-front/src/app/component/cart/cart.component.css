@@ -1,0 +1,28 @@
+.imgSize{
+  width: 100px;
+}
+
+.title{
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  /* flex-direction: column; */
+}
+
+button{
+  outline: none;
+}
+
+table,thead,tbody{
+  width: 100%;
+}
+
+.mb{
+  margin-bottom: 20px;
+}
+
+.flex{
+  height: 142.98px;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,16 @@
+.imgSize{
+  width: 350px;
+}
+
+.content{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.outline{
+  outline: none;
+}
+

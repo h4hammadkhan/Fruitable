@@ -1,0 +1,136 @@
+.overflow{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.size{
+  height: 30rem;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.front{
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.marginTop{
+  margin-top: -10;
+}
+
+.relative{
+  position: relative;
+}
+
+.absolute{
+  position: relative;
+  top: 0;
+}
+
+.index{
+  z-index: 0;
+}
+.middle-center{
+  border: none;
+}
+
+.carousel-caption{
+  position: absolute;
+  top: 25%;
+}
+
+
+
+
+/* product listing css */
+ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+
+}
+
+ul li a{
+  height: 30rem;
+  width: 20rem;
+  border: 1px solid whitesmoke;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--myPrimary);
+}
+
+
+
+li a:hover{
+  opacity: 0.9;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px 1.5px rgb(210, 210, 210);
+}
+
+.content{
+  padding: .5rem 1rem;
+  position: relative;
+
+}
+
+.favorite{
+  position: absolute;
+  top: .5rem;
+  right: 1rem;
+  font-size: 1.2rem;
+}
+
+.favorite.not{
+  color: black;
+}
+
+.star{
+  padding-bottom: .2rem;
+}
+
+.product-item-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.origins{
+  flex: 9;
+}
+
+.origins span{
+  border-radius: 10px;
+  padding: 0 5px;
+  background-color: whitesmoke;
+  color: gray;
+  font-size: .9rem;
+  margin-right: .3rem;
+  display: inline-block;
+}
+
+.cook-time{
+  font-size: .9rem;
+  flex: 3;
+  text-align: right;
+}
+
+.price{
+  color: #424242;
+  margin-top: .2rem;
+}
+

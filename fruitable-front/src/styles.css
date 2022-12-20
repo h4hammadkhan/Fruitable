@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import './theme.css';
+
+
+body { 
+    margin: -4.1rem 0 0 0 !important; 
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.myprimary{
+    color: var(--myPrimary);
+}
+
+.top-space{
+    padding-top: 8rem;
+}
+
+.bottom-space{
+    padding-bottom: 5rem;
+}
+
+.btn-myprimary{
+    color: white;
+    background-color: var(--myPrimary);
+    border: none;
+    padding: .4rem 1rem;
+    border-radius: 10rem;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+  
+.btn-myprimary:hover{
+    color: white;
+    background-color: var(--myPrimaryDark);
+}
+
+.btn-myprimary:disabled,
+.btn-myprimary[disabled]{
+  background-color: #cccccc;
+  color: #666666;
+}
+
