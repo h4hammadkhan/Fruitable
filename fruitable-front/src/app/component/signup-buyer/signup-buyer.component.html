@@ -1,0 +1,80 @@
+<div class="bg-img">
+  <div class="account section top-space bottom-space">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="login-form border p-5 ">
+            <div class="text-center heading">
+              <h2 class="mb-2">Sign Up As Buyer</h2>
+              <p class="lead">Already have an account? <a class="hover" routerLink="/login"> Login now</a></p>
+            </div>
+  
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  
+              <div class="row">
+                <div class="col-md-6">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="Enter First Name" formControlName="first_name">
+                        <mat-error *ngIf="getFields['first_name'].errors?.['required']">first name is required</mat-error>
+                      </mat-form-field>    
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Enter Last Name" formControlName="last_name">
+                        <mat-error *ngIf="getFields['last_name'].errors?.['required']">last name is required</mat-error>
+                      </mat-form-field>    
+                    </div>
+                  </div>
+                  
+                 
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>UserName</mat-label>
+                    <input matInput placeholder="Enter User Name" formControlName="userName">
+                    <mat-error *ngIf="getFields['userName'].errors?.['required']">username is required</mat-error>
+                    <mat-hint>username must be unique</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter Email" formControlName="email" >
+                    <mat-error *ngIf="getFields['email'].errors?.['required']">email is required</mat-error>
+                    <mat-error *ngIf=" getFields['email'].errors?.['email']">email address is not valid</mat-error>
+                  </mat-form-field>
+
+                </div>
+
+                <div class="col-md-6">
+    
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter Password" formControlName="password">
+                    <mat-error *ngIf="getFields['password'].errors?.['required']">password is required</mat-error>
+                    <mat-error *ngIf=" getFields['password'].errors?.['minLength']">password must be 8 character long</mat-error>
+                  </mat-form-field>
+    
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input matInput placeholder="Enter Phone Number" formControlName="phone">
+                    <mat-error *ngIf="getFields['email'].errors?.['required']">phone number is required</mat-error>
+                  </mat-form-field>
+
+                  <div class="text-center">
+                    <button class="btn-myprimary" type="submit" [disabled]="userForm.invalid" >submit</button>
+                  </div>
+                </div>
+              </div>
+            
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
