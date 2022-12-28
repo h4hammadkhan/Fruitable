@@ -2,12 +2,14 @@ package com.fruitable.model;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fruitable.model.product.Product;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -39,6 +41,12 @@ public class User implements UserDetails{
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
 	
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Set<Product> products = new LinkedHashSet<>();
+
+	
 	public User() {
 		
 	}
@@ -46,7 +54,7 @@ public class User implements UserDetails{
 
 	public User(Long userId, String first_name, String last_name, String userName, String password,
 			String profile_image, String email, String phone, String address, boolean enabled, Long impression,
-			Set<UserRole> userRoles) {
+			Set<UserRole> userRoles, Set<Product> products) {
 		super();
 		this.userId = userId;
 		this.first_name = first_name;
@@ -60,6 +68,7 @@ public class User implements UserDetails{
 		this.enabled = enabled;
 		this.impression = impression;
 		this.userRoles = userRoles;
+		this.products = products;
 	}
 
 
@@ -158,10 +167,22 @@ public class User implements UserDetails{
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
+	
+	public Set<Product> getProducts() {
+		return products;
+	}
+	
+	
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+	
  
 
-	// UserDetails method implementation 
 	
+	
+	// UserDetails method implementation 
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		

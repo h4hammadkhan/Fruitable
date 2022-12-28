@@ -14,13 +14,14 @@ button:hover{
 .sticky{
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 99;
   margin-bottom: 0;
   border-bottom: 1px solid rgb(143, 143, 143);
 }
 
 .transparent{
-  background-color: rgba(0, 0,0, 0.8);
+  /* background-color: rgba(0, 0,0, 0.8); */
+  background-color: rgba(0, 0,0,1);
   color: white;
 }
 
@@ -32,6 +33,22 @@ button:hover{
 
 }
 
+::ng-deep .mat-menu-panel{
+  background-color: rgba(0, 0,0, 0.8);
+  /* color: white; */
+  border: 1px solid rgb(143, 143, 143);
+}
+
 button{
   color: white;
+}
+
+.white{
+  color: white;
+}
+
+img{
+  width: 32px;
+  height: 30px;
+  border-radius: 25px;
 }

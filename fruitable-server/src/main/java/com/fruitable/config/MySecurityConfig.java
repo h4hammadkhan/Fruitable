@@ -68,7 +68,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 			.cors()
 			.disable()
 			.authorizeRequests()
-			.antMatchers("/generate-token","/user/").permitAll() // allow to request (generate-token) for login and /user/ for register
+			.antMatchers("/generate-token","/user/","/user/seller","/user/upload").permitAll() // allow to request (generate-token) for login and /user/ for register
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
 			.anyRequest().authenticated()
 			.and()

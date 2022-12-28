@@ -11,8 +11,9 @@
 
               <mat-stepper linear="true" #stepper class="bg">
                 
-                <mat-step [stepControl]="firstFormGroup">
-                  <form [formGroup]="firstFormGroup">
+                <!-- [stepControl]="userDetailFormGroup" -->
+                <mat-step >
+                  <form [formGroup]="userDetailFormGroup">
                     <ng-template matStepLabel>User Details</ng-template>
                       
                       <div class="row">
@@ -22,20 +23,20 @@
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>First Name</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                                <input matInput placeholder="Last name, First name" formControlName="first_name" required>
                               </mat-form-field>
                             </div>
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Last Name</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                                <input matInput placeholder="Last name, First name" formControlName="last_name" required>
                               </mat-form-field>
                             </div>
                           </div>
 
                           <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>User Name</mat-label>
-                            <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                            <input matInput placeholder="Last name, First name" formControlName="userName" required>
                           </mat-form-field>
                          
 
@@ -48,19 +49,19 @@
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Email</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                                <input matInput placeholder="Last name, First name" formControlName="email" required>
                               </mat-form-field>
                             </div>
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Phone</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                                <input matInput placeholder="Last name, First name" formControlName="phone" required>
                               </mat-form-field>
                             </div>
 
                             <mat-form-field class="example-full-width" appearance="outline">
                               <mat-label>Password</mat-label>
-                              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                              <input matInput placeholder="Last name, First name" formControlName="password" required>
                             </mat-form-field>
 
                           </div>
@@ -73,46 +74,23 @@
                   </form>
                 </mat-step>
                 
-                <mat-step [stepControl]="secondFormGroup" label="Personal Details">
-                  <form [formGroup]="secondFormGroup">
+                <!-- [stepControl]="userPersonalFormGroup" -->
+                <mat-step  label="Personal Details">
+                  <form [formGroup]="userPersonalFormGroup">
+
                     <div class="row">
-                      <div class="col-md-4">
+                      
+                      <div class="col-md-6">
                         <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Address</mat-label>
-                          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                          <input matInput formControlName="address" placeholder="Ex. 1 Main St, New York, NY" required>
                         </mat-form-field>
                       </div>
-                      <div class="col-md-4">
-                        <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Address</mat-label>
-                          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-4">
-                        <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Address</mat-label>
-                          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-4">
-                        <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Address</mat-label>
-                          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-4">
-                        <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Address</mat-label>
-                          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-4">
-                        <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Address</mat-label>
-                          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                        </mat-form-field>
-                      </div>
+                      
                     </div>
+                  
+                    {{userPersonalFormGroup.value | json}}
+
                     <div>
                       <button class="btn-myprimary mr" matStepperPrevious>Back</button>
                       <button class="btn-myprimary mr" matStepperNext>Next</button>
@@ -122,11 +100,22 @@
                 
                 <mat-step>
                   <ng-template matStepLabel>Done</ng-template>
-                  <p>You are now done.</p>
+
+                    <div class="mb-3">
+                      <input class="form-control" type="file" accept="image/*" (change)="selectImg($event)">
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div *ngIf="progress > 0">
+                      <p class="mb-0 float-right">{{progress}}%</p>
+                      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+                      <p>{{profileUploadMsg}}</p>
+                    </div>
+
                   <div>
                     <button class="btn-myprimary mr" matStepperPrevious>Back</button>
                     <button class="btn-myprimary mr" (click)="stepper.reset()">Reset</button>
-                    <button class="btn-myprimary mr">Signup</button>
+                    <button class="btn-myprimary mr" (click)="onSubmit()">Signup</button>
 
                   </div>
                 </mat-step>

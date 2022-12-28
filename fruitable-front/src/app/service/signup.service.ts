@@ -17,6 +17,14 @@ export class SignupService {
     return this.http.post<User>(`${baseUrl}/user/`,user);
   }
 
+  public addNewSeller(userInfo: User){
+    return this.http.post(`${baseUrl}/user/seller`,userInfo);
+  }
+
+  public uploadProfile(profile:any): Observable<any>{
+    return this.http.post<any>(`${baseUrl}/user/upload`,profile,{reportProgress: true, observe: "events"});
+  }
+
 
 
 

@@ -1,8 +1,9 @@
 import { LoginData } from './../model/login-data';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import baseUrl from './helper';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class LoginService {
     private http: HttpClient,
   ) { }
 
+    // get current user: which is logged in
+    public getCurrentUser(): Observable<User>{
+      return this.http.get<User>(`${baseUrl}/current-user`);
+    }
 
   //generate token
   public generateToken(loginData: LoginData){
@@ -48,5 +53,32 @@ export class LoginService {
     return true;
   }
 
+  public setRole(role:any){
+    localStorage.setItem('role',role);
+  }
+
+  public getRole(){
+    return localStorage.getItem('role');
+  }
+
+  public userDetails(userDetails:any){
+    localStorage.setItem('uuid',JSON.stringify(userDetails));
+  }
+
+  public getUserDetails(){
+    let ud = localStorage.getItem('uuid');
+    if(ud !=null){
+      return JSON.parse(ud);
+    }
+    else{
+      this.logout();
+      return null;
+    }
+  }
+
+  public getUserId(){
+    const ud = this.getUserDetails();
+    return ud.userId;
+  }
 
 }

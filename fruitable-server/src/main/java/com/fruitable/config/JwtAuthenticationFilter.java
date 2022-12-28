@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
 		final String requestTokenHeader = request.getHeader("Authorization");
 		System.out.println(requestTokenHeader);
-		String username = null;
+		String userName = null;
 		String jwtToken = null;
 		
 		if(requestTokenHeader!=null && requestTokenHeader.startsWith("Bearer ")) {
@@ -46,8 +46,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 						
 			try {
 				
-				username = this.jwtUtil.extractUsername(jwtToken);
-				System.out.println("username: "+username);
+				userName = this.jwtUtil.extractUsername(jwtToken);
+				System.out.println("username: "+userName);
 				
 			}catch (ExpiredJwtException e) {
 				
@@ -65,9 +65,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
 		
 		// validate jwtToken
-		if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
+		if(userName!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
 			
-			 final UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(username);
+			 final UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(userName);
 			 
 			 // checking token is valid
 			 if(this.jwtUtil.validateToken(jwtToken, userDetails)) {

@@ -36,7 +36,7 @@ public class AuthenticateController {
 	private JwtUtil jwtUtil;
 		
 	// generate Token
-	@PostMapping(" ")
+	@PostMapping("/generate-token")
 	public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception{	
 		try
 		{		

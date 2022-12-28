@@ -11,13 +11,17 @@
      Login
     </button>
     
-    <button mat-button routerLink="/dashboard/addProduct" *ngIf="islogin">
-      dashboard
+    <button *ngIf="islogin" mat-button [matMenuTriggerFor]="dashMenu">
+      <img src="../../../assets/default.png" alt="">
+      <small>
+        <mat-icon style="margin-top: 15px;">arrow_drop_down</mat-icon>
+      </small>
     </button>
-    
-    <button mat-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()"  *ngIf="islogin">
-      logout
-    </button>
+    <mat-menu #dashMenu="matMenu" xPosition="before">
+      <button mat-menu-item><mat-icon mat-list-icon class="white">account_circle</mat-icon>Profile</button>
+      <button routerLink="/buyer-dashboard/order" mat-menu-item><mat-icon mat-list-icon class="white">dashboard</mat-icon>Dashboard</button>
+      <button (click)="logout()" mat-menu-item><mat-icon mat-list-icon class="white">logout</mat-icon>Logout</button>
+    </mat-menu>
     
     <button mat-button class="example-icon" aria-label="Example icon-button with share icon"  *ngIf="!islogin" [matMenuTriggerFor]="menu">
       Signup

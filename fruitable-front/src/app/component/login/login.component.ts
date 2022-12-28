@@ -40,19 +40,65 @@ export class LoginComponent implements OnInit {
     // request server to generate token
     this.loginService.generateToken(this.logindata).subscribe(
       (data:any)=>{
-
         console.log("success",data);
-        
-        this.snack.open("Successfully Logged in",'',{
-          duration:3000,
-        })
 
         //Login... set token into local storage
         this.loginService.loginUser(data.token);
 
-        // Swal.fire("success","Successfuly login!!!","success");
-        this.loginService.loginStatusSubject.next(true);
-        this.router.navigate(["/dashboard/addProduct"]);
+        //get current logged user
+        this.loginService.getCurrentUser().subscribe(
+          (user:any)=>{
+
+            // get authority
+            const authority = user.authorities[0].authority;
+            const userDetails: {
+              userId: number,
+              userName: string,
+            }={
+              userId : user.userId,
+              userName : user.userName 
+            }
+          
+            console.log("userDetails:",userDetails);
+            
+            this.loginService.userDetails(userDetails);
+
+            console.log("----- gettng user details -----");
+            console.log(this.loginService.getUserDetails());
+            
+            
+
+            // set authority iin localStorage
+            this.loginService.setRole(authority);
+
+            console.log("getting role:", this.loginService.getRole());
+            
+
+            //redirect ...BUYER: buyer-dashboard
+            if(authority == "BUYER"){
+              this.loginService.loginStatusSubject.next(true);
+              this.router.navigate(["/home"]);
+            }
+            //redirect ...SELLER: seller-dashboard
+            else if(authority == "SELLER"){
+              this.loginService.loginStatusSubject.next(true);
+              this.router.navigate(["/seller-dashboard/add-product"]);
+            }
+            //redirect ...ADMIN: admin-dashboard
+            else if(authority == "ADMIN"){
+              this.loginService.loginStatusSubject.next(true);
+              this.router.navigate(["/admin-dashboard/users-list"]);
+            }
+            else{
+              this.loginService.logout();
+            }
+          },
+          (error)=>{
+            console.log(error);
+          }
+        );
+
+  
 
       },
       (err:any)=>{

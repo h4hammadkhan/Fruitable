@@ -34,6 +34,9 @@
     margin-right: 7px;
 }
 
+.float-right{
+    float: right;
+}
 
 
 /* .mat-step-header .mat-step-icon-selected */
@@ -48,6 +51,11 @@
 ::ng-deep .mat-step-header[aria-selected="true"]:hover { 	
     background-color: rgba(128, 182, 2, 0.08) !important 
 }
+
+::ng-deep .mat-progress-bar-fill::after{
+    background-color: var(--myPrimary);
+}
+
 
 
 

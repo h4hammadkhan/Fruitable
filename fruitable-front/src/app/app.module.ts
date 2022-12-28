@@ -11,11 +11,25 @@ import { HomeComponent } from './component/home/home.component';
 import { ProductsingleComponent } from './component/productsingle/productsingle.component';
 import { CartComponent } from './component/cart/cart.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { DashboardComponent } from './buyer/dashboard/dashboard.component';
 import { OrdersComponent } from './component/orders/orders.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupBuyerComponent } from './component/signup-buyer/signup-buyer.component';
+
 import { SignupSellerComponent } from './component/signup-seller/signup-seller.component';
+import { SellerDashboardComponent} from './seller/seller-dashboard/seller-dashboard.component';
+import { SellerDashboardsidebarComponent} from './seller/seller-dashboardsidebar/seller-dashboardsidebar.component';
+import { SellerOrdersComponent} from './seller/seller-orders/seller-orders.component';
+import { SellerProdustListComponent} from './seller/seller-produstList/seller-produstList.component';
+import { SellerProfileComponent } from './seller/seller-profile/seller-profile.component';
+import { SellerShipComponent } from './seller/seller-ship/seller-ship.component';
+import { AddProductComponent } from './seller/add-product/add-product.component';
+
+
+import { AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardsidebarComponent} from './admin/admin-dashboardsidebar/admin-dashboardsidebar.component';
+import {UsersListComponent} from './admin/usersList/usersList.component'
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -28,8 +42,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { CartEmptyComponent } from './component/cart-empty/cart-empty.component';
-import { DashboardsidebarComponent } from './component/dashboardsidebar/dashboardsidebar.component';
-import { AddProductComponent } from './component/add-product/add-product.component';
+import { DashboardsidebarComponent } from './buyer/dashboardsidebar/dashboardsidebar.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -39,6 +52,9 @@ import { CategoryTagComponent } from './component/category-tag/category-tag.comp
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { AuthInterceptorProviders } from './service/auth.interceptor';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 
@@ -60,9 +76,21 @@ import {MatStepperModule} from '@angular/material/stepper';
     LoginComponent,
     CartEmptyComponent,
     DashboardsidebarComponent,
-    AddProductComponent,
     CategoryTagComponent,
     NotfoundComponent,
+    SellerDashboardComponent,
+    SellerDashboardsidebarComponent,
+    AdminDashboardComponent,
+    AdminDashboardsidebarComponent,
+    UsersListComponent,
+    AddProductComponent,
+    SellerOrdersComponent,
+    SellerProdustListComponent,
+    SellerProfileComponent,
+    SellerShipComponent,
+ 
+
+
   ],
   imports: [
     BrowserModule,
@@ -87,10 +115,12 @@ import {MatStepperModule} from '@angular/material/stepper';
     NgxPageScrollCoreModule,
     MatMenuModule,
     MatStepperModule,
-    
+    MatProgressBarModule,
+    MatSidenavModule,
+
     
   ],
-  providers: [],
+  providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

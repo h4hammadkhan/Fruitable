@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Ecom';
+  title = 'Fruitable';
+  islogin = false;
+
+  constructor(
+    private loginService: LoginService,
+  ) {}
+
+  ngOnInit(): void {
+    this.islogin = this.loginService.isLoggedIn();
+
+    this.loginService.loginStatusSubject.asObservable().subscribe((data)=>{
+      this.islogin = this.loginService.isLoggedIn();
+    })
+
+
+  }
 
 
 }

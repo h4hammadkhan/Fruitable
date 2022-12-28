@@ -18,12 +18,20 @@ export class LoginguardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if(this.loginService.isLoggedIn()){
-        return true;
+      if(this.loginService.isLoggedIn() && this.loginService.getRole()=="BUYER"){
+        this.router.navigate(['/home'])
+        return false;
       }
-
-      this.router.navigate(['/login']);
-      return false
+      else if(this.loginService.isLoggedIn() && this.loginService.getRole()=="SELLER"){
+        this.router.navigate(['/seller-dashboard/add-product'])
+        return false;
+      }
+      else if(this.loginService.isLoggedIn() && this.loginService.getRole()=="ADMIN"){
+        this.router.navigate(['/admin-dashboard/users-list'])
+        return false;
+      }
+   
+      return true;
 
 
   }

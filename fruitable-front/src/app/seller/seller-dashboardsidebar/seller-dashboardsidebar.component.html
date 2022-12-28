@@ -1,0 +1,55 @@
+<mat-card class="no-shadow">
+    <mat-card-header>
+        <mat-card-title>Menu</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-selection-list [multiple]="false">
+
+
+          <mat-list-option routerLink="/seller-dashboard/add-product">
+            <button mat-icon-button>
+              <mat-icon class="mat-18">account_circle</mat-icon>
+              Profile
+            </button>
+          </mat-list-option>
+
+          <mat-list-option routerLink="/seller-dashboard/add-product">
+            <button mat-icon-button>
+              <mat-icon class="mat-18">receipt</mat-icon>
+              Orders
+            </button>
+          </mat-list-option>
+
+          <mat-list-option routerLink="/seller-dashboard/add-product">
+            <button mat-icon-button>
+              <mat-icon class="mat-18">add_circle</mat-icon>
+              add Product
+            </button>
+          </mat-list-option>
+
+          <mat-list-option routerLink="/seller-dashboard/add-product">
+            <button mat-icon-button>
+              <mat-icon class="mat-18">list</mat-icon>
+              Product list
+            </button>
+          </mat-list-option>
+
+          <mat-list-option routerLink="/seller-dashboard/add-product">
+            <button mat-icon-button>
+              <mat-icon class="mat-18">local_shipping</mat-icon>
+              Ship
+            </button>
+          </mat-list-option>
+
+
+          <mat-list-option (click)="logout()">
+            <button mat-icon-button>
+              <mat-icon class="mat-18">logout</mat-icon>
+              Logout
+            </button>
+          </mat-list-option>
+
+        </mat-selection-list>
+    </mat-card-content>
+</mat-card>
