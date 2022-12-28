@@ -2,6 +2,8 @@ import { Product } from './../model/product';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import baseUrl from './helper';
+import { Products } from '../model/products';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,16 @@ export class ProductserviceService {
     private http:HttpClient,
   ) { }
 
+
+  public addNewProduct(product:Products){
+    return this.http.post(`${baseUrl}/product/`,product);
+  } 
+
+  public uploadProductImage(file:any){
+    return this.http.post(`${baseUrl}/product/upload/`,file,{reportProgress: true,observe: "events"});
+  }
+
+// ----- ---- ---- ----- ---- ---- ----- ----  //
 
   public getLimitProducts(limit:number):Observable<Product[]>{
     return this.http.get<Product[]>(`https://fakestoreapi.com/products?limit=${limit}`);
