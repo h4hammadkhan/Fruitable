@@ -15,7 +15,8 @@ export class SignupBuyerComponent implements OnInit {
 
   user!:User;
   userForm!:FormGroup;
-
+  hide = true;
+  
   constructor(
     private formBuilder: FormBuilder,
     private signupService: SignupService,

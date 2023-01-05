@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fruitable.UserOrderModel.UsersOrder;
 import com.fruitable.model.product.Product;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,7 @@ public class User implements UserDetails{
 	private String address;
 	private boolean enabled = true;
 	private Long impression;
+	private String cnic;
 	
 	// user many roles
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
@@ -45,12 +47,17 @@ public class User implements UserDetails{
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Product> products = new LinkedHashSet<>();
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Set<UsersOrder> usersOrder = new LinkedHashSet<>();
 
 	
 	public User() {
 		
 	}
 	
+
 
 	public User(Long userId, String first_name, String last_name, String userName, String password,
 			String profile_image, String email, String phone, String address, boolean enabled, Long impression,
@@ -69,6 +76,7 @@ public class User implements UserDetails{
 		this.impression = impression;
 		this.userRoles = userRoles;
 		this.products = products;
+//		this.order = order;
 	}
 
 
@@ -176,6 +184,15 @@ public class User implements UserDetails{
 	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
+	
+//	public Set<Order> getOrder() {
+//		return order;
+//	}
+//
+//	public void setOrder(Set<Order> order) {
+//		this.order = order;
+//	}
+	
 	
  
 

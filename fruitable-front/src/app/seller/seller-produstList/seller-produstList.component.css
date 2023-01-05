@@ -1,0 +1,8 @@
+.align-center{
+    align-items: center;
+}
+
+.df-align-center{
+    display: flex;
+    align-items: center;
+}

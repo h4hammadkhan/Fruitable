@@ -61,7 +61,10 @@
 
                             <mat-form-field class="example-full-width" appearance="outline">
                               <mat-label>Password</mat-label>
-                              <input matInput placeholder="Last name, First name" formControlName="password" required>
+                              <input formControlName="password" placeholder="Enter password" matInput [type]="hide ? 'password' : 'text'" required="">
+                              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
                             </mat-form-field>
 
                           </div>
@@ -103,13 +106,6 @@
 
                     <div class="mb-3">
                       <input class="form-control" type="file" accept="image/*" (change)="selectImg($event)">
-                    </div>
-
-                    <!-- Progress Bar -->
-                    <div *ngIf="progress > 0">
-                      <p class="mb-0 float-right">{{progress}}%</p>
-                      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
-                      <p>{{profileUploadMsg}}</p>
                     </div>
 
                   <div>

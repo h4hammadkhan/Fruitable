@@ -24,11 +24,11 @@ export class CartService {
     let existingCartItem: CartItem | undefined;
 
     if(this.cartItems.length > 0){
-      existingCartItem = this.cartItems.find(temp=> temp.id == theCartItem.id);
+      existingCartItem = this.cartItems.find(temp=> temp.productId == theCartItem.productId);
       alreadyInCart = (existingCartItem != undefined);
     }
 
-    if(alreadyInCart && existingCartItem?.quantity! < existingCartItem?.count!){
+    if(alreadyInCart && existingCartItem?.quantity! < existingCartItem?.stock!){
       existingCartItem!.quantity++;
     }
     else{
@@ -59,11 +59,11 @@ export class CartService {
 
   decrementQuantity(productId:number){
 
-    let item = this.cartItems.find(temp => temp.id == productId);
+    let item = this.cartItems.find(temp => temp.productId == productId);
     item!.quantity--;
 
     if(item?.quantity == 0){
-      this.removeFromCart(item.id);
+      this.removeFromCart(item.productId);
     }
     else{
       this.calculateTotalPrice();
@@ -75,7 +75,7 @@ export class CartService {
 
   removeFromCart(productId:number){
 
-    let itemIndex = this.cartItems.findIndex(temp => temp.id == productId);
+    let itemIndex = this.cartItems.findIndex(temp => temp.productId == productId);
 
     if(itemIndex > -1){
       this.cartItems.splice(itemIndex,1);
@@ -94,7 +94,7 @@ export class CartService {
       const qty = JSON.parse(localStorage.getItem('totalQuantity')!);
       if(item){
         item.forEach((element:CartItem) => {
-          if(this.cartItems.find(temp => temp.id == element.id)){
+          if(this.cartItems.find(temp => temp.productId == element.productId)){
 
           }
           else{

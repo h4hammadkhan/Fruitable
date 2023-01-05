@@ -1,4 +1,4 @@
-<mat-card>
+<!-- <mat-card>
   <mat-card-header>
     <mat-card-title>Your Orders</mat-card-title>
     <mat-card-subtitle>
@@ -70,10 +70,10 @@
 
                     <tbody>
                       <tr *ngFor="let item of detail.cartItem; let a = index">
-                        <td>{{ item.title }}</td>
+                        <td>{{ item.product.productName }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>{{ item.price | currency }}</td>
-                        <td>{{ item.quantity * item.price | currency }}</td>
+                        <td>{{ item.product.price | currency }}</td>
+                        <td>{{ item.quantity * item.product.price | currency }}</td>
                       </tr>
 
                       <tr>
@@ -147,10 +147,10 @@
 
                     <tbody>
                       <tr *ngFor="let item of detail.cartItem; let a = index">
-                        <td>{{ item.title }}</td>
+                        <td>{{ item.product.productName }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>{{ item.price | currency }}</td>
-                        <td>{{ item.quantity * item.price | currency }}</td>
+                        <td>{{ item.product.price | currency }}</td>
+                        <td>{{ item.quantity * item.product.price | currency }}</td>
                       </tr>
 
                       <tr>
@@ -181,4 +181,4 @@
       </div>
     </div>
   </div>
-</mat-card>
+</mat-card> -->

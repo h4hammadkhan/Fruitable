@@ -52,7 +52,7 @@ export class CartComponent implements OnInit {
     this.cartService.decrementQuantity(productId);
   }
 
-  removeFormCart(productId:number){
+  removeFromCart(productId:number){
     this.cartService.removeFromCart(productId);
   }
 

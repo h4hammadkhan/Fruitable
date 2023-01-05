@@ -18,6 +18,14 @@ import { SellerGuard } from './guard/seller.guard';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
 import { UsersListComponent } from './admin/usersList/usersList.component';
+import { SellerOrdersComponent } from './seller/seller-orders/seller-orders.component';
+import { SellerProfileComponent } from './seller/seller-profile/seller-profile.component';
+import { SellerProdustListComponent } from './seller/seller-produstList/seller-produstList.component';
+import { SellerShipComponent } from './seller/seller-ship/seller-ship.component';
+import { UpdateProductComponent } from './seller/update-product/update-product.component';
+import { ProfileComponent } from './buyer/profile/profile.component';
+import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
+import { SellerUpdateProfileComponent } from './seller/seller-update-profile/seller-update-profile.component';
 
 const routes: Routes = [
   {
@@ -61,16 +69,22 @@ const routes: Routes = [
     path: "checkout",
     component: CheckoutComponent,
     canActivate: [BuyerGuard],
+
   },
   {
     path: "buyer-dashboard",
     component: DashboardComponent,
     canActivate: [BuyerGuard],
     children:[
+      
       {
         path: "order",
         component: OrdersComponent,
       },
+      {
+        path: "profile",
+        component: ProfileComponent,
+      }
     ]
   },
   {
@@ -83,18 +97,30 @@ const routes: Routes = [
         path: "add-product",
         component: AddProductComponent,
       },
-      // {
-      //   path: "order"
-      // },
-      // {
-      //   path: "profile",
-      // },
-      // {
-      //   path: "product-list",
-      // },
-      // {
-      //   path: "ship",
-      // },
+      {
+        path: "update-product/:id",
+        component: UpdateProductComponent
+      },
+      {
+        path: "orders",
+        component: SellerOrdersComponent,
+      },
+      {
+        path: "update-profile",
+        component: SellerUpdateProfileComponent,
+      },
+      {
+        path: "profile",
+        component: SellerProfileComponent
+      },
+      {
+        path: "product-list",
+        component: SellerProdustListComponent
+      },
+      {
+        path: "ship",
+        component: SellerShipComponent
+      },
     ]
   },
   {
@@ -105,6 +131,10 @@ const routes: Routes = [
       {
         path: "users-list",
         component: UsersListComponent,
+      },
+      {
+        path: "profile",
+        component: AdminProfileComponent,
       }
     ]
   },

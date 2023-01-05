@@ -40,4 +40,16 @@ export class HeaderComponent implements OnInit {
     this.loginService.loginStatusSubject.next(false);
     this.router.navigate(['/login']);
   }
+
+  navigateToProfile(){
+    const role = this.loginService.getRole();
+    if(role == "SELLER"){
+      this.router.navigate(["seller-dashboard/profile"])
+    }else if(role == "ADMIN"){
+      this.router.navigate(["admin-dashboard/profile"])
+
+    }else if(role == "BUYER"){
+      this.router.navigate(["buyer-dashboard/profile"])
+    }
+  }
 }

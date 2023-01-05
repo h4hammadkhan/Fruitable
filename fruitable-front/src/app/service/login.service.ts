@@ -16,10 +16,10 @@ export class LoginService {
     private http: HttpClient,
   ) { }
 
-    // get current user: which is logged in
-    public getCurrentUser(): Observable<User>{
-      return this.http.get<User>(`${baseUrl}/current-user`);
-    }
+  // get current user: which is logged in
+  public getCurrentUser(){
+    return this.http.get(`${baseUrl}/current-user`);
+  }
 
   //generate token
   public generateToken(loginData: LoginData){
@@ -50,6 +50,8 @@ export class LoginService {
 
   public logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('uuid');
+    localStorage.removeItem('role');
     return true;
   }
 
@@ -61,7 +63,7 @@ export class LoginService {
     return localStorage.getItem('role');
   }
 
-  public userDetails(userDetails:any){
+  public setUserDetails(userDetails:any){
     localStorage.setItem('uuid',JSON.stringify(userDetails));
   }
 

@@ -1,15 +1,5 @@
-<!-- <div class="container-fluid dashboard-top-5rem">
-  <div class="row">
-    <div class="col-md-3">
-      <app-seller-dashboardsidebar></app-seller-dashboardsidebar>
-    </div>
-    <div class="col-md-9">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div> -->
 <mat-drawer-container class="example-container dashboard-top-5rem">
-  <mat-drawer #drawer [mode]="'side'" opened>
+  <mat-drawer #drawer [mode]="'side'" opened >
     <app-seller-dashboardsidebar></app-seller-dashboardsidebar>
   </mat-drawer>
   <mat-drawer-content>
@@ -18,9 +8,8 @@
     </button>
    
     
-    <div style="width: 100%;">
+    <div>
       <router-outlet></router-outlet>
-      
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

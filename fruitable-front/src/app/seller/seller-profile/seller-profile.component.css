@@ -1,0 +1,65 @@
+.round-corner-20{
+    border-radius: 25px;
+}
+
+.round-corner-15{
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.roundImg{
+    border-radius: 8px;
+}
+
+.bg-gray{
+    background: rgb(244, 244, 244);
+}
+
+.info .name{
+    font-size: 3rem;
+}
+
+.info .username{
+    color: gray;
+}
+
+td{
+    font-weight: 500;
+    color: gray;
+}
+
+.bold{
+    font-weight: 600;
+    color: black;
+}
+
+.color-primary{
+    background: var(--myPrimary);
+    color: white;
+    border-radius: 10px;
+}
+
+.color-primary-outline{
+    background: none;
+    color: var(--myPrimary);
+    border-radius: 10px;
+    border: 2px solid var(--myPrimary);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 7px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(212, 212, 212); 
+    border-radius: 10px
+  }
+  

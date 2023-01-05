@@ -13,13 +13,6 @@
             <div class="row">
               <div class="col-md-6">
 
-                <!-- Progress Bar -->
-                <div *ngIf="progress > 0">
-                  <p class="mb-0 float-right">{{progress}}%</p>
-                  <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
-                  <p>{{ProductImageUploadMsg}}</p>
-                </div>
-
                 <div class="mb-3">
                   <input #fileInput class="form-control" type="file" accept="image/*" (change)="selectImg($event)" required>
                   <mat-hint>required*</mat-hint>
@@ -78,7 +71,7 @@
                   
 
                 <div class="text-center mb-3 mt-1">
-                  <button class="btn-myprimary" type="submit" [disabled]="productForm.invalid && productImage==null">submit</button>
+                  <button class="btn-myprimary" type="submit" [disabled]="productForm.invalid || productImage==null">submit</button>
                 </div>
 
               </div>

@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,13 +31,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fruitable.Repo.UserRepository;
 import com.fruitable.Service.FileService;
 import com.fruitable.Service.UserService;
 import com.fruitable.fileResponse.FileResponse;
 import com.fruitable.model.Role;
 import com.fruitable.model.User;
 import com.fruitable.model.UserRole;
+import com.fruitable.model.product.Product;
 
 @RestController
 @RequestMapping("/user")
@@ -46,11 +50,17 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired 
+	private UserRepository userRepository;
+	
 	@Autowired
 	private FileService fileService;
 	
 	@Value("${project.image}")
 	private String path;
+	
+	@Autowired
+	private ObjectMapper mapper;
 	
 	
 	// upload profile
@@ -65,6 +75,38 @@ public class UserController {
 			return new ResponseEntity<>(new FileResponse(
 					null, "image is not uploaded due to some error"),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		return new ResponseEntity<>(new FileResponse(
+				fileName, "image is successfully uploaded"),HttpStatus.OK);
+		
+	}
+	
+	// upload profile
+	@PostMapping("/upload/{userId}")
+	public ResponseEntity<FileResponse> uploadFileByUserId(
+			@RequestParam("image") MultipartFile image,
+			@PathVariable("userId") Long userId
+	){
+		String fileName =  null;
+		try {
+			fileName =  this.fileService.uploadImage(path, image);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<>(new FileResponse(
+					null, "image is not uploaded due to some error"),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		Optional<User> user = this.userRepository.findById(userId);
+		User userDetail = user.get();
+		userDetail.setUserId(userId);
+		userDetail.setProfile_image(fileName);
+		
+		try {
+			this.updateUser(userDetail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return new ResponseEntity<>(new FileResponse(
 				fileName, "image is successfully uploaded"),HttpStatus.OK);
 		
@@ -110,7 +152,28 @@ public class UserController {
 	
 	// register user as a Seller
 	@PostMapping("/seller")
-	public User createUserAsSeller(@RequestBody User user) throws Exception {
+	public ResponseEntity<?> createUserAsSeller(
+			@RequestParam("user") String user,
+			@RequestParam("image") MultipartFile image
+	) throws Exception {
+		
+		
+		// converting string into JSON
+		User userDetail = null;
+		try {
+			userDetail = mapper.readValue(user,User.class); 
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Request");
+		}
+		
+		// save file 
+		ResponseEntity<FileResponse> fileResponse =  this.fileUpload(image);
+		// getting image name
+		String imageName = fileResponse.getBody().getFileName();
+		
+		// save product
+		userDetail.setProfile_image(imageName);
 		
 		Set<UserRole> roles = new HashSet<>();
 		
@@ -120,12 +183,13 @@ public class UserController {
 		
 		UserRole userRole = new UserRole();
 		userRole.setRole(role);
-		userRole.setUser(user);
+		userRole.setUser(userDetail);
 		
 		roles.add(userRole);
 
-		return this.userService.createUser(user, roles);
+		return  ResponseEntity.ok(this.userService.createUser(userDetail, roles));
 	}
+	
 	
 	//get user by user name
 	@GetMapping("/{username}")

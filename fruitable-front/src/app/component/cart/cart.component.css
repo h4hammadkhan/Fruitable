@@ -1,28 +1,142 @@
-.imgSize{
-  width: 100px;
-}
-
-.title{
-  padding-left: 10px;
-  display: flex;
-  align-items: center;
-  /* flex-direction: column; */
-}
-
-button{
-  outline: none;
-}
-
-table,thead,tbody{
-  width: 100%;
-}
-
-.mb{
-  margin-bottom: 20px;
-}
-
 .flex{
-  height: 142.98px;
   display: flex;
+  justify-content: space-around;
   align-items: center;
+}
+
+
+.myPrimary{
+  color: var(--myPrimary);
+  transition: all .1s ease-in-out;
+}
+
+.myPrimary:hover{
+  opacity: 0.8;
+}
+
+/* ----/////////----- */
+.containers{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 1.5rem;
+  margin-top: 5rem;
+  
+}
+
+.containers a{
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+ul{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 3 0;
+  /* border: 1px solid #ffbbbb; */
+  box-shadow: 0px 0px 10px 5.5px rgba(221, 221, 221,0.5);
+
+  border-radius: 1rem;
+  margin: .5rem;
+  padding: 0;
+  list-style-type: none;
+  justify-content: space-around;
+}
+
+ul li{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+ul li:last-child{
+  border: none;
+}
+
+ul li img{
+  height:8rem;
+  width: 8rem;
+  border-radius: 100rem;
+  object-fit: cover;
+}
+
+ul li div{
+  padding: 1rem;
+}
+
+ul li div:not(:first-child){
+  flex-basis: 15%;
+}
+
+
+ul .remove-button{
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  padding: .5rem;
+  background-color: white;
+  color: #fb8080;
+
+}
+
+ul .remove-button:hover{
+  color: #ff1c1c;
+  cursor: pointer;
+}
+
+.checkout{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center; */
+  flex: 1 3;  
+  /* height: 20rem; */
+  /* border: 1px solid #ffbbbb; */
+  border-radius: 1rem;
+  padding: .5rem;
+  margin: .5rem;
+
+  /* new code */
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 5.5px rgb(221, 221, 221);
+}
+
+.checkout .checkMain{
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  justify-content: space-between;
+  margin: 1rem;
+  font-size: 1.4rem;
+}
+
+.checkout .checkMain > div{
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout .food-count{
+  margin-bottom: 1rem;
+}
+
+.checkout a{
+  padding: 1rem;
+  color: white;
+  background-color: var(--myPrimary);
+  display: block;
+  text-align: center;
+  border-radius: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+  transition: all .1s ease-in-out;
+}
+
+.checkout a:hover{
+  opacity: 0.8;
+  cursor: pointer;
 }

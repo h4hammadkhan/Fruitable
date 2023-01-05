@@ -48,3 +48,16 @@ body {
 .dashboard-top-5rem{
     margin-top: 4rem !important;
 }
+
+.color{
+    color: var(--myPrimary);
+}
+
+.mybtn{
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+.mybtn:hover{
+    color: var(--myPrimary);
+}

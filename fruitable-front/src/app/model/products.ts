@@ -1,3 +1,6 @@
+import { Category } from "./category";
+import { User } from "./user";
+
 export class Products {
 
     productId!: number;
@@ -7,10 +10,6 @@ export class Products {
 	product_image!:string;
 	measure!:string; // KGs or Dozens
 	date!:Date;
-	productCategory!:{
-    categoryId: number,
-  };
-	user!:{ 
-    userId: number,
-  };
+	productCategory!:Category
+	user!:User
 }

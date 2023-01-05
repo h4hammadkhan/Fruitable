@@ -21,6 +21,7 @@ export class SignupSellerComponent implements OnInit {
   profile!:any;
   progress: number = 0;
   profileUploadMsg: string = '';
+  hide = true;
 
 
   constructor(
@@ -43,7 +44,6 @@ export class SignupSellerComponent implements OnInit {
     });
     this.userPersonalFormGroup = this.formBuilder.group({
       address: ['', Validators.required],
-      profile_image:'default.png',
     });
     
   }
@@ -53,67 +53,22 @@ export class SignupSellerComponent implements OnInit {
   }
   
   selectImg(event: any){
-    let formData = new FormData();
     console.log(event.target.files[0])
-    this.profile = event.target.files[0];
-    formData.append('image',this.profile);
-    this.signupService.uploadProfile(formData).subscribe(
-      (event: any) =>{
-        switch(event.type){
-          case HttpEventType.Sent:
-            console.log('Response header has been received!');
-            break;
-          case HttpEventType.UploadProgress:
-            var eventTotal = event.total ? event.total : 0;
-            this.progress = Math.round(event.loaded / eventTotal * 100);
-            console.log(`Uploaded! ${this.progress}%`);
-            break;
-          case HttpEventType.Response:
-            console.log('Image Upload Successfully!', event.body);
-            console.log("check:",event.body.fileName);
-            this.userPersonalFormGroup.controls['profile_image'].setValue(event.body.fileName);
-            this.profileUploadMsg = event.body.message;
-
-            setTimeout(() => {
-              // this.progress = 0;
-            }, 1500);
-            
-          
-        }
-      },
-      error =>{
-
-      }
-    )
-    // this.signupService.uploadProfile(formData).subscribe(
-    //   (data:any)=>{
-    //     console.log(data);
-    //     this.userPersonalFormGroup.controls['profile_image'].setValue(data.fileName);
-    //   },
-    //   (err)=>{
-    //     console.log(err);
-    //   }
-    // )
-    
+    this.profile = event.target.files[0];  
   }
 
   onSubmit(){
 
     this.user = this.userDetailFormGroup.value;
     this.user.address = this.userPersonalFormGroup.controls['address'].value;
-    this.user.profile_image = this.userPersonalFormGroup.controls['profile_image'].value;
     console.log(this.user);
-    
-    // this.user = this.userForm.value;
-    // console.log(this.user);
-    this.signupService.addNewSeller(this.user).subscribe(
+    this.signupService.addNewSeller(this.user,this.profile).subscribe(
       (data:any)=>{
         Swal.fire("Success","Successfully registered!!","success").then(
           (ok)=>{
             this.router.navigate(['/login']);
           }
         )
-
       },
       (err)=>{
         console.log(err);

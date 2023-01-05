@@ -1,10 +1,12 @@
 import { CartItem } from './../../model/cartItem';
 import { CartService } from './../../service/cart.service';
 import { ProductserviceService } from './../../service/productservice.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from './../../model/product';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Products } from 'src/app/model/products';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-productsingle',
@@ -14,12 +16,15 @@ import Swal from 'sweetalert2';
 export class ProductsingleComponent implements OnInit {
 
   product!:Product;
+  Product!:Products;
   productId!:number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductserviceService,
     private cartService: CartService,
+    private loginSevice: LoginService,
+    private router: Router,
 
   ) { }
 
@@ -32,10 +37,10 @@ export class ProductsingleComponent implements OnInit {
   }
 
   getProductsById(){
-    this.productService.getProductById(this.productId).subscribe(
-      (data:Product)=>{
-        this.product = data;
-
+    this.productService.getSingleProduct(this.productId).subscribe(
+      (data:any)=>{
+        console.log(data);
+        this.Product = data;
       },
       (err)=>{
         console.log(err);
@@ -46,8 +51,12 @@ export class ProductsingleComponent implements OnInit {
   }
 
   addToCart(){
-    const cartItem = new CartItem(this.product);
-    this.cartService.addToCart(cartItem);
+    if(this.loginSevice.getToken()==null){
+      this.router.navigate(['/login']);
+    }else{
+      const cartItem = new CartItem(this.Product);
+      this.cartService.addToCart(cartItem);
+    }
   }
 
 

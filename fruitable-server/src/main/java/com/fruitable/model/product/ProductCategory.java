@@ -25,7 +25,6 @@ public class ProductCategory {
 	private Set<Product> products = new LinkedHashSet<>();
 
 	
-	
 	public ProductCategory() {
 		super();
 	}

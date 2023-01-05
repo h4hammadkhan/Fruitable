@@ -4,6 +4,9 @@ import { Product } from './../../model/product';
 import { ProductserviceService } from './../../service/productservice.service';
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import Swal from 'sweetalert2';
+import { Products } from 'src/app/model/products';
+import { ProductPageableResponse } from 'src/app/model/ProductPageableResponse';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -14,6 +17,8 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit {
 
   product:Product[] = [];
+  Products!:ProductPageableResponse;
+  pageEvent!: PageEvent;
   cate:string = '';
   limit = 4;
 
@@ -39,40 +44,20 @@ export class HomeComponent implements OnInit {
     this.shop.nativeElement.scrollIntoView({ behavior: 'smooth'});
 }
 
-  // @HostListener("window:scroll", [])
-  // onScroll(): void {
-  //   const hasCate = this.activatedRoute.snapshot.paramMap.has('cate');
-  //   if(!hasCate){
-  //     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-  //       // Load Your Data Here
-  //       this.limit +=5;
-
-  //       this.productService.getLimitProducts(this.limit).subscribe(
-  //         (data)=>{
-  //           this.product = data;
-  //         },
-  //         (err)=>{
-  //           console.log(err);
-  //         }
-  //       )
-  //     }
-  //   }
-  // }
 
 
   getProducts(){
 
-    const hasCate = this.activatedRoute.snapshot.paramMap.has('cate');
-    if(hasCate){
-      this.cate = String(this.activatedRoute.snapshot.paramMap.get('cate'));
-      this.getProductByCategory();
-    }
-    else{
-      this.productService.getLimitProducts(this.limit).subscribe(
-        (data:Product[])=>{
-          this.product = data;
+    // const hasCate = this.activatedRoute.snapshot.paramMap.has('cate');
+    // if(hasCate){
+    //   this.cate = String(this.activatedRoute.snapshot.paramMap.get('cate'));
+    //   this.getProductByCategory();
+    // }
+    // else{
+      this.productService.getProducts().subscribe(
+        (data:any)=>{
+          this.Products = data;
           console.log(data);
-          
         },
         (err)=>{
           console.log(err);
@@ -80,8 +65,21 @@ export class HomeComponent implements OnInit {
 
         }
       )
-    }
+    // }
 
+  }
+
+  onPaginateChange(event: PageEvent){
+    let pageNumber = event.pageIndex; 
+    let pageSize = event.pageSize;
+    this.productService.getProducts(pageNumber,pageSize).subscribe(
+      (data:any)=>{
+        this.Products = data;
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
   }
 
   getProductByCategory(){
@@ -96,27 +94,6 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  onScrollDown(ev:any){
-    // console.log("scrolled down!!",ev);
-    const hasCate = this.activatedRoute.snapshot.paramMap.has('cate');
-    if(!hasCate){
-
-      this.limit +=4;
-
-      this.productService.getLimitProducts(this.limit).subscribe(
-        (data)=>{
-          this.product = data;
-        },
-        (err)=>{
-          console.log(err);
-        }
-      )
-    }
-
-  }
-
 }
-function viewChild(arg0: string) {
-  throw new Error('Function not implemented.');
-}
+
 

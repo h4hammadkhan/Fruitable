@@ -1,4 +1,3 @@
-import { UserOrder } from 'src/app/model/userOrder';
 import { OrderserviceService } from './../../service/orderservice.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -10,8 +9,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class OrdersComponent implements OnInit {
 
-  orderDetails:UserOrder[]=[];
-  filterByDate:UserOrder[]=[];
+  // orderDetails:UserOrder[]=[];
+  // filterByDate:UserOrder[]=[];
   date:string='';
 
   constructor(
@@ -26,17 +25,17 @@ export class OrdersComponent implements OnInit {
   }
 
   getAllOdreDetails(){
-    this.orderDetails = this.orderService.getOderDetails();
-    this.filterByDate = [];
+    // this.orderDetails = this.orderService.getOderDetails();
+    // this.filterByDate = [];
     this.date = '';
   }
 
   getDate(event: MatDatepickerInputEvent<Date>){
     this.date = event.value?.toDateString()!;
-    let orders = this.orderDetails.filter(temp => temp.dateTime == this.date);
+    // let orders = this.orderDetails.filter(temp => temp.dateTime == this.date);
 
-    this.filterByDate.splice(0,this.filterByDate.length);
-    this.filterByDate.push(...orders);
+    // this.filterByDate.splice(0,this.filterByDate.length);
+    // this.filterByDate.push(...orders);
 
   }
 

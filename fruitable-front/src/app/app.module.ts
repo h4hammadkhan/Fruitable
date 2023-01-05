@@ -15,6 +15,7 @@ import { DashboardComponent } from './buyer/dashboard/dashboard.component';
 import { OrdersComponent } from './component/orders/orders.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupBuyerComponent } from './component/signup-buyer/signup-buyer.component';
+import { ProfileComponent } from './buyer/profile/profile.component'
 
 import { SignupSellerComponent } from './component/signup-seller/signup-seller.component';
 import { SellerDashboardComponent} from './seller/seller-dashboard/seller-dashboard.component';
@@ -24,11 +25,15 @@ import { SellerProdustListComponent} from './seller/seller-produstList/seller-pr
 import { SellerProfileComponent } from './seller/seller-profile/seller-profile.component';
 import { SellerShipComponent } from './seller/seller-ship/seller-ship.component';
 import { AddProductComponent } from './seller/add-product/add-product.component';
+import { UpdateProductComponent } from './seller/update-product/update-product.component';
+import { SellerUpdateProfileComponent } from './seller/seller-update-profile/seller-update-profile.component';
+
 
 
 import { AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminDashboardsidebarComponent} from './admin/admin-dashboardsidebar/admin-dashboardsidebar.component';
 import {UsersListComponent} from './admin/usersList/usersList.component'
+import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
@@ -55,6 +60,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { AuthInterceptorProviders } from './service/auth.interceptor';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatRippleModule} from '@angular/material/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -88,7 +95,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     SellerProdustListComponent,
     SellerProfileComponent,
     SellerShipComponent,
- 
+    UpdateProductComponent,
+    ProfileComponent,
+    AdminProfileComponent,
+    SellerUpdateProfileComponent,
 
 
   ],
@@ -117,6 +127,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatStepperModule,
     MatProgressBarModule,
     MatSidenavModule,
+    MatRippleModule,
+    MatPaginatorModule,
 
     
   ],

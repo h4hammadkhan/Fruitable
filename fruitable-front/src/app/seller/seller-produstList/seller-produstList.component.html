@@ -1,3 +1,58 @@
-<p>
-  seller-produstList works!
-</p>
+<div class="container" >
+  <mat-card-title>My Products</mat-card-title>
+  <!-- <button (click)="deleteImage()">D</button> -->
+  <div *ngIf="products.content.length==0" class="alert alert-warning" role="alert">
+    No Data Found !!
+  </div>
+  <div *ngIf="products">
+    <mat-card class="mb-3"  *ngFor="let pro of products.content">
+      <mat-card-content>
+        <div class="row align-center">
+          <div class="col-md-2">
+            <img [src]="'http://localhost:8080/product/productImage/'+pro.product_image" width="100%" height="80%" alt="" class="img-thumbnail">
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>{{pro.productName}}</h5>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>Price: {{pro.price+' per '+pro.measure}}</h5>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>Quantity: <span>{{pro.quantity+pro.measure}}</span></h5>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>Category: <span>{{pro.productCategory.categoryName}}</span></h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 df-align-center">
+                
+                <button mat-icon-button [routerLink]="'/seller-dashboard/update-product/'+pro.productId">
+                  <mat-icon class="color">edit</mat-icon>
+                </button>
+  
+                <button mat-icon-button (click)="deleteProduct(pro.productId,pro.product_image)">
+                  <mat-icon color="warn" >delete</mat-icon>
+                </button>
+                 
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </mat-card-content>
+    </mat-card>
+    <mat-paginator 
+              [length]="products.totalElements"
+              [pageSize]="products.pageSize"
+              [pageSizeOptions]="[3, 5, 10, 25, 100]"
+              (page) = "pageEvent = $event; onPaginateChange($event)"
+              aria-label="Select page">
+          </mat-paginator>
+  </div>
+</div>
+

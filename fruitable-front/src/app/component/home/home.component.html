@@ -62,69 +62,44 @@
           </div>
 
           <div class="row">
-            <!-- <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let item of product">
-              <div class="search-results" infinite-scroll (scrolled)="onScrollDown($event)">
-                <mat-card class="pointer" [routerLink]="'/product-single/' + item.id">
-                  <div class="product">
-                    <div class="product-wrap">
-
-                      <img class="img-fluid w-100 mb-3 img-first" [src]="item.image" alt="product-img" />
+            <ul>
+              <li *ngFor="let prod of Products?.content">
+                <a [routerLink]="'/product-single/'+prod.productId">
+                  <img [src]="'http://localhost:8080/product/productImage/'+prod.product_image" alt="food img">
+                  <div class="content">
+                    <div class="name">
+                      <h3>{{prod.productName}}</h3> 
                     </div>
+                    
+                    <div class="product-item-footer">
+                      <div class="origins">
+                        <span>
+                          {{prod.productCategory.categoryName}}
+                        </span>
+                      </div>
+  
+                      <div class="cook-time">
+                        {{prod.date | date}}
+                      </div>
 
-                    <div class="product-info mt-2">
-                      <h2 class="product-title h5 mb-0 overflow">
-                        {{ item.title }}
-                      </h2>
-                      <p class="price mt-2">
-                        {{ item.price | currency }}
-                      </p>
+                    </div>
+                    
+                    <div class="price">
+                      {{prod.price | currency:"Rs"}} Per {{prod.measure}}
                     </div>
                   </div>
-                </mat-card>
-              </div>
-            </div> -->
-            <ul>
-              <li *ngFor="let food of product">
-                  <a routerLink="/food/{{food.id}}">
-                      <img src="{{food.image}}" alt="food img">
-                      <div class="content">
-                          <div class="name">
-                              {{food.title}}
-                          </div>
-                          <div class="star">
-                              <!-- <ngb-rating [(rate)]="food.star" [max]="5" [readonly]="true">
-                                  <ng-template let-fill="fill">
-                                    <span class="defaultHeart" [class.filled]="fill === 100">
-                                      <span class="paintedHeart" [style.width.%]="fill">★</span>★
-                                    </span>
-                                  </ng-template>
-                              </ngb-rating> -->
-                          </div>
-                          
-                          <div class="product-item-footer">
-                              <div class="origins">
-                                  <!-- <span *ngFor="let origin of food.origins">
-                                      {{origin}}
-                                    </span> -->
-                                    pakistan
-                              </div>
-          
-                              <div class="cook-time">
-                                  <span>🕒</span>
-                                  <!-- {{food.cookTime}} -->
-                                  55
-                              </div>
-                          </div>
-                          
-                          <div class="price">
-                              {{food.price | currency}}
-                          </div>
-                      </div>
-                  </a>
+                </a>
               </li>
-          </ul>
+            </ul>
           
           </div>
+          <mat-paginator 
+              [length]="Products.totalElements"
+              [pageSize]="Products.pageSize"
+              [pageSizeOptions]="[10, 15, 25, 40, 100]"
+              (page) = "pageEvent = $event; onPaginateChange($event)"
+              aria-label="Select page">
+          </mat-paginator>
         </div>
       </section>
 

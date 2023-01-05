@@ -1,3 +1,19 @@
 .example-full-width {
   width: 100%;
 }
+
+.login-form{
+  border-radius: 20px;
+}
+
+.bg-gray-50{
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.f-left{
+  text-align: right;
+}
+
+.bold{
+  font-weight: 600;
+}

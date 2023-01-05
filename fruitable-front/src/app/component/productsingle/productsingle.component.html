@@ -1,31 +1,64 @@
-<div class="container mt-5">
-  <div class="row">
-
-    <div class="col-md-5 mt-5">
-      <img class="imgSize" [src]="product.image" alt="">
-    </div>
-
-    <div class="col-md-7">
-      <div class="content">
-        <p class="tag"><strong>{{product.category | titlecase}}</strong></p>
-        <h4>{{product.title}}</h4>
-        <p>{{product.description}}</p>
-
-        <div class="price">
-          <strong>Price: {{product.price | currency}}</strong>
-          <p class="mt-3"><strong>Rating: {{product.rating.rate}}</strong>⭐</p>
+<!-- [visible]="!Product" -->
+<app-notfound *ngIf="!Product"  notFoundMessage="Product Not Found !" resetLinkText="Go to HomePage!"></app-notfound>
+<div *ngIf="Product" class="container top-space">
+  <mat-card>
+    <div class="row">
+      <div class="col-md-6">
+        <img [src]="'http://localhost:8080/product/productImage/'+Product.product_image" [alt]="Product.productName">
+      </div>
+      <div class="col-md-6">
+        <div class="details">
+          <div class="header">
+            <span class="name">
+              {{Product.productName}}
+            </span>
+          </div>
+      
+          <div class="row font-size">
+            <div class="col-md-12">
+              <span>
+                <div class="display-flex">
+                  <h5>
+                    Posted By: <span class="mybtn">
+                      {{Product.user.first_name + " " + Product.user.last_name | titlecase}}
+                    </span>
+                  </h5>
+                </div>
+              </span>
+            </div>
+            <div class="col-md-6 ">
+              Category:
+            </div>
+            <div class="col-md-6 info">
+              {{Product.productCategory.categoryName}}
+            </div>
+            <div class="col-md-6">
+              Quantity:
+            </div>
+            <div class="col-md-6 info">
+              {{Product.quantity +" "+ Product.measure}}
+            </div>
+            <div class="col-md-6">
+              Date:
+            </div>
+            <div class="col-md-6 info">
+              {{Product.date | date}}
+            </div>
+          </div>
+            
+          
+      
+          <div class="price">
+            <span>
+              {{Product.price | currency:"Rs"}} Per {{Product.measure}}
+            </span>
+          </div>
+      
+          <button (click)="addToCart()">Add to Cart</button>
+      
         </div>
-
-        <div class="mt-3">
-          <button class="pl-0 outline" mat-button color="primary" routerLink="/home">
-            <mat-icon class="mat-18">arrow_back</mat-icon>
-            back to shop
-          </button>
-          <button class="outline ml-3" mat-flat-button color="primary" (click)="addToCart()">Add to cart</button>
-        </div>
-
       </div>
     </div>
+  </mat-card>
 
-  </div>
 </div>

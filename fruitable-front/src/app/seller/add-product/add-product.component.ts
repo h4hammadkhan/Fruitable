@@ -6,6 +6,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { LoginService } from 'src/app/service/login.service';
 import { HttpEventType } from '@angular/common/http';
+import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-add-product',
@@ -15,13 +16,11 @@ import { HttpEventType } from '@angular/common/http';
 export class AddProductComponent implements OnInit {
 
   productForm!: FormGroup;
-  categories!:any;
+  categories!:Category[];
   productImage!:File | any;
   Product!:Products;
   imageSrc!: string | any;
   userId!:number;
-  progress!: number;
-  ProductImageUploadMsg!: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +39,6 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       productName:['',Validators.required],
       quantity:['',Validators.required],
-      product_image:[''],
       price:['',Validators.required],
       measure:['',Validators.required],
       productCategory: this.formBuilder.group({
@@ -83,47 +81,22 @@ export class AddProductComponent implements OnInit {
   // add new product
   addProduct(){
     if(this.productForm.valid){
-      // for multiPartFile data
-      let formData = new FormData();
-      formData.append("image",this.productImage);
       
-      // upload product image
-      this.productService.uploadProductImage(formData).subscribe(
-        (event: any) =>{
-          switch(event.type){
-            case HttpEventType.UploadProgress:
-              var eventTotal = event.total ? event.total : 0;
-              this.progress = Math.round(event.loaded / eventTotal * 100);
-              console.log(`Uploaded! ${this.progress}%`);
-              break;
-            case HttpEventType.Response:
-              console.log('Image Upload Successfully!', event.body);
-              // set response message  
-              this.ProductImageUploadMsg = event.body.message;
-              // set response image name into form controller
-              this.productForm.controls['product_image'].setValue(event.body.fileName);
-              // set all data
-              this.Product = this.productForm.value;
-              // add product
-              this.productService.addNewProduct(this.Product).subscribe(
-                (data)=>{
-                  console.log(data);
-                  Swal.fire("Success","successfully add new product!!","success");
-                  // reset all fields
-                  this.productForm.reset();
-                  this.productImage = null;
-                  this.imageSrc = null;
-                  this.fileInputReset();
-                },
-                (err)=>{
-                  console.log(err);
-                  Swal.fire("Error","Error in adding new product!!","error");
-                }
-              )
-            setTimeout(() => {
-              this.progress = 0;
-            }, 3000);
-          }
+      this.Product = this.productForm.value;
+      // upload product with image
+      this.productService.addNewProductWithImage(this.Product,this.productImage).subscribe(
+        (data)=>{
+          console.log(data);
+          Swal.fire("Success","successfully add new product!!","success");
+          // reset all fields
+          this.productForm.reset();
+          this.productImage = null;
+          this.imageSrc = null;
+          this.fileInputReset();
+        },
+        (err)=>{
+          console.log(err);
+          Swal.fire("Error","Error in adding new product!!","error");
         }
       )
     }

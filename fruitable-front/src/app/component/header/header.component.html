@@ -18,7 +18,7 @@
       </small>
     </button>
     <mat-menu #dashMenu="matMenu" xPosition="before">
-      <button mat-menu-item><mat-icon mat-list-icon class="white">account_circle</mat-icon>Profile</button>
+      <button (click)="navigateToProfile()" mat-menu-item><mat-icon mat-list-icon class="white">account_circle</mat-icon>Profile</button>
       <button routerLink="/buyer-dashboard/order" mat-menu-item><mat-icon mat-list-icon class="white">dashboard</mat-icon>Dashboard</button>
       <button (click)="logout()" mat-menu-item><mat-icon mat-list-icon class="white">logout</mat-icon>Logout</button>
     </mat-menu>

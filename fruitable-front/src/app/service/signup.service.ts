@@ -17,15 +17,26 @@ export class SignupService {
     return this.http.post<User>(`${baseUrl}/user/`,user);
   }
 
-  public addNewSeller(userInfo: User){
-    return this.http.post(`${baseUrl}/user/seller`,userInfo);
+  public addNewSeller(userInfo: User,file: File){
+    let formData = new FormData();
+    formData.append('user',JSON.stringify(userInfo));
+    formData.append('image',file)
+    return this.http.post(`${baseUrl}/user/seller`,formData);
   }
 
   public uploadProfile(profile:any): Observable<any>{
     return this.http.post<any>(`${baseUrl}/user/upload`,profile,{reportProgress: true, observe: "events"});
   }
 
+  public uploadProfileByUserId(profile:File,userId:number){
+    let formData = new FormData();
+    formData.append('image',profile);
+    return this.http.post(`${baseUrl}/user/upload/${userId}`,formData,{reportProgress: true, observe: "events"});    
+  }
 
+  public updateUserInfo(user:User){
+    return this.http.post(`${baseUrl}/user/update/`,user);
+  }
 
 
 }

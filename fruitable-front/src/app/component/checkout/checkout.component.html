@@ -1,10 +1,12 @@
-<div class="account section">
+<!-- justify-content-center -->
+<div class="account section top-space">
   <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-6">
-      <div class="login-form border p-5">
-        <div class="text-center heading">
-          <h2 class="mb-2">Contact & Delivery Information</h2>
+  <div class="row">
+    <div class="col-lg-8 mb-5">
+      <div class="login-form border p-4">
+        <div class="my-3">
+            <h4 class="mb-2 bold">{{'Contact & Delivery Information' | uppercase}}</h4>
+          <mat-divider></mat-divider>
         </div>
 
         <form [formGroup]="userOrderForm" (ngSubmit)="submit()">
@@ -13,30 +15,24 @@
             <div class="col-md-6">
               <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>First Name</mat-label>
-                <input type="text" matInput placeholder="Enter first name" formControlName="firstname">
-                <mat-error *ngIf="fields['firstname'].errors?.['required']">first name is required</mat-error>
+                <input type="text" matInput placeholder="Enter First Name" formControlName="buyerFirstName">
+                <mat-error *ngIf="fields['buyerFirstName'].errors?.['required']">First Name is required</mat-error>
               </mat-form-field>
             </div>
             <div class="col-md-6">
               <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Last Name</mat-label>
-                <input type="text" matInput placeholder="Enter last name" formControlName="lastname">
-                <mat-error *ngIf="fields['lastname'].errors?.['required']">last name is required</mat-error>
+                <input type="text" matInput placeholder="Enter last name" formControlName="buyerLastName">
+                <mat-error *ngIf="fields['buyerLastName'].errors?.['required']">last name is required</mat-error>
               </mat-form-field>
             </div>
           </div>
 
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Enter your email" formControlName="email">
-            <mat-error *ngIf="fields['email'].errors?.['required']">email is required</mat-error>
-            <mat-error *ngIf="fields['email'].errors?.['email']">email is invalid</mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Phone Number</mat-label>
-            <input type="number" matInput placeholder="Enter phone Number" formControlName="phone">
-            <mat-error *ngIf="fields['phone'].errors?.['required']">phone is required</mat-error>
+            <input matInput placeholder="Enter your email" formControlName="buyerEmail">
+            <mat-error *ngIf="fields['buyerEmail'].errors?.['required']">email is required</mat-error>
+            <mat-error *ngIf="fields['buyerEmail'].errors?.['email']">email is invalid</mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width" appearance="outline">
@@ -45,16 +41,63 @@
             <mat-error *ngIf="fields['deliveryAddress'].errors?.['required']">address is required</mat-error>
           </mat-form-field>
 
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>City</mat-label>
+                <input type="text" matInput placeholder="Enter City" formControlName="city">
+                <mat-error *ngIf="fields['city'].errors?.['required']">city is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input type="text" matInput placeholder="Enter phone Number" formControlName="buyerPhone">
+                <mat-error *ngIf="fields['buyerPhone'].errors?.['required']">phone is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
 
           <div class="text-center">
-            <button mat-stroked-button color="primary" class="mr-3" routerLink="/cart">Go Back</button>
-            <button type="submit" mat-flat-button color="primary" [disabled]="userOrderForm.invalid">Place Order</button>
+            <button type="submit" class="btn-myprimary">Place Order</button>
           </div>
 
 
         </form>
 
       </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="bg-dark p-3">
+        <h5 class="color text-center m-0 bold">{{'Order summary' | uppercase}}</h5>
+      </div>
+      <div class="bg-gray-50 p-3">
+        <div class="row" *ngFor="let item of cartItem">
+          <div class="col-md-6 mb-2">
+            {{item.productName}}
+          </div>
+          <div class="col-md-6 f-left">
+            {{item.price*item.quantity | currency:"Rs."}}
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="row mb-2">
+          <div class="col-md-6 mb-2">
+            <b>SubTotal</b>
+          </div>
+          <div class="col-md-6 f-left">
+            <b>{{totalPrice | currency:"Rs."}}</b> 
+          </div>
+          <div class="col-md-6">
+            <b>Total Qty</b>
+          </div>
+          <div class="col-md-6 f-left">
+            <b>{{totalQuantity}}</b> 
+          </div>
+        </div>
+      </div>
+      {{userOrderForm.value | json}}
     </div>
   </div>
 </div>

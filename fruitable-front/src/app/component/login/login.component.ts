@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   userLogin!: FormGroup;
   logindata!:LoginData;
+  hide = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,8 +61,8 @@ export class LoginComponent implements OnInit {
             }
           
             console.log("userDetails:",userDetails);
-            
-            this.loginService.userDetails(userDetails);
+            // set user details
+            this.loginService.setUserDetails(userDetails);
 
             console.log("----- gettng user details -----");
             console.log(this.loginService.getUserDetails());
