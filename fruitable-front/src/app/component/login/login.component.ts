@@ -78,17 +78,20 @@ export class LoginComponent implements OnInit {
             //redirect ...BUYER: buyer-dashboard
             if(authority == "BUYER"){
               this.loginService.loginStatusSubject.next(true);
+              this.loginService.roleStatusSubject.next(true);
               this.router.navigate(["/home"]);
             }
             //redirect ...SELLER: seller-dashboard
             else if(authority == "SELLER"){
               this.loginService.loginStatusSubject.next(true);
+              this.loginService.roleStatusSubject.next(false);
               this.router.navigate(["/seller-dashboard/add-product"]);
             }
             //redirect ...ADMIN: admin-dashboard
             else if(authority == "ADMIN"){
               this.loginService.loginStatusSubject.next(true);
-              this.router.navigate(["/admin-dashboard/users-list"]);
+              this.loginService.roleStatusSubject.next(false);
+              this.router.navigate(["/admin-dashboard/user-report"]);
             }
             else{
               this.loginService.logout();
@@ -104,7 +107,7 @@ export class LoginComponent implements OnInit {
       },
       (err:any)=>{
         console.log(err);
-        Swal.fire("Error!!","Invalid Credentials Bad credentials","error");
+        Swal.fire("Error!!",`"Invalid Credentials Bad credentials Or Unauthorized"`,"error");
 
       }
     )

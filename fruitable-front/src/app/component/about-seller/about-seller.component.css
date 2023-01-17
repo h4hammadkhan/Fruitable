@@ -1,0 +1,143 @@
+.round-corner-20{
+    border-radius: 25px;
+}
+
+.round-corner-15{
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.roundImg{
+    border-radius: 8px;
+}
+
+.bg-gray{
+    background: rgb(244, 244, 244);
+}
+
+.info .name{
+    font-size: 3rem;
+}
+
+.info .username{
+    color: gray;
+}
+
+td{
+    font-weight: 500;
+    color: gray;
+}
+
+.bold{
+    font-weight: 600;
+    color: black;
+}
+
+.color-primary{
+    background: var(--myPrimary);
+    color: white;
+    border-radius: 10px;
+}
+
+.color-primary-outline{
+    background: none;
+    color: var(--myPrimary);
+    border-radius: 10px;
+    border: 2px solid var(--myPrimary);
+}
+
+.align-center{
+    align-items: center;
+}
+
+.mr{
+    margin-right: 1rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 7px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(212, 212, 212); 
+    border-radius: 10px
+}
+
+
+/* product listing css */
+ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+
+}
+
+ul li a{
+    height: 19rem;
+    width: 20rem;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 1rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: var(--myPrimary);
+}
+
+
+li a:hover{
+    opacity: 0.9;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 1.5px rgb(210, 210, 210);
+}
+
+li a img{
+    height: 60%;
+}
+
+.content{
+    padding: .5rem 1rem;
+    position: relative;
+
+}
+
+.product-item-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category{
+    flex: 4;    
+}
+
+.category span{
+    border-radius: 10px;
+    padding: 0 10px;
+    background-color: rgb(230, 230, 230);
+    color: gray;
+    font-size: .9rem;
+    margin-right: .3rem;
+    display: inline-block;
+}
+
+.date{
+    font-size: .9rem;
+    flex: 8;
+    text-align: right;
+}
+
+.price{
+    color: #424242;
+    margin-top: .5rem;
+}

@@ -3,6 +3,10 @@ package com.fruitable.Service;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.fruitable.fileResponse.UserPageableResponse;
 import com.fruitable.model.User;
 import com.fruitable.model.UserRole;
 
@@ -18,9 +22,24 @@ public interface UserService {
 	public void deleteById(Long userId);
 	
 	//Get all user
-	public Set<User> getAllUser();
+	public UserPageableResponse getAllUser(Integer pageNumber, Integer pageSize, String sortBy);
 	
 	//update user
 	public User updateUser(User user) throws Exception;
 	
+	// get user by userId
+	public User getUserById(Long userId);
+	
+	// update impression
+	public void setImp(Long impression, Long userId);
+	
+	// update Enabled/ lock user account
+	public void setEnabled(Boolean enabled, Long userId);
+		
+	// get user as buyers
+	public UserPageableResponse getBuyers(Long roleId,Integer pageNumber, Integer pageSize, String sortBy);
+	
+	// get user as SELLER
+	public UserPageableResponse getSellers(Long roleId,Integer pageNumber, Integer pageSize, String sortBy);
+
 }

@@ -1,14 +1,18 @@
-<div class="container-fluid dashboard-top-5rem ">
-  <div class="row">
-    <div class="col-md-3">
-      <app-dashboardsidebar></app-dashboardsidebar>
-    </div>
-    <div class="col-md-9">
+<mat-drawer-container class="example-container dashboard-top-5rem">
+  <mat-drawer #drawer [mode]="'side'" opened >
+    <app-dashboardsidebar></app-dashboardsidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button mat-icon-button  (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+   
+    
+    <div style="width: 100%;">
       <router-outlet></router-outlet>
     </div>
-  </div>
-</div>
-
+  </mat-drawer-content>
+</mat-drawer-container>
 
 
 

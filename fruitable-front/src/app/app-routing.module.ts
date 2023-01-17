@@ -1,5 +1,5 @@
 import { NotfoundComponent } from './component/notfound/notfound.component';
-import { OrdersComponent } from './component/orders/orders.component';
+import { OrdersComponent } from './buyer/orders/orders.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { LoginguardGuard } from './guard/loginguard.guard';
 import { AddProductComponent } from './seller/add-product/add-product.component';
@@ -17,7 +17,7 @@ import { SellerDashboardComponent } from './seller/seller-dashboard/seller-dashb
 import { SellerGuard } from './guard/seller.guard';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
-import { UsersListComponent } from './admin/usersList/usersList.component';
+import { BuyersListComponent } from './admin/buyersList/buyersList.component';
 import { SellerOrdersComponent } from './seller/seller-orders/seller-orders.component';
 import { SellerProfileComponent } from './seller/seller-profile/seller-profile.component';
 import { SellerProdustListComponent } from './seller/seller-produstList/seller-produstList.component';
@@ -26,6 +26,15 @@ import { UpdateProductComponent } from './seller/update-product/update-product.c
 import { ProfileComponent } from './buyer/profile/profile.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 import { SellerUpdateProfileComponent } from './seller/seller-update-profile/seller-update-profile.component';
+import { UpdateProfileComponent } from './buyer/update-profile/update-profile.component';
+import { SellerCompletedOrderComponent } from './seller/seller-completed-order/seller-completed-order.component';
+import { AboutSellerComponent } from './component/about-seller/about-seller.component';
+import { AdminUpdateProfileComponent } from './admin/admin-update-profile/admin-update-profile.component';
+import { ReportComponent } from './admin/report/report.component';
+import { SellersListComponent } from './admin/sellersList/sellersList.component';
+import { ViewUserProfileComponent } from './admin/view-user-profile/view-user-profile.component';
+import { ProductsListComponent } from './admin/productsList/productsList.component';
+import { ViewUserProductComponent } from './admin/view-user-product/view-user-product.component';
 
 const routes: Routes = [
   {
@@ -61,6 +70,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: "about-seller/:sellerId",
+    component: AboutSellerComponent,
+    pathMatch: 'full',
+  },
+  {
     path: "category/:cate",
     component: HomeComponent,
     pathMatch: 'full',
@@ -84,6 +98,10 @@ const routes: Routes = [
       {
         path: "profile",
         component: ProfileComponent,
+      },
+      {
+        path: "update-profile",
+        component: UpdateProfileComponent,
       }
     ]
   },
@@ -118,6 +136,10 @@ const routes: Routes = [
         component: SellerProdustListComponent
       },
       {
+        path: "orders-history",
+        component: SellerCompletedOrderComponent
+      },
+      {
         path: "ship",
         component: SellerShipComponent
       },
@@ -129,12 +151,36 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     children:[
       {
-        path: "users-list",
-        component: UsersListComponent,
+        path: "buyer-list",
+        component: BuyersListComponent,
+      },
+      {
+        path: "seller-list",
+        component: SellersListComponent,
+      },
+      {
+        path: "products-list",
+        component: ProductsListComponent,
+      },
+      {
+        path: "user/:id",
+        component: ViewUserProfileComponent,
+      },
+      {
+        path: "product/:pid",
+        component: ViewUserProductComponent,
       },
       {
         path: "profile",
         component: AdminProfileComponent,
+      },
+      {
+        path: "update-profile",
+        component: AdminUpdateProfileComponent,
+      },
+      {
+        path: "user-report",
+        component: ReportComponent,
       }
     ]
   },

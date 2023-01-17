@@ -27,14 +27,16 @@ button:hover{
 
 
 ::ng-deep .mat-menu-panel.bg-mat-manu {
-  background-color: rgba(0, 0,0, 0.8);
+  /* background-color: rgba(0, 0,0, 0.8); */
+  background-color: rgba(0, 0,0,1);
   /* color: white; */
   border: 1px solid rgb(143, 143, 143);
 
 }
 
 ::ng-deep .mat-menu-panel{
-  background-color: rgba(0, 0,0, 0.8);
+  /* background-color: rgba(0, 0,0, 0.8); */
+  background-color: rgba(0, 0,0,1);
   /* color: white; */
   border: 1px solid rgb(143, 143, 143);
 }

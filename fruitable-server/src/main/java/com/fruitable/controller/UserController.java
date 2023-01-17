@@ -1,13 +1,10 @@
 package com.fruitable.controller;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,10 +34,13 @@ import com.fruitable.Repo.UserRepository;
 import com.fruitable.Service.FileService;
 import com.fruitable.Service.UserService;
 import com.fruitable.fileResponse.FileResponse;
+import com.fruitable.fileResponse.UserPageableResponse;
+import com.fruitable.fileResponse.UserResponse;
+import com.fruitable.helper.UserFoundException;
 import com.fruitable.model.Role;
 import com.fruitable.model.User;
 import com.fruitable.model.UserRole;
-import com.fruitable.model.product.Product;
+
 
 @RestController
 @RequestMapping("/user")
@@ -55,6 +55,10 @@ public class UserController {
 	
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	
 	@Value("${project.image}")
 	private String path;
@@ -83,8 +87,8 @@ public class UserController {
 	// upload profile
 	@PostMapping("/upload/{userId}")
 	public ResponseEntity<FileResponse> uploadFileByUserId(
-			@RequestParam("image") MultipartFile image,
-			@PathVariable("userId") Long userId
+			@PathVariable("userId") Long userId,
+			@RequestParam("image") MultipartFile image
 	){
 		String fileName =  null;
 		try {
@@ -96,9 +100,7 @@ public class UserController {
 					null, "image is not uploaded due to some error"),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		Optional<User> user = this.userRepository.findById(userId);
-		User userDetail = user.get();
-		userDetail.setUserId(userId);
+		User userDetail  = this.userRepository.findById(userId).get();
 		userDetail.setProfile_image(fileName);
 		
 		try {
@@ -130,9 +132,15 @@ public class UserController {
 	
 	 // register user as a buyer
 	@PostMapping("/")
-	public User createUserAsBuyer(@RequestBody User user) throws Exception {
+	public ResponseEntity<UserResponse> createUserAsBuyer(@RequestBody User user){
+	
+		User registerdUser = null;
 		
 		user.setProfile_image("default.png");
+		
+		// encoding password with bCryptpasswordencoder
+		user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+		
 		Set<UserRole> roles = new HashSet<>();
 		
 		Role role = new Role();
@@ -145,18 +153,27 @@ public class UserController {
 		
 		roles.add(userRole);
 
-		return this.userService.createUser(user, roles);
+		try {
+			registerdUser = this.userService.createUser(user, roles); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new UserResponse(
+					null, "User with this username is already there in DB !! try with another one"),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<UserResponse>(new UserResponse(registerdUser,"Successfully Registered!!"),HttpStatus.OK);
 	}
 	
 	
 	
 	// register user as a Seller
 	@PostMapping("/seller")
-	public ResponseEntity<?> createUserAsSeller(
+	public ResponseEntity<UserResponse> createUserAsSeller(
 			@RequestParam("user") String user,
 			@RequestParam("image") MultipartFile image
-	) throws Exception {
+	) {
 		
+		User registerdUser = null;
 		
 		// converting string into JSON
 		User userDetail = null;
@@ -164,7 +181,8 @@ public class UserController {
 			userDetail = mapper.readValue(user,User.class); 
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Request");
+			return new ResponseEntity<>(new UserResponse(
+					null, "Invalid Bad Request!!"),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		// save file 
@@ -172,8 +190,10 @@ public class UserController {
 		// getting image name
 		String imageName = fileResponse.getBody().getFileName();
 		
-		// save product
 		userDetail.setProfile_image(imageName);
+		
+		// encoding password with bCryptpasswordencoder
+		userDetail.setPassword(this.bCryptPasswordEncoder.encode(userDetail.getPassword()));
 		
 		Set<UserRole> roles = new HashSet<>();
 		
@@ -187,7 +207,15 @@ public class UserController {
 		
 		roles.add(userRole);
 
-		return  ResponseEntity.ok(this.userService.createUser(userDetail, roles));
+		try {
+			registerdUser = this.userService.createUser(userDetail, roles);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new UserResponse(
+					null, "User with this username is already there in DB !! try with another one"),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return  new ResponseEntity<UserResponse>(new UserResponse(registerdUser,"Successfully Registered!!"),HttpStatus.OK);
 	}
 	
 	
@@ -206,8 +234,17 @@ public class UserController {
 	
 	//get All user
 	@GetMapping("/")
-	public Set<User> getAllUser() {
-		return this.userService.getAllUser();
+	public ResponseEntity<UserPageableResponse> getAllUser(
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+			@RequestParam(value="sortBy", defaultValue = "userId", required = false) String sortBy
+	) {
+
+	
+		UserPageableResponse allUser = this.userService.getAllUser(pageNumber, pageSize, sortBy);
+		
+		return new ResponseEntity<UserPageableResponse>(allUser,HttpStatus.OK);
+
 	}
 	
 	//update user
@@ -215,5 +252,60 @@ public class UserController {
 	public User updateUser(@RequestBody User user) throws Exception {
 		return this.userService.updateUser(user);
 	}
+	
+	// get user by userId
+	@GetMapping("/get/{userId}")
+	public User getUserById(@PathVariable("userId") Long userId) {
+		return this.userService.getUserById(userId);
+	}
+	
+	// set impression
+	@PostMapping("imp/{userId}")
+	public void setImpression(@PathVariable("userId") Long userId) {
+		User user = this.userRepository.findById(userId).get();
+		Long impression = user.getImpression();
+		impression++;
+		this.userService.setImp(impression, userId);
+	}
+	
+	// lock user account
+	@PostMapping("lock/{userId}")
+	public void lockUserAccount(@PathVariable("userId") Long userId) {
+		User user = this.userRepository.findById(userId).get();
+		Boolean enabled = false;
+		this.userService.setEnabled(enabled, userId);
+	}
+	
+	// unlock user account
+	@PostMapping("unlock/{userId}")
+	public void unLockUserAccount(@PathVariable("userId") Long userId) {
+		User user = this.userRepository.findById(userId).get();
+		Boolean enabled = true;
+		this.userService.setEnabled(enabled, userId);
+	}
+	
+	@GetMapping("/user-role/buyer")
+	public ResponseEntity<UserPageableResponse> getBuyers(
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+			@RequestParam(value="sortBy", defaultValue = "userId", required = false) String sortBy
+	){
+		UserPageableResponse buyers = this.userService.getBuyers(45L,pageNumber,pageSize,sortBy);
+		return ResponseEntity.ok(buyers);
+	}
+	
+	@GetMapping("/user-role/seller")
+	public ResponseEntity<UserPageableResponse> getSellers(
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+			@RequestParam(value="sortBy", defaultValue = "userId", required = false) String sortBy
+	){
+		UserPageableResponse sellers = this.userService.getSellers(46L,pageNumber,pageSize,sortBy);
+		return ResponseEntity.ok(sellers);
+	}
+	
+
+	
+	
 	
 }

@@ -59,7 +59,7 @@
           </div>
 
           <div class="text-center">
-            <button type="submit" class="btn-myprimary">Place Order</button>
+            <button type="submit" class="btn-myprimary" [disabled]="userOrderForm.invalid">Place Order</button>
           </div>
 
 
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-      {{userOrderForm.value | json}}
+      <!-- {{userOrderForm.value | json}} -->
     </div>
   </div>
 </div>

@@ -1,0 +1,82 @@
+<div class="container vw-75" >
+  <mat-card-title>Update Profile</mat-card-title>
+ 
+    <mat-card class="round-corner-20">
+      <div class="row p-3">
+        <div class="col-md-5 mb-3">
+          
+          <div class="preview-img">
+            <img id="blah" class="img-thumbnail" width="100%" [src]="imageSrc || 'http://localhost:8080/user/profile/'+currentProfile" alt="your image"/>
+          </div>
+
+        </div>
+        <div class="col-md-7">
+          
+          <div class="mb-3">
+            <div >
+              <input #fileInput class="form-control" type="file" accept="image/*" (change)="selectImg($event)" required>
+            </div>
+  
+            <div *ngIf="progress">
+              <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+              <small>{{imageStatus}}</small>
+            </div>
+            
+            <button *ngIf="imageSrc" mat-icon-button class="color" (click)="uploadProfile()">
+              <mat-icon>upload</mat-icon>Upload
+            </button>
+          </div>
+
+          <form [formGroup]="updateProfileForm" (submit)="update()">
+      
+            <input type="text" hidden  formControlName="userId">  
+    
+           <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input type="text" matInput placeholder="Enter first name" formControlName="first_name">
+                <mat-error *ngIf="fields['first_name'].errors?.['required']">first name is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input type="text" matInput placeholder="Entre last name" formControlName="last_name">
+                <mat-error *ngIf="fields['last_name'].errors?.['required']">last name is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput placeholder="Entre Email" formControlName="email">
+                <mat-error *ngIf="fields['email'].errors?.['required']">Email is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Phone</mat-label>
+                <input type="text" matInput placeholder="Entre username" formControlName="phone">
+                <mat-error *ngIf="fields['phone'].errors?.['required']">phone is required</mat-error>
+              </mat-form-field>
+            </div>
+           </div>
+    
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Address</mat-label>
+              <input type="text" matInput placeholder="Entre username" formControlName="address">
+              <mat-error *ngIf="fields['address'].errors?.['required']">address is required</mat-error>
+            </mat-form-field>
+    
+            <div class="text-center">
+              <button type="submit" class="btn-myprimary" [disabled]="updateProfileForm.invalid">Update</button>
+            </div>
+            
+          </form>
+
+        </div>
+      </div>
+
+    </mat-card>
+
+</div>

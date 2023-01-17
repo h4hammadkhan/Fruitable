@@ -1,14 +1,28 @@
 package com.fruitable.Service.Impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 
 import com.fruitable.Repo.RoleRepository;
 import com.fruitable.Repo.UserRepository;
 import com.fruitable.Service.UserService;
+import com.fruitable.UserOrderModel.UsersOrder;
+import com.fruitable.fileResponse.OrderPagealeResponse;
+import com.fruitable.fileResponse.UserPageableResponse;
+import com.fruitable.helper.UserFoundException;
 import com.fruitable.model.User;
 import com.fruitable.model.UserRole;
 
@@ -30,7 +44,7 @@ public class UserServiceImpl implements UserService {
 		User userExist = this.userRepository.findByUserName(user.getUserName());
 		if(userExist!=null) {
 			System.out.println("User already there!!!");
-			throw new Exception("User already present");
+			throw new UserFoundException();
 		} else {
 			// user create 
 			
@@ -63,8 +77,25 @@ public class UserServiceImpl implements UserService {
 	
 	//getting all users
 	@Override
-	public Set<User> getAllUser() {
-		return new HashSet<>(this.userRepository.findAll());
+	public UserPageableResponse getAllUser(Integer pageNumber, Integer pageSize, String sortBy) {
+		
+		Pageable p = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
+		
+		Page<User> pagePost = this.userRepository.findAll(p);
+		
+		List<User> allPost = pagePost.getContent();
+		
+		UserPageableResponse response = new UserPageableResponse();
+		
+		response.setContent(allPost);
+		response.setPageNumber(pagePost.getNumber());
+		response.setPageeSize(pagePost.getSize());
+		response.setTotalElements(pagePost.getTotalElements());
+		response.setTotalPages(pagePost.getTotalPages());
+		response.setLastPage(pagePost.isLast());
+		
+		return response;
+	
 	}
 
 
@@ -82,6 +113,71 @@ public class UserServiceImpl implements UserService {
 			return this.userRepository.save(user);
 		}
 	}
+
+
+	@Override
+	public User getUserById(Long userId) {
+		return this.userRepository.findById(userId).get();
+	}
+
+
+	@Override
+	public void setImp(Long impression, Long userId) {
+		this.userRepository.UpdateImpression(impression, userId);
+	}
+	
+
+	@Override
+	public UserPageableResponse getBuyers(Long roleId,Integer pageNumber, Integer pageSize, String sortBy) {
+
+		Pageable p = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
+		
+		Page<User> pagePost = this.userRepository.getUsersByRole(roleId,p);
+		
+		List<User> allPost = pagePost.getContent();
+		
+		UserPageableResponse response = new UserPageableResponse();
+		
+		response.setContent(allPost);
+		response.setPageNumber(pagePost.getNumber());
+		response.setPageeSize(pagePost.getSize());
+		response.setTotalElements(pagePost.getTotalElements());
+		response.setTotalPages(pagePost.getTotalPages());
+		response.setLastPage(pagePost.isLast());
+			
+		return response;
+	
+	}
+	
+	@Override
+	public UserPageableResponse getSellers(Long roleId,Integer pageNumber, Integer pageSize, String sortBy) {
+
+		Pageable p = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
+		
+		Page<User> pagePost = this.userRepository.getUsersByRole(roleId,p);
+		
+		List<User> allPost = pagePost.getContent();
+		
+		UserPageableResponse response = new UserPageableResponse();
+		
+		response.setContent(allPost);
+		response.setPageNumber(pagePost.getNumber());
+		response.setPageeSize(pagePost.getSize());
+		response.setTotalElements(pagePost.getTotalElements());
+		response.setTotalPages(pagePost.getTotalPages());
+		response.setLastPage(pagePost.isLast());
+			
+		return response;
+	
+	}
+
+
+	@Override
+	public void setEnabled(Boolean enabled, Long userId) {
+		this.userRepository.UpdateEnabled(enabled, userId);	
+	}
+
+	
 
 	
 }

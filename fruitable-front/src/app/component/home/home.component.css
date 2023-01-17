@@ -97,11 +97,11 @@ li a img{
   align-items: center;
 }
 
-.origins{
+.category{
   flex: 4;
 }
 
-.origins span{
+.category span{
   border-radius: 10px;
   padding: 0 10px;
   background-color: rgb(230, 230, 230);
@@ -111,7 +111,7 @@ li a img{
   display: inline-block;
 }
 
-.cook-time{
+.date{
   font-size: .9rem;
   flex: 8;
   text-align: right;

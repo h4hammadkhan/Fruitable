@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Report {{data.name | titlecase}}</h2>
+<div mat-dialog-content>
+  <section class="example-section" [formGroup]="reportData">
+    <p><mat-checkbox color="primary" formControlName="spamOrMislead">Spam or misleading</mat-checkbox></p>
+    <p><mat-checkbox color="primary" formControlName="badQualityProducts">selling bad Quality Product</mat-checkbox></p>
+    <p><mat-checkbox color="primary" formControlName="others">Others</mat-checkbox></p>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="describe in 255 characters" required=""></textarea>
+      <mat-error *ngIf="field['description'].errors?.['required']">description is required</mat-error>
+      <mat-error *ngIf="field['description'].errors?.['maxlength']">minimum 255 characters allowed</mat-error>
+    </mat-form-field>
+  </section>
+  
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button class="color" mat-dialog-close cdkFocusInitial>Cancel</button>
+  <button mat-button color="warn" [disabled]="reportData.invalid" [mat-dialog-close]="reportData.value" mat-dialog-close="false" >Submit</button>
+</div>

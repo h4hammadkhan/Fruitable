@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   islogin = false;
+  isBuyer = true;
   totalQuantity: number = 0;
 
   constructor(
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.islogin = this.loginService.isLoggedIn();
+    this.isBuyer = this.loginService.isBuyer();
 
     this.cartService.totalQuantity.subscribe(
       (value) => this.totalQuantity = value
@@ -32,12 +34,17 @@ export class HeaderComponent implements OnInit {
       this.islogin = this.loginService.isLoggedIn();
     })
 
+    this.loginService.roleStatusSubject.asObservable().subscribe(
+      data => this.isBuyer = this.loginService.isBuyer()
+    )
+
 
   }
 
   logout() {
     this.loginService.logout();
     this.loginService.loginStatusSubject.next(false);
+    this.loginService.roleStatusSubject.next(true);
     this.router.navigate(['/login']);
   }
 
@@ -50,6 +57,17 @@ export class HeaderComponent implements OnInit {
 
     }else if(role == "BUYER"){
       this.router.navigate(["buyer-dashboard/profile"])
+    }
+  }
+
+  navigateToDashobard(){
+    const role = this.loginService.getRole();
+    if(role == "SELLER"){
+      this.router.navigate(["/seller-dashboard/profile"])
+    }else if(role == "ADMIN"){
+      this.router.navigate(["/admin-dashboard/profile"])
+    }else if(role == "BUYER"){
+      this.router.navigate(["/buyer-dashboard/order"])
     }
   }
 }

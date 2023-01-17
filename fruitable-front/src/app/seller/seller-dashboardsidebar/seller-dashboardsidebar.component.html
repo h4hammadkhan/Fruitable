@@ -6,7 +6,6 @@
     <mat-card-content>
         <mat-selection-list [multiple]="false">
 
-
           <mat-list-option routerLink="/seller-dashboard/profile">
             <button mat-icon-button>
               <mat-icon class="mat-18">account_circle</mat-icon>
@@ -39,6 +38,13 @@
             <button mat-icon-button>
               <mat-icon class="mat-18">local_shipping</mat-icon>
               Ship
+            </button>
+          </mat-list-option>
+
+          <mat-list-option routerLink="/seller-dashboard/orders-history">
+            <button mat-icon-button>
+              <mat-icon class="mat-18">library_add_check</mat-icon>
+              Completed Orders
             </button>
           </mat-list-option>
 

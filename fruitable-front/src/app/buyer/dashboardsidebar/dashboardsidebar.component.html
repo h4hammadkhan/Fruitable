@@ -1,32 +1,39 @@
-<mat-card class="mb-5">
-    <mat-card-header>
-        <mat-card-title>Menu</mat-card-title>
-    </mat-card-header>
+<mat-card class="no-shadow">
+  <mat-card-header>
+      <mat-card-title>Menu</mat-card-title>
+  </mat-card-header>
 
-    <mat-card-content>
-        <mat-selection-list [multiple]="false">
+  <mat-card-content>
+      <mat-selection-list [multiple]="false">
 
-          <mat-list-option routerLink="/home">
-            <button mat-icon-button>
-              <mat-icon class="mat-18">shop</mat-icon>
-              Shop
-            </button>
-          </mat-list-option>
+        <mat-list-option routerLink="/home">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">shop</mat-icon>
+            Shop
+          </button>
+        </mat-list-option>
 
-          <mat-list-option routerLink="/dashboard/order">
-            <button mat-icon-button>
-              <mat-icon class="mat-18">receipt_long</mat-icon>
-              Orders
-            </button>
-          </mat-list-option>
+        <mat-list-option routerLink="/buyer-dashboard/profile">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">account_circle</mat-icon>
+            Profile
+          </button>
+        </mat-list-option>
 
-          <mat-list-option (click)="logout()">
-            <button mat-icon-button>
-              <mat-icon class="mat-18">logout</mat-icon>
-              Logout
-            </button>
-          </mat-list-option>
+        <mat-list-option routerLink="/buyer-dashboard/order">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">receipt_long</mat-icon>
+            Orders
+          </button>
+        </mat-list-option>
 
-        </mat-selection-list>
-    </mat-card-content>
+        <mat-list-option (click)="logout()">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">logout</mat-icon>
+            Logout
+          </button>
+        </mat-list-option>
+
+      </mat-selection-list>
+  </mat-card-content>
 </mat-card>

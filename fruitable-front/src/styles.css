@@ -26,7 +26,7 @@ body {
     background-color: var(--myPrimary);
     border: none;
     padding: .4rem 1rem;
-    border-radius: 10rem;
+    border-radius: 5px;
     outline: none;
     text-decoration: none;
     cursor: pointer;
@@ -44,6 +44,28 @@ body {
   color: #666666;
 }
 
+.btn-mydanger{
+    color: white;
+    background-color: var(--myDanger);
+    border: none;
+    padding: .4rem 1rem;
+    border-radius: 5px;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+  
+.btn-mydanger:hover{
+    color: white;
+    background-color: var(--myDangerDark);
+}
+
+.btn-mydanger:disabled,
+.btn-mydanger[disabled]{
+  background-color: #cccccc;
+  color: #666666;
+}
 
 .dashboard-top-5rem{
     margin-top: 4rem !important;
@@ -60,4 +82,52 @@ body {
 
 .mybtn:hover{
     color: var(--myPrimary);
+}
+
+.ml-3{
+    margin-left: 1rem;
+}
+
+.snack-success{
+    background-color: var(--myPrimary);
+    position: relative;
+    top: 3rem;
+}
+
+.snack-dander{
+    background-color: var(--myDanger);
+    position: relative;
+    top: 3rem;
+}
+
+.mat-simple-snack-bar-content{
+    font-size: 1.2rem;
+    color: white;
+}
+
+.vw-75{
+    width: 75vw;
+}
+
+
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: var(--myPrimary);
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+    color: var(--myPrimary);
+}
+
+.mat-form-field-appearance-legacy.mat-focused .mat-form-field-ripple {
+    color: var(--myPrimary);
+}
+
+.mat-form-field-appearance-legacy.mat-focused .mat-form-field-label {
+    color: var(--myPrimary);
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color: var(--myPrimary);
+
 }

@@ -1,3 +1,105 @@
-<p>
-  seller-ship works!
-</p>
+<div class="container vw-75" >
+  <mat-card-title>Ship Ready Products</mat-card-title>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Filter By OrderCode</mat-label>
+    <input #input matInput placeholder="FUO000000">
+  </mat-form-field>
+  <button mat-button style="color: var(--myPrimary);" (click)="FilterByCode(input.value)">Filter</button>
+
+  <!-- <button (click)="deleteImage()">D</button> -->
+  <div *ngIf="orderDetails.content.length==0" class="alert alert-warning" role="alert">
+    No Data Found !!
+  </div>
+  <div>
+    <mat-card *ngIf="orderDetails.content.length>0">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-12" *ngFor="let detail of orderDetails.content; let i = index">
+            <div>
+              <div class="card mt-3">
+                <div class="card-body">
+                  <div class="card-title space-between">
+                    <h5>Order request  {{detail.usersOrder.orderCode}}</h5>
+                    <span class="ml-5">{{ detail.usersOrder.date | date:'medium' }}</span>
+                  </div>
+                  <div class="card-text">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="flex">
+                          <strong>Name: </strong>
+                          <p class="ml-3">
+                            {{ detail.usersOrder.buyerFirstName + " " + detail.usersOrder.buyerLastName }}
+                          </p>
+                        </div>
+                        <div class="flex">
+                          <strong>Email: </strong>
+                          <p class="ml-3">{{ detail.usersOrder.buyerEmail }}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="flex">
+                          <strong>Phone: </strong>
+                          <p class="ml-3">{{ detail.usersOrder.buyerPhone }}</p>
+                        </div>
+                        <div class="flex">
+                          <strong>Delivery Address: </strong>
+                          <p class="ml-3">{{ detail.usersOrder.deliveryAddress }}</p>
+                        </div>
+                      </div>
+                    </div>
+    
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Title</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Amount</th>
+                          </tr>
+                        </thead>
+    
+                        <tbody>
+                          <tr>
+                            <td>{{ detail.usersOrder.product.productName }}</td>
+                            <td>{{ detail.usersOrder.productQuantity }}</td>
+                            <td>{{ detail.usersOrder.product.price | currency }}</td>
+                            <td>{{ detail.usersOrder.subTotal | currency }}</td>
+                          </tr>
+    
+                          <tr>
+                            <td><strong>SubTotal</strong></td>
+                            <td>
+                              <strong>{{ detail.usersOrder.productQuantity }}</strong>
+                            </td>
+                            <td></td>
+                            <td>
+                              <strong>{{ detail.usersOrder.subTotal | currency }}</strong>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button class="btn-myprimary" (click)="orderComplete(detail.shipId)">Done</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    
+    </mat-card>
+  </div>
+
+  <!-- pagination -->
+  <mat-paginator 
+    [length]="orderDetails.totalElements"
+    [pageSize]="orderDetails.pageSize"
+    [pageSizeOptions]="[15, 25, 40, 100]"
+    (page) = "pageEvent = $event; onPaginateChange($event)"
+    aria-label="Select page">
+  </mat-paginator>
+</div>
+

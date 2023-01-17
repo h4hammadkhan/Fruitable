@@ -44,7 +44,7 @@ public class AuthenticateController {
 		}catch(UserNotFoundException e)
 		{
 			e.printStackTrace();
-			throw new Exception("User not Found !!");
+			throw new UserNotFoundException();
 		}
 			
 		//// authenticate 

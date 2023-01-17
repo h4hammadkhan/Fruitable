@@ -5,12 +5,16 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -33,6 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fruitable.Repo.ProductRepository;
 import com.fruitable.Service.FileService;
 import com.fruitable.Service.ProductService;
+import com.fruitable.UserOrderModel.UsersOrder;
 import com.fruitable.fileResponse.FileResponse;
 import com.fruitable.fileResponse.ProductPagealeResponse;
 import com.fruitable.model.User;
@@ -54,6 +59,8 @@ public class ProductController {
 	
 	@Value("${project.productImage}")
 	private String path;
+	
+	private Logger logger = LoggerFactory.getLogger(UsersOrderController.class);
 
 	
 	@Autowired
@@ -157,6 +164,28 @@ public class ProductController {
 	
 		return ResponseEntity.ok(this.productService.updateProduct(pro));
 	}
+	
+	
+	
+	
+	// update product quantity
+	@PostMapping("/update/productQty")
+	public Set<Product> updateProductQtantity(@RequestBody UsersOrder[] product){
+		
+		Set<Product> pro = new HashSet<>();
+		
+		Arrays.stream(product).forEach(list ->{
+			 Product updatedProduct = this.productRepository.findById(list.getProduct().getProductId()).get();
+			 //	logger.info("data {}",updatedProduct);
+			 updatedProduct.setQuantity(updatedProduct.getQuantity()-list.getProductQuantity());
+			 pro.add(updatedProduct);
+			 System.out.println(list.getProduct().getProductId());
+		});
+		
+		return this.productService.updateProductQty(pro);
+		//	return null;
+	}
+		
 	
 	// get all product
 	@GetMapping("/")

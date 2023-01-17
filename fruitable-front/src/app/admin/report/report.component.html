@@ -1,0 +1,68 @@
+<div class="container vw-75" >
+  <mat-card-title>Reports</mat-card-title>
+  
+  <div *ngIf="reports.content.length==0" class="alert alert-warning" role="alert">
+    No Data Found !!
+  </div>
+
+  <div *ngIf="reports.content.length>0">
+    <mat-card *ngFor="let item of reports.content" class="mb-3">
+      <mat-card-title>
+        Report From {{item.buyerUserName}}
+      </mat-card-title>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="flex-middle-center">
+            <img class="round" [src]="'http://localhost:8080/user/profile/'+item.user.profile_image" [alt]="item.user.profile_image">
+            <h4 class="mb-0 hover" [routerLink]="'/admin-dashboard/user/'+item.user.userId">{{ item.user.userName | uppercase}}</h4>
+            <h6 class="mb-0">{{item.user.first_name+" "+item.user.last_name | titlecase}}</h6>
+          </div>
+        </div>
+  
+        <div class="col-md-9">
+          <div class="">
+            <div class="round-corner-15 bg-gray">
+              <div class="table-responsive">
+                <table class="table table-borderless mb-0">
+                  <thead>
+                    <tr>
+                      <td class="bold">BadQualityProduct</td>
+                      <td class="bold">SpamOrMislead</td>
+                      <td class="bold">Others</td>       
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{item.badQualityProducts? 'Yes':'No'}}</td>
+                      <td>{{item.spamOrMislead? 'Yes':'No'}}</td>
+                      <td>{{item.others? 'Yes':'No'}}</td>
+                    </tr>                 
+                  </tbody>
+                </table>
+                <table class="table table-borderless mb-0">
+                  <thead>
+                    <tr>
+                      <td class="bold">Description</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td >{{item.description}}</td>
+                    </tr>                 
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-paginator 
+              [length]="reports.totalElements"
+              [pageSize]="reports.pageSize"
+              [pageSizeOptions]="[10, 25, 50, 100]"
+              (page) = "pageEvent = $event; onPaginateChange($event)"
+              aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

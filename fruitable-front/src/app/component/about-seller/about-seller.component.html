@@ -1,0 +1,129 @@
+<div class="container top-space"> 
+  <mat-card class="round-corner-20">
+    <mat-card-title>About Seller</mat-card-title>
+    <div class="row align-center">
+      <div class="col-md-3">
+        <div class="p-3">
+          <img class="roundImg" [src]="'http://localhost:8080/user/profile/'+userDetail.profile_image ||'https://via.placeholder.com/500x300'" width="100%" alt="">
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="info p-3">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="round-corner-15 bg-gray">
+                <div class="table-responsive">
+                  <table class="table table-borderless text-center">
+                    <thead>
+                      <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Email</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="bold">{{userDetail.first_name}}</td>
+                        <td class="bold">{{userDetail.last_name}}</td>
+                        <td class="bold">{{userDetail.email}}</td>
+                      </tr>                 
+                    </tbody>
+              
+                    <thead>
+                      <tr>
+                        <td>Impression</td>
+                        <td>Up/Down Vote</td>
+                        <td>Report</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="bold">{{userDetail.impression || 0}}</td>
+                        <td>
+                          <button mat-button class="example-button color mr" 
+                          #tooltip="matTooltip"
+                          matTooltip="You can up vote once, if you are satisfied with the seller"
+                          [matTooltipPosition]="'below'"
+                          aria-label="Button that displays a tooltip that hides when scrolled out of the container"
+                          (click)="upVote()">
+                            <mat-icon>keyboard_double_arrow_up</mat-icon>Up
+                          </button>
+
+                          <button mat-button color="warn"
+                          class="example-button" 
+                          #tooltip="matTooltip"
+                          matTooltip="You can down vote once, if you are find something wrong"
+                          [matTooltipPosition]="'below'"
+                          aria-label="Button that displays a tooltip that hides when scrolled out of the container"
+                          (click)="downVote()">
+                            <mat-icon>keyboard_double_arrow_down</mat-icon>Down
+                          </button>
+                        </td>
+
+                        <td>
+                          <button mat-button color="warn" (click)="fireDialog()">
+                            <mat-icon>flag</mat-icon> Report
+                          </button>
+                        </td>                
+                      </tr>                 
+                    </tbody>
+                  </table>
+                </div>
+              </div>              
+              <button mat-flat-button class="mt-2 btn-myprimary" (click)="loadSellerProduct(userDetail.userId)">view products</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Seller Products -->
+  <section class="section products-main mt-3" *ngIf="Products?.content">
+    <div class="container">
+
+      <div class="row">
+        <ul>
+          <li *ngFor="let prod of Products?.content">
+            <a [routerLink]="'/product-single/'+prod.productId">
+              <img [src]="'http://localhost:8080/product/productImage/'+prod.product_image" alt="food img">
+              <div class="content">
+                <div class="name">
+                  <h3>{{prod.productName}}</h3> 
+                </div>
+                
+                <div class="product-item-footer">
+                  <div class="category">
+                    <span>
+                      {{prod.productCategory.categoryName}}
+                    </span>
+                  </div>
+
+                  <div class="date">
+                    {{prod.date | date}}
+                  </div>
+
+                </div>
+                
+                <div class="price">
+                  {{prod.price | currency:"Rs"}} Per {{prod.measure}}
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      
+      </div>
+      <mat-paginator 
+          [length]="Products.totalElements"
+          [pageSize]="Products.pageSize"
+          [pageSizeOptions]="[3,10, 15, 25, 40, 100]"
+          (page) = "pageEvent = $event; onPaginateChange($event)"
+          aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </section>
+
+
+</div>

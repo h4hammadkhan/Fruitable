@@ -139,14 +139,26 @@ public class Product {
 	}
 
 
-//	public Set<Order> getOrder() {
-//		return order;
-//	}
-//
-//
-//	public void setOrder(Set<Order> order) {
-//		this.order = order;
-//	}
+	public Set<UsersOrder> getUsersOrder() {
+		return usersOrder;
+	}
+
+
+	public void setUsersOrder(Set<UsersOrder> usersOrder) {
+		this.usersOrder = usersOrder;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", quantity=" + quantity
+				+ ", price=" + price + ", product_image=" + product_image + ", measure=" + measure + ", date=" + date
+				+ ", productCategory=" + productCategory + ", user=" + user + ", usersOrder=" + usersOrder + "]";
+	}
+
+
+	
+	
 	
 	
 

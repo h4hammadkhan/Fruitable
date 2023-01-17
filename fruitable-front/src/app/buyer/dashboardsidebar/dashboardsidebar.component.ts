@@ -21,6 +21,7 @@ export class DashboardsidebarComponent implements OnInit {
 
     this.loginService.logout();
     this.loginService.loginStatusSubject.next(false);
+    this.loginService.roleStatusSubject.next(true);
     this.router.navigate(['/login']);
 
   }

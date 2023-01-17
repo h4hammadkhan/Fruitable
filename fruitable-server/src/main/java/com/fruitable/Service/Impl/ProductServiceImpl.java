@@ -33,6 +33,12 @@ public class ProductServiceImpl implements ProductService{
 	public Product updateProduct(Product product) {
 		return this.productRepository.save(product);
 	}
+	
+	
+	@Override
+	public Set<Product> updateProductQty(Set<Product> product) {
+		return new HashSet<>(this.productRepository.saveAll(product));
+	}
 
 	@Override
 	public ProductPagealeResponse getAllProducts(Integer pageNumber, Integer pageSize) {
@@ -87,5 +93,7 @@ public class ProductServiceImpl implements ProductService{
 		
 		return response;
 	}
+
+	
 		
 }

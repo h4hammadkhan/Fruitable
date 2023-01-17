@@ -10,7 +10,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fruitable.helper.UserFoundException;
 import com.fruitable.Service.UserService;
 import com.fruitable.model.Role;
 import com.fruitable.model.User;
@@ -22,6 +24,9 @@ public class FruitableServerApplication implements CommandLineRunner {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FruitableServerApplication.class, args);
 	}
@@ -29,31 +34,36 @@ public class FruitableServerApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("starting code...");
-	
-//		User user = new User();
-//		
-//		user.setFirst_name("Hammad");
-//		user.setLast_name("Khan");
-//		user.setUserName("h4hammad");
-//		user.setPassword("hammad");
-//		user.setEmail("abc@demo.com");
-//		user.setProfile_image("default.png");
-//		user.setPhone("1010101010");
-//		
-//		Role role1 = new Role();
-//		role1.setRoleId(44L);
-//		role1.setRoleName("ADMIN");
-//		
-//		Set<UserRole> userRoleSet = new HashSet<>();
-//		UserRole userRole = new UserRole();
-//		userRole.setRole(role1);
-//		userRole.setUser(user);
-//		
-//		userRoleSet.add(userRole);
-//		
-//		User user1 = this.userService.createUser(user, userRoleSet);
-//		System.out.println(user1.getUserName());
-//		
+		
+		try {
+			User user = new User();
+			
+			user.setFirst_name("Hammad");
+			user.setLast_name("Khan");
+			user.setUserName("h4hammad");
+			user.setPassword(this.bCryptPasswordEncoder.encode("hammad"));
+			user.setEmail("abc@demo.com");
+			user.setProfile_image("default.png");
+			user.setPhone("1010101010");
+			
+			Role role1 = new Role();
+			role1.setRoleId(44L);
+			role1.setRoleName("ADMIN");
+			
+			Set<UserRole> userRoleSet = new HashSet<>();
+			UserRole userRole = new UserRole();
+			userRole.setRole(role1);
+			userRole.setUser(user);
+			
+			userRoleSet.add(userRole);
+			
+			User user1 = this.userService.createUser(user, userRoleSet);
+			System.out.println(user1.getUserName());
+			
+		}catch (UserFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

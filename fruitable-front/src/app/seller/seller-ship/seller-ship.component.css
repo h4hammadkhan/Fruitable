@@ -1,0 +1,31 @@
+.flex{
+    display: flex;
+}
+  
+.space-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+button{
+  outline: none;
+}
+
+/* ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*
+    color: var(--myPrimary) !important;
+}
+
+
+/*change color of underline*/
+/* ::ng-deep.mat-form-field-underline {
+    background-color: var(--myPrimary) !important;
+}  */
+
+/* .mat-form-field-ripple { */
+    /*change color of underline when focused*
+    background-color: var(--myPrimary) !important;
+} 
+ */
+
+  

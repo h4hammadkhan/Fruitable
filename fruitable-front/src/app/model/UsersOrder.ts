@@ -7,6 +7,7 @@ export class UsersOrder {
 	subTotal!:number;
     date!:Date;
 	sellerUserName!:string;
+	orderCode!:string;
 	active!:boolean;
 	deliveryAddress!:string;
 	city!:string;
@@ -16,6 +17,8 @@ export class UsersOrder {
 	buyerEmail!:string;
 	buyerUserName!:string;
 	product!:Products;
-	user!:User;
+	user!:{
+		userId:number;
+	};
 
 }

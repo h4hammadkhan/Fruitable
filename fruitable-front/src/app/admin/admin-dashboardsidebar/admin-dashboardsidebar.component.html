@@ -1,26 +1,53 @@
-<mat-card class="mb-5">
-    <mat-card-header>
-        <mat-card-title>Menu</mat-card-title>
-    </mat-card-header>
+<mat-card class="no-shadow">
+  <mat-card-header>
+      <mat-card-title>Menu</mat-card-title>
+  </mat-card-header>
 
-    <mat-card-content>
-        <mat-selection-list [multiple]="false">
+  <mat-card-content>
+      <mat-selection-list [multiple]="false">
 
-          <mat-list-option routerLink="/admin-dashboard/users-list">
-            <button mat-icon-button>
-              <mat-icon class="mat-18">list</mat-icon>
-              Users
-            </button>
-          </mat-list-option>
+        <mat-list-option routerLink="/admin-dashboard/profile">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">account_circle</mat-icon>
+            Profile
+          </button>
+        </mat-list-option>
 
+        <mat-list-option routerLink="/admin-dashboard/buyer-list">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">groups</mat-icon>
+            Buyers
+          </button>
+        </mat-list-option>
 
-          <mat-list-option (click)="logout()">
-            <button mat-icon-button>
-              <mat-icon class="mat-18">logout</mat-icon>
-              Logout
-            </button>
-          </mat-list-option>
+        <mat-list-option routerLink="/admin-dashboard/seller-list">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">group</mat-icon>
+            Sellers
+          </button>
+        </mat-list-option>
 
-        </mat-selection-list>
-    </mat-card-content>
+        <mat-list-option routerLink="/admin-dashboard/products-list">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">list</mat-icon>
+            Products
+          </button>
+        </mat-list-option>
+
+        <mat-list-option routerLink="/admin-dashboard/user-report">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">flag</mat-icon>
+            User Report
+          </button>
+        </mat-list-option>
+
+        <mat-list-option (click)="logout()">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">logout</mat-icon>
+            Logout
+          </button>
+        </mat-list-option>
+
+      </mat-selection-list>
+  </mat-card-content>
 </mat-card>

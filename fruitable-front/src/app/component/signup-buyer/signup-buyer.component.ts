@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/user';
 import Swal from 'sweetalert2';
+import { UserResponse } from 'src/app/model/UserResponse';
 
 @Component({
   selector: 'app-signup',
@@ -45,17 +46,19 @@ export class SignupBuyerComponent implements OnInit {
     this.user = this.userForm.value;
     console.log(this.user);
     this.signupService.addNewUser(this.user).subscribe(
-      (data:any)=>{
-        Swal.fire("Success","Successfully registered!!","success").then(
+      (data:UserResponse)=>{
+        console.log(data);
+  
+        Swal.fire("Success",`${data.message}`,"success").then(
           (ok)=>{
             this.router.navigate(['/login']);
           }
         )
 
       },
-      (err)=>{
+      (err:any)=>{
         console.log(err);
-        Swal.fire("Error","Error in register user!!","error");
+        Swal.fire("Error",`${err.error.message}`,"error");
       }
     )
 

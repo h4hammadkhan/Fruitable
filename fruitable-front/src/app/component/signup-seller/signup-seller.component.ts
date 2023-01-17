@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
+import { UserResponse } from 'src/app/model/UserResponse';
 import { SignupService } from 'src/app/service/signup.service';
 import Swal from 'sweetalert2';
 
@@ -39,11 +40,13 @@ export class SignupSellerComponent implements OnInit {
       last_name: ['', Validators.required],
       userName: ['', Validators.required],
       email: ['', [Validators.required,Validators.email]],
-      phone: ['', Validators.required],
       password: ['', [Validators.required,Validators.minLength(8)]],
     });
     this.userPersonalFormGroup = this.formBuilder.group({
+      phone: ['', Validators.required],
       address: ['', Validators.required],
+      city: ['', Validators.required],
+      cnic: ['', Validators.required],
     });
     
   }
@@ -60,19 +63,22 @@ export class SignupSellerComponent implements OnInit {
   onSubmit(){
 
     this.user = this.userDetailFormGroup.value;
+    this.user.phone = this.userPersonalFormGroup.controls['phone'].value;
     this.user.address = this.userPersonalFormGroup.controls['address'].value;
+    this.user.city = this.userPersonalFormGroup.controls['city'].value;
+    this.user.cnic = this.userPersonalFormGroup.controls['cnic'].value;
     console.log(this.user);
     this.signupService.addNewSeller(this.user,this.profile).subscribe(
-      (data:any)=>{
-        Swal.fire("Success","Successfully registered!!","success").then(
+      (data:UserResponse)=>{
+        Swal.fire("Success",`${data.message}`,"success").then(
           (ok)=>{
             this.router.navigate(['/login']);
           }
         )
       },
-      (err)=>{
+      (err:any)=>{
         console.log(err);
-        Swal.fire("Error","Error in register user!!","error");
+        Swal.fire("Error",`${err.error.message? err.error.message:err.error.error}`,"error");
       }
     )
 

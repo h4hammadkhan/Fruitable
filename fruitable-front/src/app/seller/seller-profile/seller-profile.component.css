@@ -50,16 +50,19 @@ td{
 ::-webkit-scrollbar {
     width: 5px;
     height: 7px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: rgb(212, 212, 212); 
     border-radius: 10px
-  }
-  
+}
+
+.align-center{
+    align-items: center;
+}

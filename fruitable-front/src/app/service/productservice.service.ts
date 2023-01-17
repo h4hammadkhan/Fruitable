@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import baseUrl from './helper';
 import { Products } from '../model/products';
 import { ProductPageableResponse } from '../model/ProductPageableResponse';
+import { UsersOrder } from '../model/UsersOrder';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,11 @@ export class ProductserviceService {
     return this.http.post(`${baseUrl}/product/update/`,formData);
   } 
 
+  // update product quantity
+  public updateProductQty(products:UsersOrder[]){
+    return this.http.post(`${baseUrl}/product/update/productQty/`,products);
+  }
+
   // delete product
   public deleteProduct(productId:number){
     return this.http.delete(`${baseUrl}/product/${productId}`);
@@ -79,27 +85,6 @@ export class ProductserviceService {
     return this.http.delete(`${baseUrl}/product/delete/${productImage}`);
   }
 
-
-// ----- ---- ---- ----- ---- ---- ----- ----  //
-
-  public getLimitProducts(limit:number):Observable<Product[]>{
-    return this.http.get<Product[]>(`https://fakestoreapi.com/products?limit=${limit}`);
-  }
-
-  // get all products
-  public getAllProducts():Observable<Product[]>{
-    return this.http.get<Product[]>('https://fakestoreapi.com/products');
-  }
-
-  // get product by id
-  public getProductById(productId:number):Observable<Product>{
-    return this.http.get<Product>(`https://fakestoreapi.com/products/${productId}`);
-  }
-
-  // add new Product
-  public addProduct(product:Product){
-    return this.http.post('https://fakestoreapi.com/products',product);
-  }
 
 
 

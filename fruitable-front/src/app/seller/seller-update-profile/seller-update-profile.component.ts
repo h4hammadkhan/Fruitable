@@ -37,6 +37,8 @@ export class SellerUpdateProfileComponent implements OnInit {
       password:["",Validators.required],
       profile_image:["",Validators.required],
       impression:["",Validators.required],
+      city:["",Validators.required],
+      cnic:["",Validators.required]
     });
 
     this.getCurrentUserData();
@@ -57,6 +59,8 @@ export class SellerUpdateProfileComponent implements OnInit {
           password: data.password,
           profile_image: data.profile_image,
           impression: data.impression,
+          city: data.city,
+          cnic: data.cnic,
         });
 
         this.currentProfile = data.profile_image;

@@ -86,29 +86,42 @@ export class CartService {
 
   }
 
+  deleteFromLocalStorage(){
+    localStorage.removeItem('cartData');
+    localStorage.removeItem('totalPrice');
+    localStorage.removeItem('totalQuantity');
+    this.cartItems = [];
+    this.totalPrice.next(0);
+    this.totalQuantity.next(0);
+    return true;
+  }
+
 
   getCartFromLocalStorage(){
 
-      const item = JSON.parse(localStorage.getItem('cartData')!);
-      const price = JSON.parse(localStorage.getItem('totalPrice')!);
-      const qty = JSON.parse(localStorage.getItem('totalQuantity')!);
-      if(item){
-        item.forEach((element:CartItem) => {
-          if(this.cartItems.find(temp => temp.productId == element.productId)){
+    const item = JSON.parse(localStorage.getItem('cartData')!);
+    const price = JSON.parse(localStorage.getItem('totalPrice')!);
+    const qty = JSON.parse(localStorage.getItem('totalQuantity')!);
+    if(item){
+      item.forEach((element:CartItem) => {
+        if(this.cartItems.find(temp => temp.productId == element.productId)){
 
-          }
-          else{
-            this.cartItems.push(element);
-            this.getPriceFormLocalStorage = price;
-            this.getQuantityFormLocalStorage = qty
+        }
+        else{
+          this.cartItems.push(element);
+          this.getPriceFormLocalStorage = price;
+          this.getQuantityFormLocalStorage = qty
 
-          }
-        });
-      }
+        }
+      });
+    }else{
+      
+    }
 
-      return this.cartItems;
+    return this.cartItems;
 
   }
+
 
 
 

@@ -1,5 +1,5 @@
 img{
-  border-radius: 3rem;
+  border-radius: 2rem;
   flex: 1 0;
   object-fit: cover;
   height: 100%;
@@ -57,7 +57,7 @@ img{
   border: none;
   font-size: 1.2rem;
   padding: 1rem;
-  border-radius: 10rem;
+  border-radius: 5px;
   outline: none;
 }
 

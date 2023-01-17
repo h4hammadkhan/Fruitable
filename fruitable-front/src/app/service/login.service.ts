@@ -11,6 +11,7 @@ import { User } from '../model/user';
 export class LoginService {
 
   public loginStatusSubject = new Subject<boolean>();
+  public roleStatusSubject = new Subject<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -43,6 +44,15 @@ export class LoginService {
       return false;
     }
     else{
+      return true;
+    }
+  }
+
+  public isBuyer(){
+    let role:any = this.getRole();
+    if(role == 'ADMIN' || role == 'SELLER' || role == ''){
+      return false;
+    }else{
       return true;
     }
   }
@@ -81,6 +91,11 @@ export class LoginService {
   public getUserId(){
     const ud = this.getUserDetails();
     return ud.userId;
+  }
+
+  public getUserName(){
+    const ud =  this.getUserDetails();
+    return ud.userName;
   }
 
 }

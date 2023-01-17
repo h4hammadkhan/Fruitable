@@ -19,7 +19,8 @@
               <span>
                 <div class="display-flex">
                   <h5>
-                    Posted By: <span class="mybtn">
+                    Posted By: 
+                    <span class="mybtn" [routerLink]="'/about-seller/'+Product.user.userId">
                       {{Product.user.first_name + " " + Product.user.last_name | titlecase}}
                     </span>
                   </h5>

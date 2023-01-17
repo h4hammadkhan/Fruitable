@@ -1,0 +1,54 @@
+<div class="container vw-75" >
+  <mat-card-title>Buyers List</mat-card-title>
+  
+  <div *ngIf="Users.content.length==0" class="alert alert-warning" role="alert">
+    No Data Found !!
+  </div>
+
+  <div *ngIf="Users.content.length>0">
+    <mat-card class="mb-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="">
+            <div class="round-corner-15 bg-gray">
+              <div class="table-responsive">
+                <table class="table mb-0" >
+                  <thead>
+                    <tr>
+                      <td>#</td>
+                      <td class="bold">Profile</td>
+                      <td class="bold">Name</td>
+                      <td class="bold">Username</td>
+                      <td class="bold">Phone</td>
+                      <td class="bold">Email</td>                         
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let user of Users.content; index as i">
+                    <tr >
+                      <td>{{i}}</td>
+                      <td>
+                        <img class="round" [src]="'http://localhost:8080/user/profile/'+user.profile_image" [alt]="user.profile_image">
+                      </td>
+                      <td class="hover" [routerLink]="'/admin-dashboard/user/'+user.userId">{{user.first_name+' '+user.last_name}}</td>
+                      <td>{{user.userName}}</td>
+                      <td>{{user.phone}}</td>
+                      <td>{{user.email}}</td>
+                      
+                    </tr>                 
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-paginator 
+              [length]="Users.totalElements"
+              [pageSize]="Users.pageSize"
+              [pageSizeOptions]="[10, 25, 50, 100]"
+              (page) = "pageEvent = $event; onPaginateChange($event)"
+              aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

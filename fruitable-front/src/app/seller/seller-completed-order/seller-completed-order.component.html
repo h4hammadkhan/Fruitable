@@ -1,0 +1,102 @@
+<div class="container vw-75" >
+  <mat-card-title>Completed Orders</mat-card-title>
+  
+  
+  <mat-form-field class="example-full-width">
+    <mat-label>Filter By OrderCode</mat-label>
+    <input #input matInput placeholder="FUO000000">
+  </mat-form-field>
+  <button mat-button style="color: var(--myPrimary);" (click)="FilterByCode(input.value)">Filter</button>
+
+
+  <!-- <button (click)="deleteImage()">D</button> -->
+  <div *ngIf="orderDetails.content.length==0" class="alert alert-warning" role="alert">
+    No Data Found !!
+  </div>
+  <div>
+    <div *ngIf="orderDetails.content.length>0">
+      <div class="row">
+        <div class="col-md-12" *ngFor="let detail of orderDetails.content; let i = index">
+          <mat-card class="mt-3">
+
+            <div class="space-between">
+              <mat-card-title>
+                  <h5>Completed Order Request</h5>
+              </mat-card-title>
+              <span class="ml-5">{{ detail.usersOrder.date | date:'medium' }}</span>
+            </div>
+            
+            <mat-card-content>
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="flex">
+                    <strong>Name: </strong>
+                    <p class="ml-3">
+                      {{ detail.usersOrder.buyerFirstName + " " + detail.usersOrder.buyerLastName }}
+                    </p>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <div class="flex">
+                    <strong>OrderCode: </strong>
+                    <p class="ml-3">{{ detail.usersOrder.orderCode }}</p>
+                  </div>
+                  
+                </div>
+              </div>
+           
+  
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Quantity</th>
+                      <th>Unit Price</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>{{ detail.usersOrder.product.productName }}</td>
+                      <td>{{ detail.usersOrder.productQuantity }}</td>
+                      <td>{{ detail.usersOrder.product.price | currency }}</td>
+                      <td>{{ detail.usersOrder.subTotal | currency }}</td>
+                    </tr>
+
+                    <tr>
+                      <td><strong>SubTotal</strong></td>
+                      <td>
+                        <strong>{{ detail.usersOrder.productQuantity }}</strong>
+                      </td>
+                      <td></td>
+                      <td>
+                        <strong>{{ detail.usersOrder.subTotal | currency }}</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+                
+              
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+  <!-- pagination -->
+  <mat-paginator 
+    [length]="orderDetails.totalElements"
+    [pageSize]="orderDetails.pageSize"
+    [pageSizeOptions]="[15, 25, 40, 100]"
+    (page) = "pageEvent = $event; onPaginateChange($event)"
+    aria-label="Select page">
+  </mat-paginator>
+</div>
+

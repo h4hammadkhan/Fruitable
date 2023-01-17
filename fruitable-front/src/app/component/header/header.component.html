@@ -1,6 +1,6 @@
 <p class="sticky">
   <mat-toolbar class="transparent">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/home">
+    <button *ngIf="isBuyer" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="/home">
       <mat-icon>home</mat-icon>
     </button>
     <span class="ml-4 myprimary">Fruitable</span>
@@ -18,20 +18,28 @@
       </small>
     </button>
     <mat-menu #dashMenu="matMenu" xPosition="before">
-      <button (click)="navigateToProfile()" mat-menu-item><mat-icon mat-list-icon class="white">account_circle</mat-icon>Profile</button>
-      <button routerLink="/buyer-dashboard/order" mat-menu-item><mat-icon mat-list-icon class="white">dashboard</mat-icon>Dashboard</button>
+      <button (click)="navigateToProfile()" mat-menu-item>
+        <mat-icon mat-list-icon class="white">account_circle</mat-icon>Profile
+      </button>
+      <button (click)="navigateToDashobard()" mat-menu-item>
+        <mat-icon mat-list-icon class="white">dashboard</mat-icon>Dashboard
+      </button>
       <button (click)="logout()" mat-menu-item><mat-icon mat-list-icon class="white">logout</mat-icon>Logout</button>
     </mat-menu>
     
     <button mat-button class="example-icon" aria-label="Example icon-button with share icon"  *ngIf="!islogin" [matMenuTriggerFor]="menu">
-      Signup
+      Join
     </button>
     <mat-menu #menu="matMenu" class="bg-mat-manu" color="primary" xPosition="before">
-      <button mat-menu-item routerLink="/signup-buyer">BUYER</button>
-      <button mat-menu-item routerLink="/signup-seller">SELLER</button>
+      <button mat-menu-item routerLink="/signup-buyer">
+        <mat-icon mat-list-icon class="white">person_add</mat-icon>BUYER
+      </button>
+      <button mat-menu-item routerLink="/signup-seller">
+        <mat-icon mat-list-icon class="white">store</mat-icon>SELLER
+      </button>
     </mat-menu>
     
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/cart">
+    <button *ngIf="isBuyer" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/cart">
       <mat-icon [matBadge]="totalQuantity" matBadgeColor="warn" matBadgeOverlap="true"  class="demo-section">shopping_cart</mat-icon>
     </button>
   

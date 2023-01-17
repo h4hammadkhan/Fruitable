@@ -3,7 +3,7 @@ package com.fruitable.model;
 public class JwtResponse {
 
 	String token;
-
+	
 	public JwtResponse() {
 		super();
 	}

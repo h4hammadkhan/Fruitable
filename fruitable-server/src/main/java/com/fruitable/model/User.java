@@ -19,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User implements UserDetails{
@@ -35,8 +36,9 @@ public class User implements UserDetails{
 	private String phone;
 	private String address;
 	private boolean enabled = true;
-	private Long impression;
+	private Long impression = 1L;
 	private String cnic;
+	private String city;
 	
 	// user many roles
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
@@ -52,16 +54,22 @@ public class User implements UserDetails{
 	@JsonIgnore
 	private Set<UsersOrder> usersOrder = new LinkedHashSet<>();
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Set<Report> report;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Impression vote;
 	
 	public User() {
 		
 	}
-	
 
 
 	public User(Long userId, String first_name, String last_name, String userName, String password,
 			String profile_image, String email, String phone, String address, boolean enabled, Long impression,
-			Set<UserRole> userRoles, Set<Product> products) {
+			String cnic,String city, Set<UserRole> userRoles, Set<Product> products, Set<UsersOrder> usersOrder) {
 		super();
 		this.userId = userId;
 		this.first_name = first_name;
@@ -74,11 +82,37 @@ public class User implements UserDetails{
 		this.address = address;
 		this.enabled = enabled;
 		this.impression = impression;
+		this.cnic = cnic;
+		this.city = city;
 		this.userRoles = userRoles;
 		this.products = products;
-//		this.order = order;
+		this.usersOrder = usersOrder;
 	}
 
+
+	public String getCnic() {
+		return cnic;
+	}
+	
+	public void setCnic(String cnic) {
+		this.cnic = cnic;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Set<UsersOrder> getUsersOrder() {
+		return usersOrder;
+	}
+
+	public void setUsersOrder(Set<UsersOrder> usersOrder) {
+		this.usersOrder = usersOrder;
+	}
 
 	public Long getUserId() {
 		return userId;
@@ -180,25 +214,32 @@ public class User implements UserDetails{
 		return products;
 	}
 	
-	
 	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
-	
-//	public Set<Order> getOrder() {
-//		return order;
-//	}
-//
-//	public void setOrder(Set<Order> order) {
-//		this.order = order;
-//	}
-	
-	
- 
 
+	public Set<Report> getReport() {
+		return report;
+	}
+		
+	public void setReport(Set<Report> report) {
+		this.report = report;
+	}
+	
+	public Impression getVote() {
+		return vote;
+	}
+	
+	public void setVote(Impression vote) {
+		this.vote = vote;
+	}
+	
+	
 	
 	
 	// UserDetails method implementation 
+
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -226,7 +267,7 @@ public class User implements UserDetails{
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return isEnabled();
 	}
 
 

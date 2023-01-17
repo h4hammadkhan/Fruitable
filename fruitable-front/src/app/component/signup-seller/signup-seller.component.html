@@ -11,8 +11,8 @@
 
               <mat-stepper linear="true" #stepper class="bg">
                 
-                <!-- [stepControl]="userDetailFormGroup" -->
-                <mat-step >
+                
+                <mat-step [stepControl]="userDetailFormGroup">
                   <form [formGroup]="userDetailFormGroup">
                     <ng-template matStepLabel>User Details</ng-template>
                       
@@ -23,20 +23,21 @@
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>First Name</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="first_name" required>
+                                <input matInput placeholder="Enter your first name" formControlName="first_name" required>
                               </mat-form-field>
                             </div>
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Last Name</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="last_name" required>
+                                <input matInput placeholder="Enter your last name" formControlName="last_name" required>
                               </mat-form-field>
                             </div>
                           </div>
 
                           <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>User Name</mat-label>
-                            <input matInput placeholder="Last name, First name" formControlName="userName" required>
+                            <input matInput placeholder="Enter your UserNamme" formControlName="userName" required>
+                            <mat-hint>Username Must be Unique</mat-hint>
                           </mat-form-field>
                          
 
@@ -44,30 +45,20 @@
                         </div>
 
                         <div class="col-md-6">
-    
-                          <div class="row">
-                            <div class="col-md-6">
-                              <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Email</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="email" required>
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-6">
-                              <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Phone</mat-label>
-                                <input matInput placeholder="Last name, First name" formControlName="phone" required>
-                              </mat-form-field>
-                            </div>
+                            
+                          <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Enter your Email" formControlName="email" required>
+                          </mat-form-field>
+                            
+                          <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="password" placeholder="Enter password" matInput [type]="hide ? 'password' : 'text'" required="">
+                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                          </mat-form-field>
 
-                            <mat-form-field class="example-full-width" appearance="outline">
-                              <mat-label>Password</mat-label>
-                              <input formControlName="password" placeholder="Enter password" matInput [type]="hide ? 'password' : 'text'" required="">
-                              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                              </button>
-                            </mat-form-field>
-
-                          </div>
                         </div>
                        
                       </div>
@@ -77,11 +68,17 @@
                   </form>
                 </mat-step>
                 
-                <!-- [stepControl]="userPersonalFormGroup" -->
-                <mat-step  label="Personal Details">
+                
+                <mat-step  label="Personal Details" [stepControl]="userPersonalFormGroup">
                   <form [formGroup]="userPersonalFormGroup">
 
                     <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Phone</mat-label>
+                          <input matInput placeholder="Enter your Phone Number" formControlName="phone" required>
+                        </mat-form-field>
+                      </div>
                       
                       <div class="col-md-6">
                         <mat-form-field class="example-full-width" appearance="outline">
@@ -89,11 +86,23 @@
                           <input matInput formControlName="address" placeholder="Ex. 1 Main St, New York, NY" required>
                         </mat-form-field>
                       </div>
+
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>City</mat-label>
+                          <input matInput formControlName="city" placeholder="Enter your city" required>
+                        </mat-form-field>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Cnic No</mat-label>
+                          <input matInput formControlName="cnic" placeholder="Enter Your Cnic Number" required>
+                        </mat-form-field>
+                      </div>
                       
                     </div>
-                  
-                    {{userPersonalFormGroup.value | json}}
-
+                
                     <div>
                       <button class="btn-myprimary mr" matStepperPrevious>Back</button>
                       <button class="btn-myprimary mr" matStepperNext>Next</button>
@@ -109,9 +118,9 @@
                     </div>
 
                   <div>
-                    <button class="btn-myprimary mr" matStepperPrevious>Back</button>
-                    <button class="btn-myprimary mr" (click)="stepper.reset()">Reset</button>
-                    <button class="btn-myprimary mr" (click)="onSubmit()">Signup</button>
+                    <button class="btn-myprimary mr mt-2" matStepperPrevious>Back</button>
+                    <button class="btn-myprimary mr mt-2" (click)="stepper.reset()">Reset</button>
+                    <button class="btn-myprimary mr mt-2" (click)="onSubmit()">Signup</button>
 
                   </div>
                 </mat-step>

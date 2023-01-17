@@ -12,10 +12,11 @@ import { ProductsingleComponent } from './component/productsingle/productsingle.
 import { CartComponent } from './component/cart/cart.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { DashboardComponent } from './buyer/dashboard/dashboard.component';
-import { OrdersComponent } from './component/orders/orders.component';
+import { OrdersComponent } from './buyer/orders/orders.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupBuyerComponent } from './component/signup-buyer/signup-buyer.component';
 import { ProfileComponent } from './buyer/profile/profile.component'
+import { UpdateProfileComponent } from './buyer/update-profile/update-profile.component';
 
 import { SignupSellerComponent } from './component/signup-seller/signup-seller.component';
 import { SellerDashboardComponent} from './seller/seller-dashboard/seller-dashboard.component';
@@ -27,13 +28,21 @@ import { SellerShipComponent } from './seller/seller-ship/seller-ship.component'
 import { AddProductComponent } from './seller/add-product/add-product.component';
 import { UpdateProductComponent } from './seller/update-product/update-product.component';
 import { SellerUpdateProfileComponent } from './seller/seller-update-profile/seller-update-profile.component';
+import { SellerCompletedOrderComponent } from './seller/seller-completed-order/seller-completed-order.component';
 
 
 
 import { AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminDashboardsidebarComponent} from './admin/admin-dashboardsidebar/admin-dashboardsidebar.component';
-import {UsersListComponent} from './admin/usersList/usersList.component'
+import {BuyersListComponent} from './admin/buyersList/buyersList.component'
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
+import { AdminUpdateProfileComponent } from './admin/admin-update-profile/admin-update-profile.component';
+import { ReportComponent } from './admin/report/report.component'
+import { SellersListComponent } from './admin/sellersList/sellersList.component';
+import { ViewUserProfileComponent } from './admin/view-user-profile/view-user-profile.component';
+import { ProductsListComponent } from './admin/productsList/productsList.component';
+import { ViewUserProductComponent } from './admin/view-user-product/view-user-product.component';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
@@ -62,6 +71,11 @@ import { AuthInterceptorProviders } from './service/auth.interceptor';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRippleModule} from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { AboutSellerComponent } from './component/about-seller/about-seller.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ReportDialogComponent } from './component/report-dialog/report-dialog.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -89,7 +103,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SellerDashboardsidebarComponent,
     AdminDashboardComponent,
     AdminDashboardsidebarComponent,
-    UsersListComponent,
+    BuyersListComponent,
     AddProductComponent,
     SellerOrdersComponent,
     SellerProdustListComponent,
@@ -99,8 +113,20 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ProfileComponent,
     AdminProfileComponent,
     SellerUpdateProfileComponent,
+    UpdateProfileComponent,
+    SellerCompletedOrderComponent,
+    AboutSellerComponent,
+    ReportDialogComponent,
+    AdminUpdateProfileComponent,
+    ReportComponent,
+    SellersListComponent,
+    ViewUserProfileComponent,
+    ProductsListComponent,
+    ViewUserProductComponent,
 
-
+  ],
+  entryComponents: [
+    ReportDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -129,7 +155,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatSidenavModule,
     MatRippleModule,
     MatPaginatorModule,
-
+    MatTooltipModule,
+    MatDialogModule,
+    MatCheckboxModule,
     
   ],
   providers: [AuthInterceptorProviders],

@@ -1,0 +1,55 @@
+<div class="container vw-75" >
+  <mat-card-title>Products List</mat-card-title>
+  
+  <div *ngIf="products.content.length==0" class="alert alert-warning" role="alert">
+    No Data Found !!
+  </div>
+
+  <div *ngIf="products.content.length>0">
+    <mat-card class="mb-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="">
+            <div class="round-corner-15 bg-gray">
+              <div class="table-responsive">
+                <table class="table mb-0" >
+                  <thead>
+                    <tr>
+                      <td class="bold">Image</td>
+                      <td class="bold">Owner</td>
+                      <td class="bold">Product</td>
+                      <td class="bold">Quantity</td>
+                      <td class="bold">Price</td>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let pro of products.content">
+                    <tr >
+                      <td>
+                        <img class="round" [src]="'http://localhost:8080/product/productImage/'+pro.product_image" [alt]="pro.product_image">
+                      </td>
+                      <td class="hover" [routerLink]="'/admin-dashboard/user/'+pro.user.userId">{{pro.user.userName}}</td>
+                      <td class="hover" [routerLink]="'/admin-dashboard/product/'+pro.productId">
+                        {{pro.productName}}
+                      </td>
+                      <td>{{pro.quantity +' '+pro.measure}}</td>
+                      <td>{{pro.price | currency:"Rs."}}</td>
+                    </tr> 
+      
+                                
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-paginator 
+              [length]="products.totalElements"
+              [pageSize]="products.pageSize"
+              [pageSizeOptions]="[10, 25, 50, 100]"
+              (page) = "pageEvent = $event; onPaginateChange($event)"
+              aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

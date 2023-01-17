@@ -42,18 +42,18 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 		return super.authenticationManagerBean();
 	}
 	
-//	@Bean
-//	BCryptPasswordEncoder passwordEncoder() {
-//		
-//		return  new BCryptPasswordEncoder();
-//	}
+	@Bean
+	BCryptPasswordEncoder passwordEncoder() {
+		
+		return  new BCryptPasswordEncoder();
+	}
 	
 	
 	// testing only
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
+//	@Bean
+//	PasswordEncoder passwordEncoder() {
+//		return NoOpPasswordEncoder.getInstance();
+//	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -10,4 +10,6 @@ export class User {
   address!: string;
   enabled: boolean = true;
   impression!: number;
+  cnic!:string;
+  city!:string;
 }

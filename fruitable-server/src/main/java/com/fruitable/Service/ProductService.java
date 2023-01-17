@@ -15,6 +15,9 @@ public interface ProductService {
 	// update product
 	public Product updateProduct(Product product);
 	
+	// update product Quantity
+	public Set<Product> updateProductQty(Set<Product> pro);
+	
 	// get all products
 	public ProductPagealeResponse getAllProducts(Integer pageNumber, Integer pageSize);
 	
@@ -26,5 +29,7 @@ public interface ProductService {
 	
 	// delete product
 	public void deleteProduct(Long productId);
+	
+	
 
 }
