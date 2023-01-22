@@ -1,7 +1,6 @@
 import { OrderserviceService } from '../../service/orderservice.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/service/login.service';
-import { UsersOrder } from 'src/app/model/UsersOrder';
 import { OrderPageableResponse } from 'src/app/model/OrderPageableResponse';
 import { PageEvent } from '@angular/material/paginator';
 

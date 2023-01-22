@@ -21,7 +21,7 @@
                 <div class="card-body">
                   <div class="card-title space-between">
                     <h5>Your order request  {{detail.orderCode}}</h5>
-                    <span class="ml-5">{{ detail.date | date:'medium' }}</span>
+                    <span class="ml-5">{{ detail.date | date:'medium':'GMT' }}</span>
                   </div>
                   <div class="card-text">
                     <div class="row">
@@ -64,8 +64,8 @@
                           <tr>
                             <td>{{ detail.product.productName }}</td>
                             <td>{{ detail.productQuantity }}</td>
-                            <td>{{ detail.product.price | currency }}</td>
-                            <td>{{ detail.subTotal | currency }}</td>
+                            <td>{{ detail.product.price | currency:'Rs.' }}</td>
+                            <td>{{ detail.subTotal | currency:'Rs.' }}</td>
                           </tr>
     
                           <tr>
@@ -75,7 +75,7 @@
                             </td>
                             <td></td>
                             <td>
-                              <strong>{{ detail.subTotal | currency }}</strong>
+                              <strong>{{ detail.subTotal | currency:'Rs.' }}</strong>
                             </td>
                           </tr>
                         </tbody>

@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImpressionResponse } from 'src/app/model/impressionResponse';
 import { ProductPageableResponse } from 'src/app/model/ProductPageableResponse';
-import { Report } from 'src/app/model/report';
 import { User } from 'src/app/model/user';
 import { LoginService } from 'src/app/service/login.service';
 import { ProductserviceService } from 'src/app/service/productservice.service';

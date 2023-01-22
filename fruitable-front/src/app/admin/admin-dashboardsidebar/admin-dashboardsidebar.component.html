@@ -41,6 +41,20 @@
           </button>
         </mat-list-option>
 
+        <mat-list-option routerLink="/admin-dashboard/add-category">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">add_circle</mat-icon>
+            Add Category
+          </button>
+        </mat-list-option>
+
+        <mat-list-option routerLink="/admin-dashboard/category-list">
+          <button mat-icon-button>
+            <mat-icon class="mat-18">category</mat-icon>
+            View Categories
+          </button>
+        </mat-list-option>
+
         <mat-list-option (click)="logout()">
           <button mat-icon-button>
             <mat-icon class="mat-18">logout</mat-icon>

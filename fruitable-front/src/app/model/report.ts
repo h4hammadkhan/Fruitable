@@ -8,5 +8,6 @@ export class Report {
     others!:boolean;
     description!:string;
     buyerUserName!:string;
+    date!:Date;
     user!:User;
 }

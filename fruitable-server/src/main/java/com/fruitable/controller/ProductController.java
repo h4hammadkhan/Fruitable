@@ -161,11 +161,8 @@ public class ProductController {
 			
 		}
 
-	
 		return ResponseEntity.ok(this.productService.updateProduct(pro));
 	}
-	
-	
 	
 	
 	// update product quantity
@@ -191,10 +188,11 @@ public class ProductController {
 	@GetMapping("/")
 	public ResponseEntity<ProductPagealeResponse> getAllProducts(
 			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
-			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+			@RequestParam(value="sortBy", defaultValue = "productId", required = false) String sortBy
 	){
 		
-		ProductPagealeResponse products = this.productService.getAllProducts(pageNumber,pageSize);
+		ProductPagealeResponse products = this.productService.getAllProducts(pageNumber,pageSize,sortBy);
 		
 		return new ResponseEntity<ProductPagealeResponse>(products, HttpStatus.OK);  
 	}
@@ -205,12 +203,13 @@ public class ProductController {
 	public ResponseEntity<ProductPagealeResponse> getProductsByUser(
 			@PathVariable("userId") Long userId,
 			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
-			@RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize
+			@RequestParam(value = "pageSize", defaultValue = "3", required = false) Integer pageSize,
+			@RequestParam(value="sortBy", defaultValue = "productId", required = false) String sortBy
 	){
 		
 		User user = new User();
 		user.setUserId(userId);
-		ProductPagealeResponse productsByUser = this.productService.getProductsByUser(user,pageNumber,pageSize);
+		ProductPagealeResponse productsByUser = this.productService.getProductsByUser(user,pageNumber,pageSize,sortBy);
 		
 		return new ResponseEntity<ProductPagealeResponse>(productsByUser,HttpStatus.OK);
 	}
@@ -239,5 +238,33 @@ public class ProductController {
 		Files.delete(file);
 	}
 	
+	
+	// search by product name
+	@GetMapping("/search/{productName}")
+	public ResponseEntity<ProductPagealeResponse> searchProducts(
+			@PathVariable("productName") String productName,
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+			@RequestParam(value="sortBy", defaultValue = "productId", required = false) String sortBy
+	){
+		
+		ProductPagealeResponse products = this.productService.searchProduct(productName, pageNumber, pageSize, sortBy);
+		
+		return new ResponseEntity<ProductPagealeResponse>(products, HttpStatus.OK);  
+	}
+	
+	// search by product name
+	@GetMapping("/category/{categoryId}")
+	public ResponseEntity<ProductPagealeResponse> getProductsByCategoryId(
+			@PathVariable("categoryId") Long categoryId,
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize,
+			@RequestParam(value="sortBy", defaultValue = "productId", required = false) String sortBy
+	){
+		
+		ProductPagealeResponse products = this.productService.getProductByProductCategory(categoryId, pageNumber, pageSize, sortBy);
+		
+		return new ResponseEntity<ProductPagealeResponse>(products, HttpStatus.OK);  
+	}
 	
 }

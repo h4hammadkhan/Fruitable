@@ -30,7 +30,7 @@
 
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Enter your email" formControlName="buyerEmail">
+            <input type="text" matInput placeholder="Enter your email" formControlName="buyerEmail">
             <mat-error *ngIf="fields['buyerEmail'].errors?.['required']">email is required</mat-error>
             <mat-error *ngIf="fields['buyerEmail'].errors?.['email']">email is invalid</mat-error>
           </mat-form-field>

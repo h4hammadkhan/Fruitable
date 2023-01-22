@@ -1,0 +1,43 @@
+div.search-body{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+div.relative{
+    position: relative;
+}
+
+div.relative input{
+    border-radius: 10rem;
+    border: none;
+    height: 3rem;
+    width: 40rem;
+    background-color: #ededed;
+    padding: 1.2rem;
+    font-size: 1.1rem;
+    outline: none;
+    
+}
+
+div.relative button{
+    position: absolute;
+    right: 12px;
+    color: black;
+    background-color: #ededed;
+    height: 3rem;
+    border-radius: 0 10rem 10rem 0;
+    border: none;
+}
+
+div.relative button:hover{
+    color: var(--myPrimary);
+    cursor: pointer;
+}
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}

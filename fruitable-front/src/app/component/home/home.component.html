@@ -57,12 +57,16 @@
         <div class="container">
 
 
-          <div class="mt-3 mb-5">
+          <div class="mt-3 mb-4">
+            <app-search></app-search>
             <app-category-tag></app-category-tag>
           </div>
 
           <div class="row">
-            <ul>
+            <div *ngIf="Products.content.length==0" class="alert alert-warning" role="alert">
+              No Data Found !!
+            </div>
+            <ul *ngIf="Products.content.length>0">
               <li *ngFor="let prod of Products?.content">
                 <a [routerLink]="'/product-single/'+prod.productId">
                   <img [src]="'http://localhost:8080/product/productImage/'+prod.product_image" alt="food img">
@@ -106,27 +110,15 @@
       <section class="features mt-5">
         <mat-divider></mat-divider>
         <div class="container mt-4">
-          <div class="row">
+          <div class="row space-between">
             <div class="col-lg-3 col-sm-6 col-md-6">
               <div class="feature-block">
                 <div class="content">
                   <div class="flex">
                     <mat-icon class="mat-18 mr-2">local_shipping</mat-icon>
-                    <h5 class="m-0">Free Shipping</h5>
+                    <h5 class="m-0">Shipping Charges</h5>
                   </div>
-                  <p>On all order over $39.00</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-md-6">
-              <div class="feature-block">
-                <i class="tf-wallet"></i>
-                <div class="content">
-                  <div class="flex">
-                    <mat-icon class="mat-18 mr-2">attach_money</mat-icon>
-                    <h5 class="m-0">30 Days Return</h5>
-                  </div>
-                  <p>Money back Guarantee</p>
+                  <p class="text-center">{{ '200' | currency:'Rs.'}}</p>
                 </div>
               </div>
             </div>
@@ -138,7 +130,7 @@
                     <mat-icon class="mat-18 mr-2">gpp_good</mat-icon>
                     <h5 class="m-0">Secure Checkout</h5>
                   </div>
-                  <p>100% Protected by paypal</p>
+                  <p class="text-center">100% Protected</p>
                 </div>
               </div>
             </div>
@@ -150,7 +142,7 @@
                     <mat-icon class="mat-18 mr-2">support_agent</mat-icon>
                     <h5 class="m-0">24/7 Support</h5>
                   </div>
-                  <p>All time customer support</p>
+                  <p class="text-center">All time customer support</p>
                 </div>
               </div>
             </div>

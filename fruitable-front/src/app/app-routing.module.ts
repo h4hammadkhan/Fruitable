@@ -35,12 +35,34 @@ import { SellersListComponent } from './admin/sellersList/sellersList.component'
 import { ViewUserProfileComponent } from './admin/view-user-profile/view-user-profile.component';
 import { ProductsListComponent } from './admin/productsList/productsList.component';
 import { ViewUserProductComponent } from './admin/view-user-product/view-user-product.component';
+import { ChangePasswordComponent } from './buyer/change-password/change-password.component';
+import { SellerChangePasswordComponent } from './seller/seller-change-password/seller-change-password.component';
+import { AdminChangePasswordComponent } from './admin/admin-change-password/admin-change-password.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { UserChangePasswordComponent } from './component/User-change-password/user-change-password.component';
+import { OtpGuard } from './guard/otp.guard';
+import { IsSellerAdminLoginGuard } from './guard/is-seller-admin-login.guard';
+import { AddCategoryComponent } from './admin/add-category/add-category.component';
+import { CategoryListComponent } from './admin/categoryList/categoryList.component';
 
 const routes: Routes = [
   {
     path: "home",
     component: HomeComponent,
     pathMatch: 'full',
+    canActivate: [IsSellerAdminLoginGuard]
+  },
+  {
+    path: "search/:keyword",
+    component: HomeComponent,
+    pathMatch: 'full',
+    canActivate: [IsSellerAdminLoginGuard]
+  },
+  {
+    path: "home/:cate",
+    component: HomeComponent,
+    pathMatch: 'full',
+    canActivate: [IsSellerAdminLoginGuard]
   },
   {
     path: "login",
@@ -49,19 +71,34 @@ const routes: Routes = [
     canActivate: [LoginguardGuard],
   },
   {
+    path: "forgot-password",
+    component: ForgotPasswordComponent,
+    pathMatch: 'full',
+    canActivate: [LoginguardGuard],
+  },
+  {
+    path: "change-forgot-password/:uid",
+    component: UserChangePasswordComponent,
+    pathMatch: 'full',
+    canActivate: [OtpGuard],
+  },
+  {
     path: "signup-buyer",
     component: SignupBuyerComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [LoginguardGuard]
   },
   {
     path: "signup-seller",
     component: SignupSellerComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [LoginguardGuard]
   },
   {
     path: "cart",
     component: CartComponent,
     pathMatch: 'full',
+    canActivate: [IsSellerAdminLoginGuard]
 
   },
   {
@@ -73,11 +110,7 @@ const routes: Routes = [
     path: "about-seller/:sellerId",
     component: AboutSellerComponent,
     pathMatch: 'full',
-  },
-  {
-    path: "category/:cate",
-    component: HomeComponent,
-    pathMatch: 'full',
+    canActivate: [IsSellerAdminLoginGuard]
   },
   {
     path: "checkout",
@@ -102,6 +135,10 @@ const routes: Routes = [
       {
         path: "update-profile",
         component: UpdateProfileComponent,
+      },
+      {
+        path: "change-password/:uid",
+        component: ChangePasswordComponent,
       }
     ]
   },
@@ -130,6 +167,10 @@ const routes: Routes = [
       {
         path: "profile",
         component: SellerProfileComponent
+      },
+      {
+        path: "change-password/:uid",
+        component: SellerChangePasswordComponent,
       },
       {
         path: "product-list",
@@ -175,12 +216,24 @@ const routes: Routes = [
         component: AdminProfileComponent,
       },
       {
+        path: "change-password/:uid",
+        component: AdminChangePasswordComponent,
+      },
+      {
         path: "update-profile",
         component: AdminUpdateProfileComponent,
       },
       {
         path: "user-report",
         component: ReportComponent,
+      },
+      {
+        path: "add-category",
+        component: AddCategoryComponent,
+      },
+      {
+        path: "category-list",
+        component: CategoryListComponent,
       }
     ]
   },

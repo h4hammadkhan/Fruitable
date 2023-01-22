@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { ReportPageableResponse } from 'src/app/model/ReportPageableResponse';
 import { UserPageableResponse } from 'src/app/model/UserPageableResponse';
 import { ReportService } from 'src/app/service/report.service';
 import { SignupService } from 'src/app/service/signup.service';
 
 @Component({
-  selector: 'app-usersList',
+  selector: 'app-buyersList',
   templateUrl: './buyersList.component.html',
   styleUrls: ['./buyersList.component.css']
 })

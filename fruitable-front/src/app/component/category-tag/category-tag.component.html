@@ -1,6 +1,6 @@
 <div>
       <div class="tag-container">
         <p class="tag" [routerLink]="'/home'">All</p>
-        <p class="tag" *ngFor="let cate of category" [routerLink]="'/category/'+cate">{{cate | titlecase}}</p>
+        <p class="tag" *ngFor="let cate of category" [routerLink]="'/home/'+cate.categoryId">{{cate.categoryName | titlecase}}</p>
       </div>
 </div>

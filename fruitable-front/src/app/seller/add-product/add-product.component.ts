@@ -5,7 +5,6 @@ import { Products } from '../../model/products';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { LoginService } from 'src/app/service/login.service';
-import { HttpEventType } from '@angular/common/http';
 import { Category } from 'src/app/model/category';
 
 @Component({

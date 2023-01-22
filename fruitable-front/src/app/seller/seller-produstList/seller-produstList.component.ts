@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
 import { ProductPageableResponse } from 'src/app/model/ProductPageableResponse';
-import { Products } from 'src/app/model/products';
 import { LoginService } from 'src/app/service/login.service';
 import { ProductserviceService } from 'src/app/service/productservice.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seller-produstList',
@@ -78,15 +77,30 @@ export class SellerProdustListComponent implements OnInit {
 
 
   // delete product
-  public deleteProduct(productId:number,productImage: string){
-    this.productImage = productImage;
-    this.productService.deleteProduct(productId).subscribe(
-      (data)=>{
-        console.log(data);
-        this.getProductsByUser();
-      },
-      (error)=>{
-        console.log(error);
+  public deleteProduct(productId:number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'cancel',
+      cancelButtonColor: '#f44336',
+      confirmButtonText: 'Yes',
+      confirmButtonColor: '#7fb602',
+      confirmButtonAriaLabel: "hk",
+    }).then(
+      (yes)=>{
+        if(yes.isConfirmed){
+          this.productService.deleteProduct(productId).subscribe(
+            (data)=>{
+              console.log(data);
+              this.getProductsByUser();
+            },
+            (error)=>{
+              console.log(error);
+            }
+          )
+        }
       }
     )
   }

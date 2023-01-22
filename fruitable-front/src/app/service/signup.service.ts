@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from './helper';
 import { UserResponse } from '../model/UserResponse';
+import { ChangePassword } from '../model/changePassword';
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +80,11 @@ export class SignupService {
   // unlock user
   public UnlockUser(userId:number){
     return this.http.post(`${baseUrl}/user/unlock/${userId}`,'');
+  }
+
+  // change password
+  public changePassword(passwordInfo:ChangePassword){
+    return this.http.post(`${baseUrl}/user/change/password`,passwordInfo);
   }
 
 }

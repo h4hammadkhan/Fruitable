@@ -6,17 +6,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
-import { FooterComponent } from './component/footer/footer.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProductsingleComponent } from './component/productsingle/productsingle.component';
 import { CartComponent } from './component/cart/cart.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
+import { SearchComponent } from './component/search/search.component';
+
 import { DashboardComponent } from './buyer/dashboard/dashboard.component';
 import { OrdersComponent } from './buyer/orders/orders.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupBuyerComponent } from './component/signup-buyer/signup-buyer.component';
 import { ProfileComponent } from './buyer/profile/profile.component'
 import { UpdateProfileComponent } from './buyer/update-profile/update-profile.component';
+import { ChangePasswordComponent } from './buyer/change-password/change-password.component';
 
 import { SignupSellerComponent } from './component/signup-seller/signup-seller.component';
 import { SellerDashboardComponent} from './seller/seller-dashboard/seller-dashboard.component';
@@ -29,6 +31,7 @@ import { AddProductComponent } from './seller/add-product/add-product.component'
 import { UpdateProductComponent } from './seller/update-product/update-product.component';
 import { SellerUpdateProfileComponent } from './seller/seller-update-profile/seller-update-profile.component';
 import { SellerCompletedOrderComponent } from './seller/seller-completed-order/seller-completed-order.component';
+import { SellerChangePasswordComponent } from './seller/seller-change-password/seller-change-password.component';
 
 
 
@@ -42,8 +45,15 @@ import { SellersListComponent } from './admin/sellersList/sellersList.component'
 import { ViewUserProfileComponent } from './admin/view-user-profile/view-user-profile.component';
 import { ProductsListComponent } from './admin/productsList/productsList.component';
 import { ViewUserProductComponent } from './admin/view-user-product/view-user-product.component';
+import { AdminChangePasswordComponent } from './admin/admin-change-password/admin-change-password.component';
+import { AddCategoryComponent } from './admin/add-category/add-category.component';
+import { CategoryListComponent } from './admin/categoryList/categoryList.component';
+import { EditCategorytDialogComponent } from './admin/editCategory-dialog/editCategory-dialog.component';
 
 
+
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { UserChangePasswordComponent } from './component/User-change-password/user-change-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -76,6 +86,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ReportDialogComponent } from './component/report-dialog/report-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 
 
@@ -83,7 +95,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     HomeComponent,
     ProductsingleComponent,
     CartComponent,
@@ -123,10 +134,21 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ViewUserProfileComponent,
     ProductsListComponent,
     ViewUserProductComponent,
+    ChangePasswordComponent,
+    SellerChangePasswordComponent,
+    AdminChangePasswordComponent,
+    ForgotPasswordComponent,
+    UserChangePasswordComponent,
+    AddCategoryComponent,
+    CategoryListComponent,
+    EditCategorytDialogComponent,
+    SearchComponent,
+    
 
   ],
   entryComponents: [
     ReportDialogComponent,
+    EditCategorytDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -158,6 +180,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTooltipModule,
     MatDialogModule,
     MatCheckboxModule,
+    LoadingBarHttpClientModule,
+    LoadingBarModule,
+
     
   ],
   providers: [AuthInterceptorProviders],

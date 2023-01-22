@@ -6,10 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { UsersOrder } from 'src/app/model/UsersOrder';
-import { SignupService } from 'src/app/service/signup.service';
 import { LoginService } from 'src/app/service/login.service';
 import { User } from 'src/app/model/user';
-import { Products } from 'src/app/model/products';
 import { ProductserviceService } from 'src/app/service/productservice.service';
 
 @Component({
@@ -119,7 +117,7 @@ export class CheckoutComponent implements OnInit {
       cancelButtonText: 'cancel',
       cancelButtonColor: '#f44336',
       confirmButtonText: 'Yes',
-      confirmButtonColor: '#3f51b5',
+      confirmButtonColor: '#7fb602',
       confirmButtonAriaLabel: "hk",
     }).then(
       (yes)=>{

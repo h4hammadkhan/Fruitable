@@ -62,14 +62,23 @@ public class User implements UserDetails{
 	@JsonIgnore
 	private Impression vote;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Set<OTP> otp;
+	
+	
+	
+
+
 	public User() {
-		
+		super();
 	}
 
 
 	public User(Long userId, String first_name, String last_name, String userName, String password,
 			String profile_image, String email, String phone, String address, boolean enabled, Long impression,
-			String cnic,String city, Set<UserRole> userRoles, Set<Product> products, Set<UsersOrder> usersOrder) {
+			String cnic, String city, Set<UserRole> userRoles, Set<Product> products, Set<UsersOrder> usersOrder,
+			Set<Report> report, Impression vote, Set<OTP> otp) {
 		super();
 		this.userId = userId;
 		this.first_name = first_name;
@@ -87,7 +96,13 @@ public class User implements UserDetails{
 		this.userRoles = userRoles;
 		this.products = products;
 		this.usersOrder = usersOrder;
+		this.report = report;
+		this.vote = vote;
+		this.otp = otp;
 	}
+
+
+
 
 
 	public String getCnic() {
@@ -233,12 +248,26 @@ public class User implements UserDetails{
 	public void setVote(Impression vote) {
 		this.vote = vote;
 	}
+		
+	
+	public Set<OTP> getOtp() {
+		return otp;
+	}
+	
+	
+	public void setOtp(Set<OTP> otp) {
+		this.otp = otp;
+	}
+	
+	
+
+	
+	
 	
 	
 	
 	
 	// UserDetails method implementation 
-
 
 
 	@Override

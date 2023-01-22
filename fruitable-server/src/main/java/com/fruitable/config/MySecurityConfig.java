@@ -69,6 +69,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 			.disable()
 			.authorizeRequests()
 			.antMatchers("/generate-token","/user/","/user/seller","/user/upload").permitAll() // allow to request (generate-token) for login and /user/ for register
+			.antMatchers("/forgot/send-otp/{userName}","/forgot/verify/{userOtp}","/user/change/forgot-password/{userId}/{password}").permitAll()
 			.antMatchers(HttpMethod.GET).permitAll()
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
 			.anyRequest().authenticated()

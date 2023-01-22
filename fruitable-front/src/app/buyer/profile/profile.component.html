@@ -35,15 +35,12 @@
                
                       <thead>
                         <tr>
-                          <td>Phone</td>
-                          <td>Address</td>
-                         
+                          <td>Phone</td>                         
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td class="bold">{{userDetail.phone}}</td>
-                          <td class="bold">{{userDetail.address}}</td>
                         
                         </tr>                 
                       </tbody>
@@ -53,7 +50,7 @@
                 
                 <div class="row">
                   <div class="col-md-6 mt-1 mb-1">
-                    <button class="mt-2 w-100 h-100 color-primary-outline" mat-button color="primary">
+                    <button [routerLink]="'/buyer-dashboard/change-password/'+userDetail.userId" class="mt-2 w-100 h-100 color-primary-outline" mat-button color="primary">
                       Change Password
                     </button>
                   </div>

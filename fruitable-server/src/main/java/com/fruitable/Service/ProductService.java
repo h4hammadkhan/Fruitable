@@ -19,10 +19,10 @@ public interface ProductService {
 	public Set<Product> updateProductQty(Set<Product> pro);
 	
 	// get all products
-	public ProductPagealeResponse getAllProducts(Integer pageNumber, Integer pageSize);
+	public ProductPagealeResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy);
 	
 	// get all products by user
-	public ProductPagealeResponse getProductsByUser(User user,Integer pageNumber, Integer pageSize);
+	public ProductPagealeResponse getProductsByUser(User user,Integer pageNumber, Integer pageSize,String sortBy);
 	
 	// get product by id
 	public Product getProductById(Long productId);
@@ -30,6 +30,10 @@ public interface ProductService {
 	// delete product
 	public void deleteProduct(Long productId);
 	
+	// get Product by categoryId
+	public ProductPagealeResponse getProductByProductCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy);
 	
+	// search by product name
+	public ProductPagealeResponse searchProduct(String productName, Integer pageNumber, Integer pageSize, String sortBy);
 
 }

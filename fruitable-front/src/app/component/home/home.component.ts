@@ -1,10 +1,8 @@
 import { CategoryService } from './../../service/category.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from './../../model/product';
 import { ProductserviceService } from './../../service/productservice.service';
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import Swal from 'sweetalert2';
-import { Products } from 'src/app/model/products';
 import { ProductPageableResponse } from 'src/app/model/ProductPageableResponse';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -16,11 +14,11 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class HomeComponent implements OnInit {
 
-  product:Product[] = [];
+  // product:Product[] = [];
   Products!:ProductPageableResponse;
   pageEvent!: PageEvent;
-  cate:string = '';
-  limit = 4;
+  cate!:number ;
+  keyword!:string;
 
   constructor(
     private productService: ProductserviceService,
@@ -48,44 +46,106 @@ export class HomeComponent implements OnInit {
 
   getProducts(){
 
-    // const hasCate = this.activatedRoute.snapshot.paramMap.has('cate');
-    // if(hasCate){
-    //   this.cate = String(this.activatedRoute.snapshot.paramMap.get('cate'));
-    //   this.getProductByCategory();
-    // }
-    // else{
-      this.productService.getProducts().subscribe(
-        (data:any)=>{
-          this.Products = data;
-          console.log(data);
-        },
-        (err)=>{
-          console.log(err);
-          Swal.fire("error","Error in fetching data!!","error");
-
-        }
-      )
-    // }
+    this.activatedRoute.params.subscribe(params =>{
+      if(params['keyword']){
+        this.keyword = String(this.activatedRoute.snapshot.paramMap.get('keyword'));
+        console.log("home:",this.keyword);
+        
+        this.getSearchedProducts();
+      }
+      else if(params['cate']){
+        this.cate = Number(this.activatedRoute.snapshot.paramMap.get('cate'));
+        this.getProductByCategory();
+      }
+      else{
+        this.getAllProducts();
+      }
+    });
 
   }
 
-  onPaginateChange(event: PageEvent){
-    let pageNumber = event.pageIndex; 
-    let pageSize = event.pageSize;
-    this.productService.getProducts(pageNumber,pageSize).subscribe(
+
+  // get all products
+  getAllProducts(){
+    this.productService.getProducts().subscribe(
+      (data:any)=>{
+        this.Products = data;
+        console.log(data);
+      },
+      (err)=>{
+        console.log(err);
+        Swal.fire("error","Error in fetching data!!","error");
+
+      }
+    )
+  }
+
+  getSearchedProducts(){
+    this.productService.searchedProducts(this.keyword).subscribe(
       (data:any)=>{
         this.Products = data;
       },
       (error)=>{
         console.log(error);
+        Swal.fire("error","Error in fetching data!!","error");
       }
     )
   }
 
+  onPaginateChange(event: PageEvent){
+    let pageNumber = event.pageIndex; 
+    let pageSize = event.pageSize;
+    this.activatedRoute.paramMap.subscribe(
+      ()=>{
+        this.activatedRoute.params.subscribe(params =>{
+          if(params['keyword']){
+            this.keyword = String(this.activatedRoute.snapshot.paramMap.get('keyword'));
+            this.productService.searchedProducts(this.keyword,pageNumber,pageSize).subscribe(
+              (data:any)=>{
+                this.Products = data;
+              },
+              (error)=>{
+                console.log(error);
+                Swal.fire("error","Error in fetching data!!","error");
+              }
+            )
+          }
+          else if(params['cate']){
+            this.cate = Number(this.activatedRoute.snapshot.paramMap.get('cate'));
+            this.productService.getProductByCategoryId(this.cate,pageNumber,pageSize).subscribe(
+              (data:any)=>{
+                this.Products = data;
+              },
+              (err)=>{
+                console.log(err);
+                Swal.fire("error","Error in fetching data!!","error");
+              }
+            )
+          }
+          else{
+            this.productService.getProducts(pageNumber,pageSize).subscribe(
+              (data:any)=>{
+                this.Products = data;
+                console.log(data);
+              },
+              (err)=>{
+                console.log(err);
+                Swal.fire("error","Error in fetching data!!","error");
+        
+              }
+            );
+          }
+        });
+      }
+    )
+    
+ 
+  }
+
   getProductByCategory(){
-    this.cateService.getProductByCategory(this.cate).subscribe(
-      (data:Product[])=>{
-        this.product = data;
+    this.productService.getProductByCategoryId(this.cate).subscribe(
+      (data:any)=>{
+        this.Products = data;
       },
       (err)=>{
         console.log(err);
@@ -95,5 +155,3 @@ export class HomeComponent implements OnInit {
   }
 
 }
-
-

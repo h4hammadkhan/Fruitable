@@ -36,12 +36,12 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <td>Address</td>
+                        <td *ngIf="userDetail.address">Address</td>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="bold">{{userDetail.address}}</td>
+                        <td class="bold" *ngIf="userDetail.address">{{userDetail.address}}</td>
                       </tr>                 
                     </tbody>
                   </table>
@@ -72,16 +72,16 @@
       <table class="table text-center">
         <thead>
           <tr>
-            <td class="bold">City</td>
-            <td class="bold">Cnic</td>
+            <td class="bold" *ngIf="userDetail.city">City</td>
+            <td class="bold" *ngIf="userDetail.cnic">Cnic</td>
             <td class="bold">Phone</td>
             <td class="bold">Email</td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{{userDetail.city }}</td>
-            <td>{{userDetail.cnic}}</td>
+            <td *ngIf="userDetail.city">{{userDetail.city }}</td>
+            <td *ngIf="userDetail.cnic">{{userDetail.cnic}}</td>
             <td>{{userDetail.phone}}</td>
             <td>{{userDetail.email}}</td>
           </tr>                 

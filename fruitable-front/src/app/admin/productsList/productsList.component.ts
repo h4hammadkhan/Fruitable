@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ProductPageableResponse } from 'src/app/model/ProductPageableResponse';
-import { UserPageableResponse } from 'src/app/model/UserPageableResponse';
 import { ProductserviceService } from 'src/app/service/productservice.service';
 import { SignupService } from 'src/app/service/signup.service';
 
 @Component({
-  selector: 'app-usersList',
+  selector: 'app-productsList',
   templateUrl: './productsList.component.html',
   styleUrls: ['./productsList.component.css']
 })

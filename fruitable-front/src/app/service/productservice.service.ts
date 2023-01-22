@@ -1,4 +1,3 @@
-import { Product } from './../model/product';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -85,7 +84,24 @@ export class ProductserviceService {
     return this.http.delete(`${baseUrl}/product/delete/${productImage}`);
   }
 
+  // get searched products
+  public searchedProducts(keyword:string,pageNumber?:number,pageSize?:number){
+    if(pageNumber != null && pageSize != null){
+      return this.http.get(`${baseUrl}/product/search/${keyword}?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+    }
+    else{
+      return this.http.get(`${baseUrl}/product/search/${keyword}`);
+    }
+  }
 
+  // get product by category id
+  public getProductByCategoryId(categoryId:number,pageNumber?:number,pageSize?:number){
+    if(pageNumber != null && pageSize != null){
+      return this.http.get(`${baseUrl}/product/category/${categoryId}?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+    }else{
+      return this.http.get(`${baseUrl}/product/category/${categoryId}`);
+    }
+  }
 
 
 }

@@ -27,7 +27,7 @@ export class LoginguardGuard implements CanActivate {
         return false;
       }
       else if(this.loginService.isLoggedIn() && this.loginService.getRole()=="ADMIN"){
-        this.router.navigate(['/admin-dashboard/users-list'])
+        this.router.navigate(['/admin-dashboard/user-report'])
         return false;
       }
    

@@ -1,5 +1,8 @@
 package com.fruitable.model;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +23,9 @@ public class Report {
 	private String description;
 	private String buyerUserName;
 	
+	@Column(insertable = false, updatable = false,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Date date;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
 
@@ -27,8 +33,9 @@ public class Report {
 		super();
 	}
 
-	public Report(Long reportId, Boolean spamOrMislead, Boolean badQualityProducts, Boolean others,
-			String description, String buyerUserName, User user) {
+
+	public Report(Long reportId, Boolean spamOrMislead, Boolean badQualityProducts, Boolean others, String description,
+			String buyerUserName, Date date, User user) {
 		super();
 		this.reportId = reportId;
 		this.spamOrMislead = spamOrMislead;
@@ -36,8 +43,11 @@ public class Report {
 		this.others = others;
 		this.description = description;
 		this.buyerUserName = buyerUserName;
+		this.date = date;
 		this.user = user;
 	}
+
+
 
 	public Long getReportId() {
 		return reportId;
@@ -93,6 +103,14 @@ public class Report {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	

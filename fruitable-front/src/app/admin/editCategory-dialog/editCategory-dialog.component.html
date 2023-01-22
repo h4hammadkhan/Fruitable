@@ -1,0 +1,27 @@
+<!-- <h2 mat-dialog-title></h2> -->
+<div mat-dialog-content>
+  
+  <div class="login-form border p-5 ">
+    <div class="text-center heading">
+      <h2 class="mb-2">Edit Category</h2>
+    </div>
+
+    <form [formGroup]="categoriesForm">
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Category Name</mat-label>
+        <input type="text" matInput placeholder="Entre username" formControlName="categoryName">
+        <mat-error *ngIf="field['categoryName'].errors?.['required']">category Name is required</mat-error>
+      </mat-form-field>
+      
+    </form>
+  </div>
+
+  
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button color="warn" mat-dialog-close cdkFocusInitial>Cancel</button>
+  <button mat-button class="color" [disabled]="categoriesForm.invalid" [mat-dialog-close]="categoriesForm.value" mat-dialog-close="false" >Submit</button>
+</div>
+

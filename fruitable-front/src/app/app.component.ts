@@ -9,7 +9,7 @@ import { LoginService } from './service/login.service';
 export class AppComponent {
   title = 'Fruitable';
   islogin = false;
-
+  primaryColor = "#7fb602";
   constructor(
     private loginService: LoginService,
   ) {}

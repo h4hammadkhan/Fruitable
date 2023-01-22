@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { UserResponse } from 'src/app/model/UserResponse';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-signup-buyer',
   templateUrl: './signup-buyer.component.html',
   styleUrls: ['./signup-buyer.component.css']
 })

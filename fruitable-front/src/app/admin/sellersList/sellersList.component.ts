@@ -4,7 +4,7 @@ import { UserPageableResponse } from 'src/app/model/UserPageableResponse';
 import { SignupService } from 'src/app/service/signup.service';
 
 @Component({
-  selector: 'app-usersList',
+  selector: 'app-sellersList',
   templateUrl: './sellersList.component.html',
   styleUrls: ['./sellersList.component.css']
 })

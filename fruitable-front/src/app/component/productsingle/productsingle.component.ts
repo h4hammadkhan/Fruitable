@@ -2,7 +2,6 @@ import { CartItem } from './../../model/cartItem';
 import { CartService } from './../../service/cart.service';
 import { ProductserviceService } from './../../service/productservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from './../../model/product';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Products } from 'src/app/model/products';
@@ -15,7 +14,6 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class ProductsingleComponent implements OnInit {
 
-  product!:Product;
   Product!:Products;
   productId!:number;
 

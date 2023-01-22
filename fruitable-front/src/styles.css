@@ -95,10 +95,11 @@ body {
 }
 
 .snack-dander{
-    background-color: var(--myDanger);
+    background-color: var(--myDanger) !important;
     position: relative;
     top: 3rem;
 }
+
 
 .mat-simple-snack-bar-content{
     font-size: 1.2rem;

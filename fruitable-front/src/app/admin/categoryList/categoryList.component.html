@@ -1,0 +1,50 @@
+<div class="container vw-75" >
+  <mat-card-title>Category List</mat-card-title>
+  
+  <div *ngIf="!categories" class="alert alert-warning" role="alert">
+    No Data Found !!
+  </div>
+
+  <div *ngIf="categories">
+    <mat-card class="mb-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="">
+            <div class="round-corner-15 bg-gray">
+              <div class="table-responsive">
+                <table class="table mb-0" >
+                  <thead>
+                    <tr>
+                      <td>#</td>
+                      <td class="bold">Category Name</td>
+                      <td class="bold">Edit</td>
+                      <td class="bold">Delete</td>
+                                         
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let cate of categories; index as i">
+                    <tr >
+                      <td>{{i+1}}</td>
+                      <!-- <td class="hover" [routerLink]="'/admin-dashboard/user/'+user.userId">{{user.first_name+' '+user.last_name}}</td> -->
+                      <td>{{cate.categoryName}}</td>
+                      <td>             
+                        <button mat-icon-button (click)="openDialog(cate.categoryId)">
+                          <mat-icon class="color">edit</mat-icon>
+                        </button>
+                      </td>
+                      <td>
+                        <button mat-icon-button (click)="deleteCategory(cate.categoryId)">
+                          <mat-icon color="warn" >delete</mat-icon>
+                        </button>
+                      </td>
+                    </tr>                 
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

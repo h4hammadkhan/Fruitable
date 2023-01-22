@@ -1,8 +1,7 @@
-import { Product } from './../model/product';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from './helper';
+import { Category } from '../model/category';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +12,32 @@ export class CategoryService {
     private http: HttpClient,
   ) { }
 
-
   
+  // add category
+  public addCategory(category:Category){
+    return this.http.post(`${baseUrl}/category/`,category);
+  }
+
+  // update category
+  public updateCategory(category:Category){
+    return this.http.post(`${baseUrl}/category/update/`,category);
+  }
+  
+  // get all categories
   public getCategories(){
     return this.http.get(`${baseUrl}/category/`);
   }
-
-  public getAllCategories(){
-    return this.http.get("https://fakestoreapi.com/products/categories");
+  
+  // get all category by id
+  public getCategoryById(cateId:number){
+    return this.http.get(`${baseUrl}/category/${cateId}`);
   }
 
-  public getProductByCategory(cate:string):Observable<Product[]>{
-    return this.http.get<Product[]>(`https://fakestoreapi.com/products/category/${cate}`)
+  // delete category
+  public deleteCategory(cateId:number){
+    return this.http.delete(`${baseUrl}/category/${cateId}`);
   }
+
+  
 
 }

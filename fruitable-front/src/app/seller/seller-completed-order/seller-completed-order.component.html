@@ -23,7 +23,7 @@
               <mat-card-title>
                   <h5>Completed Order Request</h5>
               </mat-card-title>
-              <span class="ml-5">{{ detail.usersOrder.date | date:'medium' }}</span>
+              <span class="ml-5">{{ detail.usersOrder.date | date:'medium':'GMT' }}</span>
             </div>
             
             <mat-card-content>
@@ -63,8 +63,8 @@
                     <tr>
                       <td>{{ detail.usersOrder.product.productName }}</td>
                       <td>{{ detail.usersOrder.productQuantity }}</td>
-                      <td>{{ detail.usersOrder.product.price | currency }}</td>
-                      <td>{{ detail.usersOrder.subTotal | currency }}</td>
+                      <td>{{ detail.usersOrder.product.price | currency:'Rs.' }}</td>
+                      <td>{{ detail.usersOrder.subTotal | currency:'Rs.' }}</td>
                     </tr>
 
                     <tr>
@@ -74,7 +74,7 @@
                       </td>
                       <td></td>
                       <td>
-                        <strong>{{ detail.usersOrder.subTotal | currency }}</strong>
+                        <strong>{{ detail.usersOrder.subTotal | currency:'Rs.' }}</strong>
                       </td>
                     </tr>
                   </tbody>

@@ -28,7 +28,7 @@
 
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Product Name</mat-label>
-                  <input matInput placeholder="Enter Product Name" formControlName="productName">
+                  <input type="text" matInput placeholder="Enter Product Name" formControlName="productName">
                   <mat-error *ngIf="getFields['productName'].errors?.['required']">product Name is required</mat-error>
                 </mat-form-field>
 
@@ -36,15 +36,15 @@
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Quantity</mat-label>
-                      <input matInput placeholder="Enter Product Quantity" formControlName="quantity">
+                      <input type="number" matInput placeholder="Enter Product Quantity" formControlName="quantity">
                       <mat-error *ngIf="getFields['quantity'].errors?.['required']">quantity is required</mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Price per Kgs/Darjon</mat-label>
-                      <input matInput placeholder="Enter Price per Kgs/Darjon" formControlName="price">
-                      <mat-error *ngIf="getFields['price'].errors?.['required']">product Name is required</mat-error>
+                      <mat-label>Price per Kgs/Dozen</mat-label>
+                      <input type="number" matInput placeholder="Enter Price per Kgs/Dozen" formControlName="price">
+                      <mat-error *ngIf="getFields['price'].errors?.['required']">product price is required</mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -55,7 +55,7 @@
                   <mat-label>Select an measure</mat-label>
                   <mat-select formControlName="measure">
                     <mat-option value="KGs">KGs</mat-option>
-                    <mat-option value="Darjan">Darjan</mat-option>
+                    <mat-option value="Dozen">Dozen</mat-option>
                   </mat-select>
                   <mat-error *ngIf="getFields['measure'].errors?.['required']">measure is required</mat-error>
                 </mat-form-field>

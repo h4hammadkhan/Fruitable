@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { OrderPageableResponse } from 'src/app/model/OrderPageableResponse';
-import { Ship } from 'src/app/model/ship';
 import { ShipPageableResponse } from 'src/app/model/ShipPageableResponse';
 import { LoginService } from 'src/app/service/login.service';
 import { OrderserviceService } from 'src/app/service/orderservice.service';

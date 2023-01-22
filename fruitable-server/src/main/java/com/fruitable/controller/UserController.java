@@ -4,8 +4,6 @@ package com.fruitable.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,11 +32,12 @@ import com.fruitable.Repo.UserRepository;
 import com.fruitable.Service.FileService;
 import com.fruitable.Service.UserService;
 import com.fruitable.fileResponse.FileResponse;
+import com.fruitable.fileResponse.UserChangePasswordResponse;
 import com.fruitable.fileResponse.UserPageableResponse;
 import com.fruitable.fileResponse.UserResponse;
-import com.fruitable.helper.UserFoundException;
 import com.fruitable.model.Role;
 import com.fruitable.model.User;
+import com.fruitable.model.UserChangePassword;
 import com.fruitable.model.UserRole;
 
 
@@ -305,6 +304,50 @@ public class UserController {
 	}
 	
 
+	// change password
+	@PostMapping("/change/password")
+	public ResponseEntity<UserChangePasswordResponse> changePassword(@RequestBody UserChangePassword changePassword){
+		
+		Long userId = changePassword.getUserId();
+		User currentUser = this.userRepository.findById(userId).get();
+		if(this.bCryptPasswordEncoder.matches(changePassword.getOldPassword(), currentUser.getPassword())) {
+			currentUser.setPassword(this.bCryptPasswordEncoder.encode(changePassword.getNewPassword()));
+			this.userRepository.save(currentUser);
+			return new ResponseEntity<UserChangePasswordResponse>(
+					new UserChangePasswordResponse("Successfuly Changed Password!!"),HttpStatus.OK);
+		}else {
+			
+			return new ResponseEntity<UserChangePasswordResponse>(
+					new UserChangePasswordResponse("Wrong old Password!!"),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	@PostMapping("change/forgot-password/{userId}/{password}")
+	public ResponseEntity<UserChangePasswordResponse> changeForgotPassword(
+			@PathVariable("userId") Long userId,
+			@PathVariable("password") String password
+	){
+		User user = null;
+		try{			
+			user = this.userRepository.findById(userId).get();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<UserChangePasswordResponse>(new 
+					UserChangePasswordResponse("User not Found !!"),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		user.setPassword(this.bCryptPasswordEncoder.encode(password));
+		this.userRepository.save(user);
+		return new ResponseEntity<UserChangePasswordResponse>(new 
+				UserChangePasswordResponse("Successfully change Password"),HttpStatus.OK);
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 	

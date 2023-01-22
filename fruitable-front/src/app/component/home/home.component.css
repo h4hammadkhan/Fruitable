@@ -11,6 +11,7 @@
 .flex{
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .pointer{
@@ -72,6 +73,7 @@ ul li a{
   flex-direction: column;
   overflow: hidden;
   color: var(--myPrimary);
+  text-decoration: none;
 }
 
 
@@ -122,3 +124,11 @@ li a img{
   margin-top: .5rem;
 }
 
+.space-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.features{
+  background: rgb(240, 240, 240);
+}

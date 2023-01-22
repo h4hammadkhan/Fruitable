@@ -1,5 +1,6 @@
 import { CategoryService } from './../../service/category.service';
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/model/category';
 
 @Component({
   selector: 'app-category-tag',
@@ -8,14 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryTagComponent implements OnInit {
 
-  category:string[]=[];
+  category!:Category[];
   constructor(
     private cateService: CategoryService,
   ) { }
 
   ngOnInit(): void {
-    this.cateService.getAllCategories().subscribe(
+    this.cateService.getCategories().subscribe(
       (data:any)=>{
+        console.log(data);
         this.category = data;
       },
       (err)=>{

@@ -41,7 +41,7 @@ public class FruitableServerApplication implements CommandLineRunner {
 			user.setFirst_name("Hammad");
 			user.setLast_name("Khan");
 			user.setUserName("h4hammad");
-			user.setPassword(this.bCryptPasswordEncoder.encode("hammad"));
+			user.setPassword(this.bCryptPasswordEncoder.encode("h4hammad"));
 			user.setEmail("abc@demo.com");
 			user.setProfile_image("default.png");
 			user.setPhone("1010101010");

@@ -26,6 +26,7 @@
                 <table class="table table-borderless mb-0">
                   <thead>
                     <tr>
+                      <td class="bold">Date</td>       
                       <td class="bold">BadQualityProduct</td>
                       <td class="bold">SpamOrMislead</td>
                       <td class="bold">Others</td>       
@@ -33,6 +34,7 @@
                   </thead>
                   <tbody>
                     <tr>
+                      <td>{{item.date | date:'medium':'GMT'}}</td>
                       <td>{{item.badQualityProducts? 'Yes':'No'}}</td>
                       <td>{{item.spamOrMislead? 'Yes':'No'}}</td>
                       <td>{{item.others? 'Yes':'No'}}</td>
@@ -42,7 +44,7 @@
                 <table class="table table-borderless mb-0">
                   <thead>
                     <tr>
-                      <td class="bold">Description</td>
+                      <td class="bold" rowspan="3">Description</td>
                     </tr>
                   </thead>
                   <tbody>

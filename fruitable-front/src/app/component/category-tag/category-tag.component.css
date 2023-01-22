@@ -4,9 +4,9 @@
 }
 
 .tag{
-  background: rgb(37, 37, 37);
+  background: rgb(0, 0, 0);
   color: aliceblue;
-  padding: 8px 15px;
+  padding: 8px 20px;
   margin: 4px;
   border-radius: 25px;
   transition: all .1s ease-in;
@@ -17,7 +17,7 @@
 }
 
 .tag:hover{
-  background: rgb(110, 110, 110);
+  color: var(--myPrimary);
 }
 
 

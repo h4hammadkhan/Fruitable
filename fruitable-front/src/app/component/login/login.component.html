@@ -27,6 +27,10 @@
                 </button>
                 <mat-error *ngIf="fields['password'].errors?.['required']">password is required</mat-error>
               </mat-form-field>
+              
+              <div>
+                <p class="hover" routerLink="/forgot-password">Forgot Password</p>
+              </div>
   
               <div class="text-center">
                 <button type="submit" class="btn-myprimary" [disabled]="userLogin.invalid">Login</button>
